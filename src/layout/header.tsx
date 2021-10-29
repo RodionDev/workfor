@@ -1,9 +1,10 @@
 import * as React from 'react';
+import { Sample } from '../components';
 interface HeaderProps {
   className: string;
 }
 const Header: React.SFC<HeaderProps> = ({className}) => 
   <div className={className}>
-    Header
+    <Sample containerProp='Sample Here'/>
   </div>
 export default Header;
