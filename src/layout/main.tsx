@@ -1,8 +1,8 @@
 import * as React from 'react';
-interface MainProps {
+interface Props {
   className: string;
 }
-const Main: React.SFC<MainProps> = ({className}) =>
+const Main: React.SFC<Props> = ({className}) =>
   <div className={className}>
     Main
   </div>
