@@ -1,8 +1,8 @@
 import * as React from 'react';
-interface FooterProps {
+interface Props {
   className: string;
 }
-const Footer: React.SFC<FooterProps> = ({className}) =>
+const Footer: React.SFC<Props> = ({className}) =>
   <div className={className}>
     Footer
   </div>

@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Sample } from '../components';
-interface HeaderProps {
+interface Props {
   className: string;
 }
-const Header: React.SFC<HeaderProps> = ({className}) => 
+const Header: React.SFC<Props> = ({className}) => 
   <div className={className}>
     <Sample containerProp='Sample Here'/>
   </div>

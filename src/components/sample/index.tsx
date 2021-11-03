@@ -1,5 +1,5 @@
 import * as React from 'react';
-import SamplePresenter from '../presenter/sample.presenter';
+import SamplePresenter from './presenter/sample.presenter';
 interface Props {
   containerProp: string
 }
