@@ -14,7 +14,11 @@ const styles = (theme: Theme) => createStyles({
   },
   title: {
     color: '#66757f',
-    fontSize: 26
+    fontSize: 26,
+    cursor: 'pointer',
+    '&:hover': {
+      color: red.A400
+    }
   },
   grow: {
     flexGrow: 1,
@@ -55,12 +59,12 @@ const styles = (theme: Theme) => createStyles({
     paddingLeft: theme.spacing.unit * 10,
     transition: theme.transitions.create('width'),
     width: '100%',
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       width: 200,
       '&:focus': {
         width: 280,
-        border: '2px solid',
-        borderColor: red[900],
+        border: '1px solid',
+        borderColor: red.A200,
         borderRadius: 17
       },
     },
@@ -76,7 +80,32 @@ const styles = (theme: Theme) => createStyles({
     letterSpacing: 2
   },
   button: {
+    textTransform: 'none',
+  },
+  popupMenu: {
+    width: 235
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    marginBottom: theme.spacing.unit * 4,
+    width: 200,
+  },
+  key: {
+    height: 48
+  },
+  newCommer: {
+    width: '85%',
+    margin: '0 auto',
+    marginTop: theme.spacing.unit,
+    fontSize: 12,
+    color: '#66757F'
+  },
+  noCap: {
     textTransform: 'none'
+  },
+  divider: {
+    marginTop: theme.spacing.unit
   }
 });
 export default styles;
