@@ -1,8 +1,13 @@
 import * as React from 'react';
-import NavigationBarPresenter from './presenter/navigation-bar.presenter';
-class NavigationBar extends React.Component<{}> {
+import NavigationBarPresenter, { Redirect } from './presenter/navigation-bar.presenter';
+interface Props {
+  brandName: string,
+  searchBarPlaceHolder?: string,
+  redirectLinks?: Redirect[];
+}
+class NavigationBar extends React.Component<Props> {
   render() {
-    return <NavigationBarPresenter brandName='Vortex' searchBarPlaceHolder='Place Holder'/>
+    return <NavigationBarPresenter {...this.props}/>
   }
 }
 export default NavigationBar;

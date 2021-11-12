@@ -5,6 +5,6 @@ interface Props {
 }
 const Header: React.SFC<Props> = ({className}) => 
   <div className={className}>
-    <NavigationBar/>
+    <NavigationBar brandName='Vortex' />
   </div>
 export default Header;

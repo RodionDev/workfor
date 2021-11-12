@@ -2,17 +2,25 @@ import * as React from 'react';
 import { AppBar, Toolbar, Typography, Icon, InputBase, Button, Menu, MenuItem, TextField, Divider } from '@material-ui/core';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import styles from './navigationbar.styles';
-export interface NavigationBarProps extends WithStyles<typeof styles> {
+import { Link } from 'react-router-dom';
+export interface Redirect {
+  name: string,
+  link: string
+}
+interface Props extends WithStyles<typeof styles> {
   brandName: string;
-  searchBarPlaceHolder: string;
-  redirectLinks?: Array<{ name: string; link: string }>;
+  searchBarPlaceHolder?: string;
+  redirectLinks?: Redirect[];
 }
 interface State {
   anchorEl?: HTMLElement | null;
   privateKey?: string
 }
 const NavigationBarPresenter = withStyles(styles)(
-  class extends React.Component<NavigationBarProps, State> {
+  class extends React.Component<Props, State> {
+    static defaultProps = {
+      searchBarPlaceHolder: 'Search'
+    }
     state: Readonly<State> = {
       anchorEl: null,
       privateKey: ''
@@ -27,7 +35,7 @@ const NavigationBarPresenter = withStyles(styles)(
       this.setState({ privateKey: event.target.value });
     }
     render(): JSX.Element {
-      const { brandName, classes } = this.props;
+      const { brandName, classes, redirectLinks } = this.props;
       const { anchorEl } = this.state;
       const open = Boolean(anchorEl);
       return (
@@ -48,6 +56,24 @@ const NavigationBarPresenter = withStyles(styles)(
               >
                 {brandName}
               </Typography>
+              {
+                redirectLinks ? 
+                redirectLinks.map((link, index) => 
+                  <Link key={index} to={link.link} className={classes.link}>
+                    <Typography
+                      align='center'
+                      variant='title'
+                      classes={{
+                        root: classes.linkText
+                      }}
+                    >
+                      {link.name}
+                    </Typography>
+                  </Link>
+                )
+                :
+                null
+              }
               <div className={classes.grow} />
               <div className={classes.search}>
                 <div className={classes.searchIcon}>

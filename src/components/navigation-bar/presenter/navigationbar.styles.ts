@@ -14,7 +14,7 @@ const styles = (theme: Theme) => createStyles({
   },
   title: {
     color: '#66757f',
-    fontSize: 26,
+    fontSize: 32,
     cursor: 'pointer',
     '&:hover': {
       color: red.A400
@@ -106,6 +106,18 @@ const styles = (theme: Theme) => createStyles({
   },
   divider: {
     marginTop: theme.spacing.unit
+  },
+  link: {
+    textDecoration: 'none',
+    marginLeft: theme.spacing.unit * 5
+  },
+  linkText: {
+    color: '#66757f',
+    fontSize: 22,
+    cursor: 'pointer',
+    '&:hover': {
+      color: red.A400
+    }
   }
 });
 export default styles;
