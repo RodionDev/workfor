@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { NavigationBar } from 'src/components';
+import { NavigationBar } from '../components';
 interface Props {
   className: string;
 }
