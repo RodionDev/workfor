@@ -126,7 +126,12 @@ const NavigationBarPresenter = withStyles(styles)(
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem className={classes.key}>
+                  <MenuItem 
+                    className={classes.key}
+                    classes={{
+                      root: classes.noHoverMenu
+                    }}
+                  >
                   <TextField
                     id='standard-textarea'
                     label='Private Key'
@@ -136,7 +141,13 @@ const NavigationBarPresenter = withStyles(styles)(
                     onChange={this.handleKeyChange}
                   />
                   </MenuItem>
-                  <MenuItem onClick={this.handleClose}>
+                  <MenuItem 
+                    onClick={this.handleClose}
+                    classes={{
+                      root: classes.noHoverMenu
+                    }}
+                    disableRipple={true}
+                  >
                     <Button
                       variant='contained'
                       fullWidth={true}
@@ -153,7 +164,13 @@ const NavigationBarPresenter = withStyles(styles)(
                   >
                     Mới gia nhập?
                   </Typography>
-                  <MenuItem onClick={this.handleClose}>
+                  <MenuItem 
+                    onClick={this.handleClose}
+                    classes={{
+                      root: classes.noHoverMenu
+                    }}
+                    disableRipple={true}
+                  >
                     <Button
                       variant='contained'
                       fullWidth={true}

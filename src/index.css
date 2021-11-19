@@ -15,6 +15,8 @@ body {
 }
 .header-layout {
   width: 100vw;
+  height: 60vh;
+  max-height: 600px;
 }
 .main-layout {
   background-color: #cccccc;

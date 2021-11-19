@@ -3,7 +3,9 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { red } from '@material-ui/core/colors';
 const styles = (theme: Theme) => createStyles({
   appBar: {
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    position: 'fixed',
+    top: 0
   },
   toolBar: {
     width: '-webkit-fill-available',
@@ -102,7 +104,7 @@ const styles = (theme: Theme) => createStyles({
     color: '#66757F'
   },
   noCap: {
-    textTransform: 'none'
+    textTransform: 'none',
   },
   divider: {
     marginTop: theme.spacing.unit
@@ -117,6 +119,11 @@ const styles = (theme: Theme) => createStyles({
     cursor: 'pointer',
     '&:hover': {
       color: red.A400
+    }
+  },
+  noHoverMenu: {
+    '&:hover': {
+      backgroundColor: 'transparent'
     }
   }
 });
