@@ -11,6 +11,7 @@ interface Props extends WithStyles<typeof styles> {
   brandName: string;
   searchBarPlaceHolder?: string;
   redirectLinks?: Redirect[];
+  handleBrandClick: () => void;
 }
 interface State {
   anchorEl?: HTMLElement | null;
@@ -33,9 +34,9 @@ const NavigationBarPresenter = withStyles(styles)(
     };
     handleKeyChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
       this.setState({ privateKey: event.target.value });
-    }
+    };
     render(): JSX.Element {
-      const { brandName, classes, redirectLinks } = this.props;
+      const { brandName, classes, redirectLinks, handleBrandClick } = this.props;
       const { anchorEl } = this.state;
       const open = Boolean(anchorEl);
       return (
@@ -53,6 +54,7 @@ const NavigationBarPresenter = withStyles(styles)(
                 classes={{
                   root: classes.title
                 }}
+                onClick={handleBrandClick}
               >
                 {brandName}
               </Typography>

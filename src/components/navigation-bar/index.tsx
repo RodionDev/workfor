@@ -1,13 +1,19 @@
 import * as React from 'react';
 import NavigationBarPresenter, { Redirect } from './presenter/navigation-bar.presenter';
-interface Props {
+import { withRouter } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router';
+interface Props extends RouteComponentProps {
   brandName: string,
   searchBarPlaceHolder?: string,
   redirectLinks?: Redirect[];
 }
 class NavigationBar extends React.Component<Props> {
+  handleBrandClick = (): void => {
+    const { history } = this.props;
+    history.push('/');
+  };
   render() {
-    return <NavigationBarPresenter {...this.props}/>
+    return <NavigationBarPresenter {...this.props} handleBrandClick={this.handleBrandClick}/>
   }
 }
-export default NavigationBar;
+export default withRouter(NavigationBar);
