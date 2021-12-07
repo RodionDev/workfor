@@ -18,8 +18,10 @@ const styles = (theme: Theme) => createStyles({
     color: '#66757f',
     fontSize: 32,
     cursor: 'pointer',
+    borderBottom: 'solid 2px transparent',
     '&:hover': {
-      color: red.A400
+      color: red.A400,
+      borderBottomColor: red.A400
     }
   },
   grow: {
@@ -117,8 +119,10 @@ const styles = (theme: Theme) => createStyles({
     color: '#66757f',
     fontSize: 22,
     cursor: 'pointer',
+    borderBottom: 'solid 2px transparent',
     '&:hover': {
-      color: red.A400
+      color: red.A400,
+      borderBottomColor: red.A400
     }
   },
   noHoverMenu: {
