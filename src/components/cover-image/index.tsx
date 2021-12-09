@@ -7,7 +7,7 @@ interface State {
   keep: number
 }
 export default class extends React.Component<Props, State> {
-  render() {
+  render(): JSX.Element {
     const { imageUrl } = this.props;
     return(
       <CoverImagePresenter imageUrl={imageUrl}/>

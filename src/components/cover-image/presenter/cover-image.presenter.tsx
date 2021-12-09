@@ -5,9 +5,9 @@ interface Props extends WithStyles<typeof styles> {
   imageUrl?: string
 }
 const CoverImagePresenter: React.SFC<Props> = ({imageUrl, classes}) =>
-  <>
+  <div className={classes.root}>
     <img className={classes.image} src={imageUrl}/>
-  </>
+  </div>
 CoverImagePresenter.defaultProps = {
   imageUrl: 'https:
 }

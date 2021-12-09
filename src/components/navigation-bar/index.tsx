@@ -12,7 +12,7 @@ class NavigationBar extends React.Component<Props> {
     const { history } = this.props;
     history.push('/');
   };
-  render() {
+  render(): JSX.Element {
     return <NavigationBarPresenter {...this.props} handleBrandClick={this.handleBrandClick}/>
   }
 }
