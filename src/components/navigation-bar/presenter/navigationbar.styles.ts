@@ -86,8 +86,11 @@ const styles = (theme: Theme) => createStyles({
   button: {
     textTransform: 'none',
   },
+  borderText: {
+    border: '1px solid transparent'
+  },
   popupMenu: {
-    width: 235
+    width: 233
   },
   textField: {
     marginLeft: theme.spacing.unit,

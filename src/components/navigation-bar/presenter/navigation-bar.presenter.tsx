@@ -94,6 +94,9 @@ const NavigationBarPresenter = withStyles(styles)(
                   variant={open ? 'outlined': 'text'} 
                   color='secondary' 
                   className={classes.button}
+                  classes={{
+                    text: classes.borderText
+                  }}
                   aria-owns={open ? 'menu-appbar' : undefined}
                   onClick={this.handleMenu}
                 >
