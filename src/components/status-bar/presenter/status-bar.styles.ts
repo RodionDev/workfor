@@ -36,6 +36,8 @@ const styles  = (theme: Theme) => createStyles({
   },
   actionButton: {
     borderRadius: '18px',
+    textTransform: 'none',
+    fontSize: 17
   }
 });
 export default styles;
