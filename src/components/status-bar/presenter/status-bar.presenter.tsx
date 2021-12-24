@@ -17,9 +17,9 @@ const StatusBarPresenter = withStyles(styles)(
     render(): JSX.Element {
       const { classes } = this.props;
       return (
-        <Paper color='default' className={classes.root}>
+        <Paper color='default' className={classes.root} elevation={2}>
           <Grid container={true} spacing={0} className={classes.fixedHeight}>
-            <Grid item={true} md={2}>
+            <Grid item={true} md={3}>
               <Grid
                 container={true}
                 justify='flex-end'
@@ -31,7 +31,7 @@ const StatusBarPresenter = withStyles(styles)(
                 />
               </Grid>
             </Grid>
-            <Grid item={true} md={8}>
+            <Grid item={true} md={7}>
               <Tabs
                 value={this.state.value}
                 onChange={this.handleChange}

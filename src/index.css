@@ -17,7 +17,9 @@ body {
   width: 100vw;
 }
 .main-layout {
-  background-color: #cccccc;
+  background-color: #E6ECEF;
   flex: 1;
   order: 1;
+  margin-top: 3px;
+  width: 100vw;
 }
