@@ -31,7 +31,7 @@ const StatusBarPresenter = withStyles(styles)(
                 />
               </Grid>
             </Grid>
-            <Grid item={true} md={7}>
+            <Grid item={true} md={6}>
               <Tabs
                 value={this.state.value}
                 onChange={this.handleChange}
@@ -61,7 +61,7 @@ const StatusBarPresenter = withStyles(styles)(
                 />
               </Tabs>
             </Grid>
-            <Grid item={true} md={2}>
+            <Grid item={true} md={3}>
               <Grid container={true} justify='flex-start'>
                 <div className={classes.verticalAlign}>
                   <Button 
