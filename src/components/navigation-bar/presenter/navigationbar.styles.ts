@@ -18,10 +18,12 @@ const styles = (theme: Theme) => createStyles({
     color: '#66757f',
     fontSize: 32,
     cursor: 'pointer',
-    borderBottom: 'solid 2px transparent',
+    borderBottom: 'solid 1px transparent',
+    transition: 'border-color .5s ease-out',
     '&:hover': {
       color: red.A400,
-      borderBottomColor: red.A400
+      borderBottomColor: red.A400,
+      borderWidth: 2
     }
   },
   grow: {
@@ -122,10 +124,12 @@ const styles = (theme: Theme) => createStyles({
     color: '#66757f',
     fontSize: 22,
     cursor: 'pointer',
-    borderBottom: 'solid 2px transparent',
+    borderBottom: 'solid 1px transparent',
+    transition: 'border-color .5s ease-out',
     '&:hover': {
       color: red.A400,
-      borderBottomColor: red.A400
+      borderBottomColor: red.A400,
+      borderWidth: 2
     }
   },
   noHoverMenu: {
