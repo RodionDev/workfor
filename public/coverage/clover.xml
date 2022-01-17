@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1543870949702" clover="3.2.0">
+  <project timestamp="1543870949702" name="All files">
+    <metrics statements="253" coveredstatements="189" conditionals="53" coveredconditionals="25" methods="55" coveredmethods="31" elements="361" coveredelements="245" complexity="0" loc="253" ncloc="253" packages="18" files="27" classes="27">
+      <package name="src">
+        <metrics statements="59" coveredstatements="13" conditionals="26" coveredconditionals="3" methods="18" coveredmethods="3"/>
+        <file name="App.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\App.tsx">
+          <metrics statements="13" coveredstatements="13" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="8" count="1" type="stmt"/>
+          <line num="9" count="1" type="stmt"/>
+          <line num="11" count="1" type="cond" truecount="3" falsecount="0"/>
+          <line num="13" count="1" type="stmt"/>
+          <line num="14" count="1" type="stmt"/>
+          <line num="19" count="1" type="stmt"/>
+          <line num="21" count="1" type="stmt"/>
+        </file>
+        <file name="index.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\index.tsx">
+          <metrics statements="10" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="2" count="0" type="stmt"/>
+          <line num="3" count="0" type="stmt"/>
+          <line num="4" count="0" type="stmt"/>
+          <line num="5" count="0" type="stmt"/>
+          <line num="6" count="0" type="stmt"/>
+          <line num="7" count="0" type="stmt"/>
+          <line num="8" count="0" type="stmt"/>
+          <line num="9" count="0" type="stmt"/>
+          <line num="10" count="0" type="stmt"/>
+        </file>
+        <file name="registerServiceWorker.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\registerServiceWorker.ts">
+          <metrics statements="36" coveredstatements="0" conditionals="23" coveredconditionals="0" methods="15" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+          <line num="4" count="0" type="stmt"/>
+          <line num="11" count="0" type="cond" truecount="0" falsecount="3"/>
+          <line num="17" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="19" count="0" type="stmt"/>
+          <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="24" count="0" type="stmt"/>
+          <line num="26" count="0" type="stmt"/>
+          <line num="27" count="0" type="stmt"/>
+          <line num="28" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="30" count="0" type="stmt"/>
+          <line num="33" count="0" type="stmt"/>
+          <line num="34" count="0" type="stmt"/>
+          <line num="40" count="0" type="stmt"/>
+          <line num="45" count="0" type="stmt"/>
+          <line num="47" count="0" type="stmt"/>
+          <line num="50" count="0" type="stmt"/>
+          <line num="51" count="0" type="stmt"/>
+          <line num="52" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="53" count="0" type="stmt"/>
+          <line num="54" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="55" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="60" count="0" type="stmt"/>
+          <line num="66" count="0" type="stmt"/>
+          <line num="74" count="0" type="stmt"/>
+          <line num="79" count="0" type="stmt"/>
+          <line num="82" count="0" type="cond" truecount="0" falsecount="4"/>
+          <line num="85" count="0" type="stmt"/>
+          <line num="86" count="0" type="stmt"/>
+          <line num="87" count="0" type="stmt"/>
+          <line num="93" count="0" type="stmt"/>
+          <line num="97" count="0" type="stmt"/>
+          <line num="101" count="0" type="cond" truecount="0" falsecount="2"/>
+          <line num="102" count="0" type="stmt"/>
+          <line num="103" count="0" type="stmt"/>
+          <line num="107" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.actions">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="keep.action.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\actions\keep.action.ts">
+          <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="index.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\index.ts">
+          <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="7" count="5" type="stmt"/>
+          <line num="8" count="5" type="stmt"/>
+          <line num="9" count="5" type="stmt"/>
+          <line num="10" count="5" type="stmt"/>
+          <line num="11" count="5" type="stmt"/>
+          <line num="12" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.cover-image">
+        <metrics statements="12" coveredstatements="12" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <file name="index.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\cover-image\index.tsx">
+          <metrics statements="12" coveredstatements="12" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="7" count="5" type="stmt"/>
+          <line num="9" count="2" type="cond" truecount="3" falsecount="0"/>
+          <line num="11" count="5" type="stmt"/>
+          <line num="12" count="2" type="stmt"/>
+          <line num="13" count="2" type="stmt"/>
+          <line num="15" count="5" type="stmt"/>
+          <line num="17" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.cover-image.presenter">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <file name="cover-image.presenter.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\cover-image\presenter\cover-image.presenter.tsx">
+          <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="7" count="2" type="stmt"/>
+          <line num="8" count="2" type="stmt"/>
+          <line num="11" count="5" type="stmt"/>
+          <line num="14" count="5" type="stmt"/>
+        </file>
+        <file name="cover-image.styles.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\cover-image\presenter\cover-image.styles.ts">
+          <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="16" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.info-panel">
+        <metrics statements="11" coveredstatements="11" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <file name="index.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\info-panel\index.tsx">
+          <metrics statements="11" coveredstatements="11" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="7" count="5" type="stmt"/>
+          <line num="9" count="1" type="cond" truecount="3" falsecount="0"/>
+          <line num="11" count="5" type="stmt"/>
+          <line num="12" count="1" type="stmt"/>
+          <line num="14" count="5" type="stmt"/>
+          <line num="16" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.info-panel.presenter">
+        <metrics statements="14" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <file name="info-panel.presenter.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\info-panel\presenter\info-panel.presenter.tsx">
+          <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="7" count="5" type="stmt"/>
+          <line num="8" count="5" type="stmt"/>
+          <line num="9" count="1" type="stmt"/>
+          <line num="10" count="1" type="stmt"/>
+          <line num="19" count="5" type="stmt"/>
+        </file>
+        <file name="info-panel.styles.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\info-panel\presenter\info-panel.styles.ts">
+          <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="25" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.navigation-bar">
+        <metrics statements="16" coveredstatements="14" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="3"/>
+        <file name="index.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\navigation-bar\index.tsx">
+          <metrics statements="16" coveredstatements="14" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="3"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="7" count="5" type="stmt"/>
+          <line num="8" count="5" type="stmt"/>
+          <line num="10" count="2" type="cond" truecount="3" falsecount="0"/>
+          <line num="11" count="2" type="stmt"/>
+          <line num="12" count="0" type="stmt"/>
+          <line num="13" count="0" type="stmt"/>
+          <line num="15" count="2" type="stmt"/>
+          <line num="17" count="5" type="stmt"/>
+          <line num="18" count="2" type="stmt"/>
+          <line num="20" count="5" type="stmt"/>
+          <line num="22" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.navigation-bar.presenter">
+        <metrics statements="33" coveredstatements="30" conditionals="9" coveredconditionals="7" methods="8" coveredmethods="5"/>
+        <file name="navigation-bar.presenter.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\navigation-bar\presenter\navigation-bar.presenter.tsx">
+          <metrics statements="26" coveredstatements="23" conditionals="9" coveredconditionals="7" methods="7" coveredmethods="4"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="7" count="5" type="stmt"/>
+          <line num="8" count="5" type="stmt"/>
+          <line num="9" count="5" type="stmt"/>
+          <line num="10" count="5" type="stmt"/>
+          <line num="11" count="5" type="stmt"/>
+          <line num="13" count="2" type="cond" truecount="3" falsecount="0"/>
+          <line num="14" count="2" type="stmt"/>
+          <line num="18" count="2" type="stmt"/>
+          <line num="19" count="0" type="stmt"/>
+          <line num="21" count="2" type="stmt"/>
+          <line num="22" count="0" type="stmt"/>
+          <line num="24" count="2" type="stmt"/>
+          <line num="25" count="0" type="stmt"/>
+          <line num="27" count="2" type="stmt"/>
+          <line num="29" count="5" type="stmt"/>
+          <line num="30" count="2" type="stmt"/>
+          <line num="31" count="2" type="stmt"/>
+          <line num="32" count="2" type="stmt"/>
+          <line num="33" count="2" type="stmt"/>
+          <line num="43" count="1" type="stmt"/>
+          <line num="89" count="5" type="stmt"/>
+          <line num="95" count="5" type="stmt"/>
+        </file>
+        <file name="navigationbar.styles.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\navigation-bar\presenter\navigationbar.styles.ts">
+          <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="8" count="2" type="stmt"/>
+          <line num="149" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.sample">
+        <metrics statements="12" coveredstatements="9" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <file name="index.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\sample\index.tsx">
+          <metrics statements="12" coveredstatements="9" conditionals="3" coveredconditionals="0" methods="3" coveredmethods="1"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="7" count="5" type="stmt"/>
+          <line num="9" count="0" type="cond" truecount="0" falsecount="3"/>
+          <line num="11" count="5" type="stmt"/>
+          <line num="12" count="0" type="stmt"/>
+          <line num="13" count="0" type="stmt"/>
+          <line num="15" count="5" type="stmt"/>
+          <line num="17" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.sample.presenter">
+        <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <file name="sample.presenter.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\sample\presenter\sample.presenter.tsx">
+          <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="0" type="stmt"/>
+          <line num="6" count="0" type="stmt"/>
+          <line num="8" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.status-bar">
+        <metrics statements="11" coveredstatements="11" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <file name="index.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\status-bar\index.tsx">
+          <metrics statements="11" coveredstatements="11" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="7" count="5" type="stmt"/>
+          <line num="9" count="3" type="cond" truecount="3" falsecount="0"/>
+          <line num="11" count="5" type="stmt"/>
+          <line num="12" count="3" type="stmt"/>
+          <line num="14" count="5" type="stmt"/>
+          <line num="16" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.components.status-bar.presenter">
+        <metrics statements="22" coveredstatements="21" conditionals="3" coveredconditionals="3" methods="5" coveredmethods="4"/>
+        <file name="status-bar.presenter.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\status-bar\presenter\status-bar.presenter.tsx">
+          <metrics statements="18" coveredstatements="17" conditionals="3" coveredconditionals="3" methods="4" coveredmethods="3"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
+          <line num="7" count="5" type="stmt"/>
+          <line num="8" count="5" type="stmt"/>
+          <line num="9" count="5" type="stmt"/>
+          <line num="11" count="3" type="cond" truecount="3" falsecount="0"/>
+          <line num="12" count="3" type="stmt"/>
+          <line num="15" count="3" type="stmt"/>
+          <line num="16" count="0" type="stmt"/>
+          <line num="18" count="3" type="stmt"/>
+          <line num="20" count="5" type="stmt"/>
+          <line num="21" count="3" type="stmt"/>
+          <line num="22" count="3" type="stmt"/>
+          <line num="40" count="5" type="stmt"/>
+          <line num="42" count="5" type="stmt"/>
+        </file>
+        <file name="status-bar.styles.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\components\status-bar\presenter\status-bar.styles.ts">
+          <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="6" type="stmt"/>
+          <line num="45" count="5" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.layout">
+        <metrics statements="28" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+        <file name="footer.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\layout\footer.tsx">
+          <metrics statements="6" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="5" count="0" type="stmt"/>
+          <line num="6" count="0" type="stmt"/>
+          <line num="8" count="1" type="stmt"/>
+        </file>
+        <file name="header.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\layout\header.tsx">
+          <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="12" count="1" type="stmt"/>
+        </file>
+        <file name="index.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\layout\index.ts">
+          <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="8" count="1" type="stmt"/>
+        </file>
+        <file name="main.tsx" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\layout\main.tsx">
+          <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+          <line num="2" count="1" type="stmt"/>
+          <line num="3" count="1" type="stmt"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="5" count="1" type="stmt"/>
+          <line num="6" count="1" type="stmt"/>
+          <line num="7" count="1" type="stmt"/>
+          <line num="8" count="1" type="stmt"/>
+          <line num="17" count="1" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.reducers">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="keep.reducer.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\reducers\keep.reducer.ts">
+          <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.sagas">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="keep.saga.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\sagas\keep.saga.ts">
+          <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.selectors">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="keep.selectors.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\selectors\keep.selectors.ts">
+          <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+        </file>
+      </package>
+      <package name="src.store">
+        <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <file name="keep.store.ts" path="C:\Users\ndhai\Desktop\Workplace\CNM\vortex-network\src\store\keep.store.ts">
+          <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+          <line num="1" count="0" type="stmt"/>
+        </file>
+      </package>
+    </metrics>
+  </project>
+</coverage>
