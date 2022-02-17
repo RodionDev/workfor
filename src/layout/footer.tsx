@@ -3,7 +3,5 @@ interface Props {
   className: string;
 }
 const Footer: React.SFC<Props> = ({className}) =>
-  <div className={className}>
-    Footer
-  </div>
+  <div className={className}/>
 export default Footer;
