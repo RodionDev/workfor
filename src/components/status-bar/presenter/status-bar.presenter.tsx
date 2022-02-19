@@ -2,7 +2,9 @@ import * as React from 'react';
 import { WithStyles, withStyles } from '@material-ui/core/styles';
 import styles from './status-bar.styles';
 import { Tabs, Tab, Paper, Grid, Avatar, Button } from '@material-ui/core';
-interface Props extends WithStyles<typeof styles> {}
+interface Props extends WithStyles<typeof styles> {
+  handleTabChange: (tabId: number) => void
+}
 interface State {
   value: number;
 }
@@ -12,7 +14,9 @@ const StatusBarPresenter = withStyles(styles)(
       value: 0
     };
     handleChange = (_: any, value: any) => {
+      const { handleTabChange } = this.props;
       this.setState({ value });
+      handleTabChange(value);
     };
     render(): JSX.Element {
       const { classes } = this.props;

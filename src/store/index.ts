@@ -1,7 +1,8 @@
-import { createStore } from 'redux';
-import rootReducer from '../reducers';
-const store = createStore(
-  rootReducer,
-  undefined,
-);
-export default store;
+import { combineReducers } from 'redux';
+import { primaryPanelReducer, PrimaryPanelState } from './primary-panel';
+export interface ApplicationState {
+  primaryPanel: PrimaryPanelState,
+};
+export const rootReducer = combineReducers<ApplicationState>({
+  primaryPanel: primaryPanelReducer
+});
