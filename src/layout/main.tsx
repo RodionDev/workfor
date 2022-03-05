@@ -7,7 +7,7 @@ interface Props {
 const Main: React.SFC<Props> = ({ className }) => (
   <div className={className}>
     <Grid container={true} justify='center' style={{marginTop: '8px'}}>
-      <Grid item={true} xs={8} >
+      <Grid item={true} xs={12} lg={10} xl={8}>
         <Grid container={true}>
           <Grid item={true} xs={3} md={3}>
             <InfoPanel/>
