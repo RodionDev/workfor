@@ -7,6 +7,10 @@ import { rootReducer, ApplicationState } from './store';
 const initialState: ApplicationState = {
   primaryPanel: {
     tabId: 0
+  },
+  user: {
+    privateKey: '',
+    loading: false
   }
 }
 const store = createStore(

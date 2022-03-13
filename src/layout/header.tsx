@@ -6,7 +6,7 @@ interface Props {
 const Header: React.SFC<Props> = ({className}) => 
   <div className={className}>
     <NavigationBar brandName='Vortex' redirectLinks={[{name: 'Khám phá', link: '/introduction'}]}/>
-    <CoverImage imageUrl='https:
+    <CoverImage imageUrl='http:
     <StatusBar/>
   </div>
 export default Header;

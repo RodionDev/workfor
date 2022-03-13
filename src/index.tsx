@@ -8,16 +8,24 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware } from 'redux';
 import { rootReducer, ApplicationState } from './store';
 import logger from 'redux-logger';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from 'src/sagas';
+const saga = createSagaMiddleware();
 const initialState: ApplicationState = {
   primaryPanel: {
     tabId: 0
+  },
+  user: {
+    privateKey: '',
+    loading: false
   }
 }
 const store = createStore(
   rootReducer,
   initialState,
-  applyMiddleware(logger)
+  applyMiddleware(saga, logger)
 )
+saga.run(rootSaga);
 ReactDOM.render(
   <Provider store={store}>
     <App />

@@ -12,10 +12,11 @@ interface Props extends WithStyles<typeof styles> {
   searchBarPlaceHolder?: string;
   redirectLinks?: Redirect[];
   handleBrandClick: () => void;
+  handleKeySubmit: (privateKey: string) => void;
 }
 interface State {
   anchorEl?: HTMLElement | null;
-  privateKey?: string
+  privateKey: string
 }
 const NavigationBarPresenter = withStyles(styles)(
   class extends React.Component<Props, State> {
@@ -35,6 +36,11 @@ const NavigationBarPresenter = withStyles(styles)(
     handleKeyChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
       this.setState({ privateKey: event.target.value });
     };
+    onSigninClick = (event: React.MouseEvent<HTMLElement>) => {
+      const { handleKeySubmit } = this.props;
+      const { privateKey } = this.state;
+      handleKeySubmit(privateKey);
+    }
     render(): JSX.Element {
       const { brandName, classes, redirectLinks, handleBrandClick } = this.props;
       const { anchorEl } = this.state;
@@ -158,6 +164,7 @@ const NavigationBarPresenter = withStyles(styles)(
                       fullWidth={true}
                       color='secondary'
                       className={classes.noCap}
+                      onClick={this.onSigninClick}
                     >
                       Đăng nhập
                     </Button>
