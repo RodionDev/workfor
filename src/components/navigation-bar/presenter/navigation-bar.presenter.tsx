@@ -3,11 +3,12 @@ import { AppBar, Toolbar, Typography, Icon, InputBase, Button, Menu, MenuItem, T
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import styles from './navigationbar.styles';
 import { Link } from 'react-router-dom';
+import { UserState } from '../../../store/user';
 export interface Redirect {
   name: string,
   link: string
 }
-interface Props extends WithStyles<typeof styles> {
+interface Props extends WithStyles<typeof styles>, UserState {
   brandName: string;
   searchBarPlaceHolder?: string;
   redirectLinks?: Redirect[];
@@ -21,7 +22,7 @@ interface State {
 const NavigationBarPresenter = withStyles(styles)(
   class extends React.Component<Props, State> {
     static defaultProps = {
-      searchBarPlaceHolder: 'Search'
+      searchBarPlaceHolder: 'Search...'
     }
     state: Readonly<State> = {
       anchorEl: null,
@@ -42,7 +43,17 @@ const NavigationBarPresenter = withStyles(styles)(
       handleKeySubmit(privateKey);
     }
     render(): JSX.Element {
-      const { brandName, classes, redirectLinks, handleBrandClick } = this.props;
+      const { 
+        brandName, 
+        classes, 
+        redirectLinks, 
+        handleBrandClick, 
+        loading, 
+        privateKey,
+        publicKey, 
+        displayName,
+        searchBarPlaceHolder
+      } = this.props;
       const { anchorEl } = this.state;
       const open = Boolean(anchorEl);
       return (
@@ -88,7 +99,7 @@ const NavigationBarPresenter = withStyles(styles)(
                   <Icon>searchIcon</Icon>
                 </div>
                 <InputBase
-                  placeholder='Search…'
+                  placeholder={searchBarPlaceHolder}
                   classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
@@ -96,7 +107,24 @@ const NavigationBarPresenter = withStyles(styles)(
                 />
               </div>
               <div>
-                <Button 
+                {
+                  publicKey ? 
+                  <Button
+                    variant='outlined'
+                    color='secondary'
+                    className={classes.button}
+                    classes={{
+                      text: classes.borderText
+                    }}
+                  >
+                    <Typography variant='title'
+                      className={classes.buttonPrimaryText}
+                    >
+                      {(publicKey).slice(0, 18) + '...'}
+                    </Typography> 
+                  </Button>
+                  :
+                  <Button 
                   variant={open ? 'outlined': 'text'} 
                   color='secondary' 
                   className={classes.button}
@@ -119,6 +147,7 @@ const NavigationBarPresenter = withStyles(styles)(
                     Đăng nhập
                   </Typography> 
                 </Button>
+                }
                 <Menu
                   id='menu-appbar'
                   classes={{

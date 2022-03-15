@@ -7,4 +7,12 @@ export const enum UserActionTypes {
 export interface UserState {
   readonly privateKey: string;
   readonly loading: boolean;
+  readonly balance?: number;
+  readonly createdAt?: Date,
+  readonly displayName?: string,
+  readonly following?: {
+    readonly account: string,
+    readonly addresses: [string]
+  },
+  readonly publicKey?: string
 }

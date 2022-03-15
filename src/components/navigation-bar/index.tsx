@@ -4,11 +4,18 @@ import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from 'react-router';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { doPrivateKeySubmit, UserAction } from '../../store/user';
+import { doPrivateKeySubmit, UserAction, UserState } from '../../store/user';
+import { ApplicationState } from '../../store';
+const mapStateToProps = ({user}: ApplicationState) => ({
+  privateKey: user.privateKey,
+  loading: user.loading,
+  displayName: user.displayName,
+  publicKey: user.publicKey
+});
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   privateKeySubmit: (privateKey: string) => dispatch(doPrivateKeySubmit(privateKey))
 });
-interface Props extends RouteComponentProps {
+interface Props extends RouteComponentProps, UserState {
   brandName: string,
   searchBarPlaceHolder?: string,
   redirectLinks?: Redirect[];
@@ -32,5 +39,5 @@ class NavigationBar extends React.Component<Props> {
   }
 }
 export default withRouter(
-  connect(undefined, mapDispatchToProps)(NavigationBar)
+  connect(mapStateToProps, mapDispatchToProps)(NavigationBar)
 );
