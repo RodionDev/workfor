@@ -2,7 +2,8 @@ import * as React from 'react';
 import { WithStyles, withStyles } from '@material-ui/core/styles';
 import styles from './status-bar.styles';
 import { Tabs, Tab, Paper, Grid, Avatar, Button } from '@material-ui/core';
-interface Props extends WithStyles<typeof styles> {
+import { UserState } from '../../../store/user';
+interface Props extends WithStyles<typeof styles>, UserState {
   handleTabChange: (tabId: number) => void
 }
 interface State {
@@ -19,7 +20,10 @@ const StatusBarPresenter = withStyles(styles)(
       handleTabChange(value);
     };
     render(): JSX.Element {
-      const { classes } = this.props;
+      const { classes, image } = this.props;
+      if (image) {
+        console.log(Buffer.from(image).toString('base64'));
+      }
       return (
         <Paper color='default' className={classes.root} elevation={2}>
           <Grid container={true} spacing={0} className={classes.fixedHeight}>
@@ -31,7 +35,7 @@ const StatusBarPresenter = withStyles(styles)(
               >
                 <Avatar
                   className={classes.avatar}
-                  src='https:
+                  src={image ? `data:image/jpeg;base64,${Buffer.from(image).toString('base64')}` : 'https:
                 />
               </Grid>
             </Grid>

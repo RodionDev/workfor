@@ -107,24 +107,7 @@ const NavigationBarPresenter = withStyles(styles)(
                 />
               </div>
               <div>
-                {
-                  publicKey ? 
-                  <Button
-                    variant='outlined'
-                    color='secondary'
-                    className={classes.button}
-                    classes={{
-                      text: classes.borderText
-                    }}
-                  >
-                    <Typography variant='title'
-                      className={classes.buttonPrimaryText}
-                    >
-                      {(publicKey).slice(0, 18) + '...'}
-                    </Typography> 
-                  </Button>
-                  :
-                  <Button 
+                <Button 
                   variant={open ? 'outlined': 'text'} 
                   color='secondary' 
                   className={classes.button}
@@ -134,20 +117,31 @@ const NavigationBarPresenter = withStyles(styles)(
                   aria-owns={open ? 'menu-appbar' : undefined}
                   onClick={this.handleMenu}
                 >
-                  <Typography variant='title'
-                    className={classes.buttonSecondText}
-                  >
-                    Đã có tài khoản?
-                  </Typography> 
-                  &nbsp; 
+                {
+                  publicKey ? 
                   <Typography 
                     variant='title'
                     className={classes.buttonPrimaryText}
                   >
-                    Đăng nhập
+                    { publicKey.slice(0, 19) + '...'}
                   </Typography> 
-                </Button>
+                  :
+                  <>
+                    <Typography variant='title'
+                      className={classes.buttonSecondText}
+                    >
+                      Đã có tài khoản?
+                    </Typography> 
+                    &nbsp; 
+                    <Typography 
+                      variant='title'
+                      className={classes.buttonPrimaryText}
+                    >
+                      Đăng nhập
+                    </Typography> 
+                  </>
                 }
+                </Button>
                 <Menu
                   id='menu-appbar'
                   classes={{
