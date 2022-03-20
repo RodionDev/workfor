@@ -21,9 +21,6 @@ const StatusBarPresenter = withStyles(styles)(
     };
     render(): JSX.Element {
       const { classes, image } = this.props;
-      if (image) {
-        console.log(Buffer.from(image).toString('base64'));
-      }
       return (
         <Paper color='default' className={classes.root} elevation={2}>
           <Grid container={true} spacing={0} className={classes.fixedHeight}>

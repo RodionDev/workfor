@@ -2,27 +2,41 @@ import * as React from 'react';
 import styles from './info-panel.styles';
 import { WithStyles, withStyles } from '@material-ui/core/styles';
 import { Typography } from '@material-ui/core';
-import { LocationOnOutlined, DateRangeOutlined } from '@material-ui/icons';
-interface Props extends WithStyles<typeof styles> {}
-const InfoPanelPresenter: React.SFC<Props> = ({classes}): JSX.Element =>
+import { DateRangeOutlined, HighlightOutlined, CreditCardOutlined } from '@material-ui/icons';
+import { UserState } from '../../../store/user';
+import * as moment from 'moment';
+interface Props extends WithStyles<typeof styles>, UserState {}
+const InfoPanelPresenter: React.SFC<Props> = ({classes, balance, createdAt, energy, displayName, loading, publicKey }): JSX.Element =>
   <div className={classes.root}>
     <Typography
       variant='body2'
       className={classes.infoHeadline}
     >
-      YouTube
+      {displayName || 'YOUR DISPLAYNAME'}
+    </Typography>
+    <Typography
+      variant='body2'
+      className={classes.publicKey || 'YOUR FULL PUBLICKEY'}
+    >
+      {publicKey}
     </Typography>
     <Typography
       variant='body2'
       className={classes.subText}
     >
-      <LocationOnOutlined className={classes.subIcon}/> San Bruno, CA
+      <HighlightOutlined className={classes.subIcon}/> { (energy || 0) + ' OXY' }
+    </Typography>
+    <Typography
+      variant='body2'
+      className={classes.subText}
+    >
+      <CreditCardOutlined className={classes.subIcon}/> { (balance || 0) + ' TRE'}
     </Typography>
       <Typography
       variant='body2'
       className={classes.subText}
     >
-      <DateRangeOutlined className={classes.subIcon}/> Tham gia 11/2007
+      <DateRangeOutlined className={classes.subIcon}/> {moment(createdAt).toString()}
     </Typography>
   </div>
 export default withStyles(styles)(InfoPanelPresenter);

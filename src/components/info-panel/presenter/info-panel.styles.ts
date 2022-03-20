@@ -3,12 +3,14 @@ const styles = (theme: Theme) => createStyles({
   root: {
     marginTop: 36,
     '& p': {
-      marginBottom: 32
-    }
+      marginBottom: 16
+    },
+    paddingRight: '15px'
   },
   infoHeadline: {
     fontSize: 24,
     fontWeight: 800,
+    marginBottom: '2px !important'
   },
   subText: {
     fontSize: 18,
@@ -18,6 +20,12 @@ const styles = (theme: Theme) => createStyles({
   subIcon: {
     position: 'relative',
     top: 4
+  },
+  publicKey: {
+    overflowWrap: 'break-word',
+    color: '#6D6D6D',
+    fontSize: 13,
+    fontWeight: 300,
   }
 });
 export default styles;
