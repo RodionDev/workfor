@@ -9,7 +9,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   tabChange: (tabId: number) => dispatch(doPrimaryPanelChange(tabId))
 });
 const mapStateToProps = ({user}: ApplicationState) => ({
-  image: user.image
+  image: user.image,
+  followings: user.followings
 })
 interface Props extends UserState {
   tabChange: (tabId: number) => PrimaryPanelAction;
@@ -20,9 +21,9 @@ class StatusBarContainer extends React.Component<Props, {}> {
     tabChange(tabId);
   }
   render(): JSX.Element {
-    const { image } = this.props;
+    const { image, followings } = this.props;
     return(
-      <StatusBarPresenter handleTabChange={this.handleTabChange} image={image}/>
+      <StatusBarPresenter handleTabChange={this.handleTabChange} image={image} followings={followings}/>
     );
   }
 };

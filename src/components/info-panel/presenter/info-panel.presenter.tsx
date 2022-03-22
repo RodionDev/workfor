@@ -30,7 +30,7 @@ const InfoPanelPresenter: React.SFC<Props> = ({classes, balance, createdAt, ener
       variant='body2'
       className={classes.subText}
     >
-      <CreditCardOutlined className={classes.subIcon}/> { (balance || 0) + ' TRE'}
+      <CreditCardOutlined className={classes.subIcon}/> { ((balance || 0)/100000000) + ' TRE'}
     </Typography>
       <Typography
       variant='body2'

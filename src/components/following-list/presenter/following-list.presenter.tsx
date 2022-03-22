@@ -1,17 +1,19 @@
 import * as React from 'react';
-import styles from './follower-list.styles';
+import styles from './following-list.styles';
 import { WithStyles, withStyles } from '@material-ui/core/styles';
 import {
   Paper,
   Typography,
   Divider,
   Grid} from '@material-ui/core';
-import { Follower } from '../..';
-interface Props extends WithStyles<typeof styles> {}
-const FollowerListPresenter = withStyles(styles)(
+import { Follower, Following } from '../..';
+interface Props extends WithStyles<typeof styles> {
+  followings: any[]
+}
+const FollowingListPresenter = withStyles(styles)(
   class extends React.Component<Props> {
     render() {
-      const { classes } = this.props;
+      const { classes, followings } = this.props;
       return (
         <Paper elevation={0} square={true}>
           <Typography
@@ -19,7 +21,7 @@ const FollowerListPresenter = withStyles(styles)(
             className={classes.lrMargin}
             color='secondary'
           >
-            Follower
+            Following
           </Typography>
           <Divider variant='fullWidth' />
           <Grid
@@ -28,16 +30,18 @@ const FollowerListPresenter = withStyles(styles)(
             justify='flex-start'
             spacing={16}
           >
-            <Grid item={true} xl={12} xs={12}>
-              <Follower/>
+          {
+            followings.map(
+              (following, index) => 
+              <Grid key={index} item={true} xl={12} xs={12}>
+                <Following data={following}/>
             </Grid>
-            <Grid item={true} xl={12} xs={12}>
-              <Follower/>
-            </Grid>
+            )
+          }
           </Grid>
         </Paper>
       );
     }
   }
 );
-export default FollowerListPresenter;
+export default FollowingListPresenter;

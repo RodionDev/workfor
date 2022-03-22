@@ -10,6 +10,12 @@ const initialState: ApplicationState = {
   },
   user: {
     privateKey: '',
+    loading: false,
+    followings: []
+  },
+  follow: {
+    followers: [],
+    followings: [],
     loading: false
   }
 }

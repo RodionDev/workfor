@@ -1,5 +1,5 @@
 import { endpoint, get, applyValue } from './utils';
-import { DATABASE, ACCOUNT_SUMMARY, API_URL } from './constants';
+import { DATABASE, ACCOUNT_SUMMARY, API_URL, USER_INFO } from './constants';
 import { pipe } from 'ramda';
 import axios from 'axios';
 const test = async () => {
@@ -20,7 +20,20 @@ const getAccountSummary = async (publicKey: string) => {
   )(API_URL);
   return data;
 }
+const getUserInfos = async (publicKeys: string[]) => {
+  const promises = publicKeys.map(async publicKey => {
+    const { data } = await pipe(
+      endpoint(DATABASE),
+      get(ACCOUNT_SUMMARY),
+      applyValue(publicKey),
+      axios.get
+    )(API_URL);
+    return {...data.result}
+  })
+  return await Promise.all(promises);
+}
 export { 
   test,
-  getAccountSummary
+  getAccountSummary,
+  getUserInfos
 }

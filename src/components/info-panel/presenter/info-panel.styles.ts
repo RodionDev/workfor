@@ -1,7 +1,7 @@
 import { createStyles, Theme } from '@material-ui/core/styles';
 const styles = (theme: Theme) => createStyles({
   root: {
-    marginTop: 36,
+    marginTop: 6,
     '& p': {
       marginBottom: 16
     },
@@ -19,7 +19,7 @@ const styles = (theme: Theme) => createStyles({
   },
   subIcon: {
     position: 'relative',
-    top: 4
+    top: 4,
   },
   publicKey: {
     overflowWrap: 'break-word',

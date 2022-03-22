@@ -10,10 +10,7 @@ export interface UserState {
   readonly balance?: number;
   readonly createdAt?: Date,
   readonly displayName?: string;
-  readonly following?: {
-    readonly account: string,
-    readonly addresses: [string]
-  },
+  readonly followings?: string[];
   readonly publicKey?: string;
   readonly energy?: number;
   readonly image?: any

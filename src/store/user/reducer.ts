@@ -3,6 +3,7 @@ import { UserState, UserActionTypes } from './types';
 const initialState: UserState = {
   loading: false,
   privateKey: '',
+  followings: [],
 }
 const applyPrivateKeyVerifying = (state: UserState, action: AnyAction): UserState => {
   return {
