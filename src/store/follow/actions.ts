@@ -21,8 +21,29 @@ const doFollowingFetch = (publicKeys: string[]): FollowAction => ({
     publicKeys
   }
 })
+const doFollowerFetching = (): FollowAction => ({
+  type: FollowActionTypes.FOLLOWER_FETCHING,
+  payload: {
+    loading: true
+  }
+})
+const doFollowerFetch = (publicKey: string): FollowAction => ({
+  type: FollowActionTypes.FOLLOWER_FETCH,
+  payload: {
+    publicKey
+  }
+})
+const doFollowerFetched = (data: any[]): FollowAction => ({
+  type: FollowActionTypes.FOLLOWER_FETCHED,
+  payload: {
+    data
+  }
+})
 export {
   doFollowingFetching,
   doFollowingFetched,
-  doFollowingFetch
+  doFollowingFetch,
+  doFollowerFetch,
+  doFollowerFetched,
+  doFollowerFetching,
 }

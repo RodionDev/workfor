@@ -5,32 +5,46 @@ import {
   withStyles,
   Card,
   CardContent,
-  Typography
+  Typography,
+  Grid,
+  Avatar
 } from '@material-ui/core';
-interface Props extends WithStyles<typeof styles> {}
+import { DateRangeOutlined, CreditCardOutlined } from '@material-ui/icons';
+import * as moment from 'moment';
+interface Props extends WithStyles<typeof styles> {
+  data: any
+}
 const FollowerPresenter = withStyles(styles)(
   class extends React.Component<Props> {
     render() {
-      const { classes } = this.props;
+      const { classes, data } = this.props;
+      const { balance, createdAt, displayName, image, publicKey } = data;
+      console.log(data);
       return (
         <Card className={classes.card}>
           <CardContent>
-            <Typography
-              className={classes.title}
-              color='textSecondary'
-              gutterBottom={true}
-            >
-              Since 6/2008
-            </Typography>
-            <Typography variant='h5' component='h2'>
-              Name
-            </Typography>
-            <Typography className={classes.pos} color='textSecondary'>
-              @name
-            </Typography>
-            <Typography component='p'>
-              {"Place holder for cover image"}
-            </Typography>
+          <Grid container={true}>
+              <Grid item={true} xs={4}>
+                <Avatar
+                  className={classes.avatar}
+                  src={image ? `data:image/jpeg;base64,${Buffer.from(image).toString('base64')}` : ''}
+                />
+              </Grid>
+              <Grid item={true} xs={8}>
+                <Typography variant='h5' component='h2'>
+                  {displayName}
+                </Typography>
+                <Typography className={classes.pos} color='textSecondary'>
+                  {publicKey}
+                </Typography>
+                <Typography className={classes.pos} color='textSecondary'>
+                  <DateRangeOutlined className={classes.subIcon} fontSize='small'/> {moment(createdAt).toString()}
+                </Typography>
+                <Typography className={classes.pos} color='textSecondary'>
+                  <CreditCardOutlined className={classes.subIcon} fontSize='small'/> {balance/100000000 + ' TRE'}
+                </Typography>
+              </Grid>
+            </Grid>
           </CardContent>
           {}
         </Card>

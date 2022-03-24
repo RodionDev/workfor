@@ -7,11 +7,13 @@ import {
   Divider,
   Grid} from '@material-ui/core';
 import { Follower } from '../..';
-interface Props extends WithStyles<typeof styles> {}
+interface Props extends WithStyles<typeof styles> {
+  followers: any[]
+}
 const FollowerListPresenter = withStyles(styles)(
   class extends React.Component<Props> {
     render() {
-      const { classes } = this.props;
+      const { classes, followers } = this.props;
       return (
         <Paper elevation={0} square={true}>
           <Typography
@@ -28,12 +30,14 @@ const FollowerListPresenter = withStyles(styles)(
             justify='flex-start'
             spacing={16}
           >
-            <Grid item={true} xl={12} xs={12}>
-              <Follower/>
+          {
+            followers.map(
+              (follower, index) => 
+              <Grid key={index} item={true} xl={12} xs={12}>
+                <Follower data={follower}/>
             </Grid>
-            <Grid item={true} xl={12} xs={12}>
-              <Follower/>
-            </Grid>
+            )
+          }
           </Grid>
         </Paper>
       );

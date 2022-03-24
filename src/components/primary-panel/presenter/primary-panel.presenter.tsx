@@ -4,13 +4,9 @@ import { WithStyles, withStyles } from '@material-ui/core/styles';
 import { Post, FollowerList, FollowingList } from '../..';
 import { PrimaryPanelState } from 'src/store/primary-panel';
 interface Props extends WithStyles<typeof styles>, PrimaryPanelState {
-  followings:  string[]
 }
 const PrimaryPanelPresenter = withStyles(styles)(
   class extends React.Component<Props> {
-    static defaultProps = {
-      followings: []
-    }
     render(): JSX.Element {
       const { tabId } = this.props;
       return (

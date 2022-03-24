@@ -18,7 +18,7 @@ const FollowingPresenter = withStyles(styles)(
   class extends React.Component<Props> {
     render() {
       const { classes, data } = this.props;
-      const { balance, createdAt, displayName, energy, image, publicKey } = data;
+      const { balance, createdAt, displayName, image, publicKey } = data;
       return (
         <Card className={classes.card}>
           <CardContent>

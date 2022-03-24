@@ -3,6 +3,6 @@ import * as ReactDOM from 'react-dom';
 import { Follower } from '..';
 it('StatusBar renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Follower />, div);
+  ReactDOM.render(<Follower data={{}}/>, div);
   ReactDOM.unmountComponentAtNode(div);
 });

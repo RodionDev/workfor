@@ -1,9 +1,12 @@
 import * as React from 'react';
 import FollowerPresenter from './presenter/follower.presenter';
-export default class extends React.Component {
+interface Props {
+  data: any
+}
+export default class extends React.Component<Props> {
   render() {
     return (
-      <FollowerPresenter/>
+      <FollowerPresenter {...this.props }/>
     )
   }
 }

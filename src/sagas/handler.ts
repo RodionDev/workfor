@@ -1,8 +1,8 @@
 import { put, call } from 'redux-saga/effects';
 import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess } from '../store/user';
-import { getAccountSummary, getUserInfos } from '../api'
+import { getAccountSummary, getUserInfos, getFollower } from '../api'
 import { generateKey } from './helper';
-import { doFollowingFetching, FollowAction, doFollowingFetched } from '../store/follow';
+import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched } from '../store/follow';
 function *handlePrivateKeySubmit(action: UserAction) {
   yield put(doPrivateKeyVerifying());
   const { privateKey } = action.payload;
@@ -24,7 +24,18 @@ function *handleFollowingFetch(action: FollowAction) {
     yield put(doFollowingFetched([]));
   }
 }
+function *handleFollowerFetch(action: FollowAction) {
+  yield put(doFollowerFetching());
+  const { publicKey } = action.payload;
+  try {
+    const data = yield call(getFollower, publicKey);
+    yield put(doFollowerFetched(data));
+  } catch(err) {
+    yield put(doFollowerFetched([]));
+  }
+}
 export {
   handlePrivateKeySubmit,
-  handleFollowingFetch
+  handleFollowingFetch,
+  handleFollowerFetch
 }

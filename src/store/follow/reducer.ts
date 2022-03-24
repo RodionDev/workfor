@@ -7,14 +7,22 @@ const initialState: FollowState = {
   followings: []
 }
 const applyFollowingFetching = (state: FollowState, action: FollowAction): FollowState => ({
-  followers: [],
-  followings: [],
+  ...state,
   loading: true
 })
 const applyFollowingFetched = (state: FollowState, action: FollowAction): FollowState => ({
   ...state,
   followings: action.payload.data,
   loading: false
+})
+const applyFollowerFetching = (state: FollowState, action: FollowAction): FollowState => ({
+  ...state,
+  loading: true
+})
+const applyFollowerFetched = (state: FollowState, action: FollowAction): FollowState => ({
+  ...state,
+  loading: false,
+  followers: action.payload.data
 })
 const reducer: Reducer<FollowState, FollowAction> = (state = initialState, action) => {
   switch(action.type) {
@@ -23,6 +31,12 @@ const reducer: Reducer<FollowState, FollowAction> = (state = initialState, actio
     }
     case FollowActionTypes.FOLLOWING_FETCHED: {
       return applyFollowingFetched(state, action);
+    }
+    case FollowActionTypes.FOLLOWER_FETCHING: {
+      return applyFollowerFetching(state, action);
+    }
+    case FollowActionTypes.FOLLOWER_FETCHED: {
+      return applyFollowerFetched(state, action);
     }
     default: return state;
   }
