@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Grid } from '@material-ui/core';
-import { InfoPanel, PrimaryPanel } from '../components';
+import { InfoPanel, PrimaryPanel, PostPanel } from '../components';
 interface Props {
   className: string;
 }
@@ -16,7 +16,7 @@ const Main: React.SFC<Props> = ({ className }) => (
             <PrimaryPanel/>
           </Grid>
           <Grid item={true} xs={12} md={3}>
-            Right Panel
+            <PostPanel/>
           </Grid>
         </Grid>
       </Grid>

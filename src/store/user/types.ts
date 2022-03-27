@@ -13,5 +13,6 @@ export interface UserState {
   readonly followings?: string[];
   readonly publicKey?: string;
   readonly energy?: number;
-  readonly image?: any
+  readonly image?: any,
+  readonly followerCount?: number
 }

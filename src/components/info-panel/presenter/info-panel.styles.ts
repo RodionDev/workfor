@@ -10,7 +10,9 @@ const styles = (theme: Theme) => createStyles({
   infoHeadline: {
     fontSize: 24,
     fontWeight: 800,
-    marginBottom: '2px !important'
+    marginBottom: '2px !important',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden'
   },
   subText: {
     fontSize: 18,

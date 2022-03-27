@@ -8,3 +8,4 @@ export { default as FollowerList } from './follower-list';
 export { default as Follower } from './follower';
 export { default as Following }from './following';
 export { default as FollowingList } from './following-list'
+export { default as PostPanel } from './post-panel';
