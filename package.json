@@ -20,7 +20,8 @@
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2",
     "stellar-base": "^0.10.0",
-    "typeface-roboto": "^0.0.54"
+    "typeface-roboto": "^0.0.54",
+    "varstruct": "^6.1.2"
   },
   "scripts": {
     "start": "react-scripts-ts start",

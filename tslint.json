@@ -6,10 +6,12 @@
     "interface-name": [false],
     "member-access": [false],
     "no-bitwise": [false],
-    "no-console": [false]
+    "no-console": [false],
+    "no-shadowed-variable": [false]
   },
   "linterOptions": {
     "exclude": [
+      "src/api/**/*.js",
       "config/**/*.js",
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js",

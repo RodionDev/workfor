@@ -21,6 +21,7 @@ const PostPanelPresenter = withStyles(styles)(
       const { onContentSubmit } = this.props;
       const { content } = this.state;
       onContentSubmit(content);
+      this.setState({content: ''});
     }
     render() {
       const { classes } = this.props;
@@ -57,9 +58,10 @@ const PostPanelPresenter = withStyles(styles)(
               <TextField
                 label='Nội dung'
                 multiline={true}
-                rowsMax={30}
+                rowsMax={10}
                 rows={6}
                 variant='outlined'
+                value={content}
                 onChange={this.handleInputChange}
                 fullWidth={true}
                 helperText={'~' + (117 + (!equals(content, '') ? Buffer.from(content).byteLength  : 0)) + ' Oxy'}

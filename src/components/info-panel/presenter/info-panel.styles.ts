@@ -1,4 +1,5 @@
 import { createStyles, Theme } from '@material-ui/core/styles';
+import { pink } from '@material-ui/core/colors';
 const styles = (theme: Theme) => createStyles({
   root: {
     marginTop: 6,
@@ -11,8 +12,14 @@ const styles = (theme: Theme) => createStyles({
     fontSize: 24,
     fontWeight: 800,
     marginBottom: '2px !important',
-    textOverflow: 'ellipsis',
-    overflow: 'hidden'
+    border: '1px solid transparent',
+    borderRadius: 3,
+    transition: 'background-color 250ms ease-out, border 250ms ease-out',
+    '&:hover': {
+      borderColor: pink.A400,
+      backgroundColor: 'rgba(245, 0, 87, 0.08)',
+      cursor: 'pointer'
+    }
   },
   subText: {
     fontSize: 18,
@@ -28,6 +35,9 @@ const styles = (theme: Theme) => createStyles({
     color: '#6D6D6D',
     fontSize: 13,
     fontWeight: 300,
+  },
+  saveBtn: {
+    height: '100%'
   }
 });
 export default styles;

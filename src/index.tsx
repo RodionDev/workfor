@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
-import 'typeface-roboto';
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware } from 'redux';
@@ -24,6 +23,9 @@ const initialState: ApplicationState = {
     followers: [],
     followings: [], 
     loading: false
+  },
+  post: {
+    posts: []
   }
 }
 const store = createStore(

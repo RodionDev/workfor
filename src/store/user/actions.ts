@@ -1,10 +1,7 @@
 import { Action } from 'redux';
 import { UserActionTypes } from './types';
 export interface UserAction extends Action {
-  payload: {
-    privateKey: string,
-    loading: boolean
-  }
+  payload: any
 }
 const doPrivateKeyVerifying = (): UserAction => ({
   type: UserActionTypes.PRIVATE_KEY_VERIFYING,
@@ -35,9 +32,24 @@ const doPrivateKeyVerifySuccess = (privateKey: string, accountSummary: any): Use
     ...accountSummary.result
   }
 })
+const doUpdateUsername = (privateKey: string, username: string): UserAction => ({
+  type: UserActionTypes.UPDATE_USERNAME,
+  payload: {
+    privateKey,
+    username
+  }
+})
+const doUpdateUsernameDone = (username: string): UserAction => ({
+  type: UserActionTypes.UPDATE_USERNAME_DONE,
+  payload: {
+    username
+  }
+})
 export {
   doPrivateKeyVerifying,
   doPrivateKeySubmit,
   doPrivateKeyVerifyFailed,
-  doPrivateKeyVerifySuccess
+  doPrivateKeyVerifySuccess,
+  doUpdateUsername,
+  doUpdateUsernameDone
 }

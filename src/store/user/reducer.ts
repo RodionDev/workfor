@@ -7,17 +7,25 @@ const initialState: UserState = {
 }
 const applyPrivateKeyVerifying = (state: UserState, action: AnyAction): UserState => {
   return {
-    ...action.payload
+    ...state,
+    loading: true
   }
 }
 const applyPrivateKeyVerifyFailed = (state: UserState, action: AnyAction): UserState => {
   return {
-    ...action.payload
+    ...state,
+    loading: false
   }
 }
 const applyPrivateKeyVerifySuccess = (state: UserState, action: AnyAction): UserState => {
   return {
     ...action.payload
+  }
+}
+const applyUpdateUsernameDone = (state: UserState, action: AnyAction): UserState => {
+  return {
+    ...state,
+    displayName: action.payload.username
   }
 }
 const reducer: Reducer<UserState> = (state = initialState, action) => {
@@ -30,6 +38,9 @@ const reducer: Reducer<UserState> = (state = initialState, action) => {
     }
     case UserActionTypes.PRIVATE_KEY_VERIFY_SUCCESS: {
       return applyPrivateKeyVerifySuccess(state, action);
+    }
+    case UserActionTypes.UPDATE_USERNAME_DONE: {
+      return applyUpdateUsernameDone(state, action);
     }
     default: return state;
   }

@@ -17,6 +17,9 @@ const initialState: ApplicationState = {
     followers: [],
     followings: [],
     loading: false
+  },
+  post: {
+    posts: []
   }
 }
 const store = createStore(

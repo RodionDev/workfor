@@ -22,7 +22,7 @@ const styles  = (theme: Theme) => createStyles({
   avatar: {
     width: 200,
     height: 200,
-    top: '-110px',
+    top: '-120px',
     transition: 'transform .2s',
     '&:hover': {
       transform: 'scale(1.1)'
