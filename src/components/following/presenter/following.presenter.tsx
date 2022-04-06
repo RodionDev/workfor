@@ -7,7 +7,8 @@ import {
   CardContent,
   Typography,
   Grid,
-  Avatar
+  Avatar,
+  Button
 } from '@material-ui/core';
 import * as moment from 'moment';
 import { CreditCardOutlined, DateRangeOutlined } from '@material-ui/icons';
@@ -29,7 +30,7 @@ const FollowingPresenter = withStyles(styles)(
                   src={image ? `data:image/jpeg;base64,${Buffer.from(image).toString('base64')}` : ''}
                 />
               </Grid>
-              <Grid item={true} xs={8}>
+              <Grid item={true} xs={6}>
                 <Typography variant='h5' component='h2'>
                   {displayName}
                 </Typography>
@@ -42,6 +43,16 @@ const FollowingPresenter = withStyles(styles)(
                 <Typography className={classes.pos} color='textSecondary'>
                   <CreditCardOutlined className={classes.subIcon} fontSize='small'/> {balance/100000000 + ' TRE'}
                 </Typography>
+              </Grid>
+              <Grid item={true} xs={2}>
+                <Button
+                  variant='contained'
+                  className={classes.cancelBtn}
+                  size='small'
+                  color='secondary'
+                >
+                  Xoá
+                </Button>
               </Grid>
             </Grid>
           </CardContent>

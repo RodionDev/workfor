@@ -24,5 +24,8 @@ const styles = (theme: Theme) => createStyles({
     position: 'relative',
     top: 4
   },
+  cancelBtn: {
+    float: 'right'
+  }
 })
 export default styles;

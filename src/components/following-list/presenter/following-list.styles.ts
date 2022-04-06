@@ -23,5 +23,9 @@ const styles = (theme: Theme) => createStyles({
   pos: {
     marginBottom: 12,
   },
+  confirmBtn: {
+    margin: '10px 16px 0px 0px',
+    float: 'right'
+  }
 });
 export default styles;

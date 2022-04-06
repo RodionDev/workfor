@@ -44,7 +44,7 @@ const PostPanelPresenter = withStyles(styles)(
                   !isEmpty(content) && 
                   <Button 
                     variant="contained" 
-                    color="secondary" 
+                    color="primary" 
                     className={classes.submitBtn}
                     onClick={this.handleSubmit}
                     >

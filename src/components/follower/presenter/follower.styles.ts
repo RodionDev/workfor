@@ -1,5 +1,4 @@
 import { Theme, createStyles } from '@material-ui/core/styles';
-
 const styles = (theme: Theme) => createStyles({
   card: {
     minWidth: 275,
@@ -26,5 +25,4 @@ const styles = (theme: Theme) => createStyles({
     top: 4
   },
 })
-
 export default styles;

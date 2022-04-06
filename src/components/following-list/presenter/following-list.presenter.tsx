@@ -5,7 +5,8 @@ import {
   Paper,
   Typography,
   Divider,
-  Grid} from '@material-ui/core';
+  Grid,
+  Button} from '@material-ui/core';
 import { Follower, Following } from '../..';
 interface Props extends WithStyles<typeof styles> {
   followings: any[]
@@ -16,13 +17,27 @@ const FollowingListPresenter = withStyles(styles)(
       const { classes, followings } = this.props;
       return (
         <Paper elevation={0} square={true}>
-          <Typography
-            variant='body2'
-            className={classes.lrMargin}
-            color='secondary'
-          >
-            Following
-          </Typography>
+          <Grid container={true}>
+            <Grid item={true} xs={8}>
+              <Typography
+                variant='body2'
+                className={classes.lrMargin}
+                color='secondary'
+              >
+                Following
+              </Typography>
+            </Grid>
+            <Grid item={true} xs={4}>
+              <Button
+                variant='contained'
+                color="primary"
+                className={classes.confirmBtn}
+              >
+                Xác nhận
+              </Button>
+            </Grid>
+          </Grid>
+          {}
           <Divider variant='fullWidth' />
           <Grid
             container={true}
