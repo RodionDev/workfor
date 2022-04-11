@@ -11,6 +11,7 @@
     "@types/react-router-dom": "^4.3.1",
     "axios": "^0.18.0",
     "base32": "^0.0.6",
+    "crypto": "^1.0.1",
     "moment": "^2.23.0",
     "ramda": "^0.26.1",
     "react": "^16.6.3",
