@@ -19,7 +19,6 @@ const FollowerPresenter = withStyles(styles)(
     render() {
       const { classes, data } = this.props;
       const { balance, createdAt, displayName, image, publicKey } = data;
-      console.log(data);
       return (
         <Card className={classes.card}>
           <CardContent>
@@ -27,11 +26,11 @@ const FollowerPresenter = withStyles(styles)(
               <Grid item={true} xs={4}>
                 <Avatar
                   className={classes.avatar}
-                  src={image ? `data:image/jpeg;base64,${Buffer.from(image).toString('base64')}` : ''}
+                  src={image ? `data:image/jpeg;base64,${Buffer.from(image).toString('base64')}` : `https:
                 />
               </Grid>
               <Grid item={true} xs={8}>
-                <Typography variant='h5' component='h2'>
+                <Typography variant='h5' component='h2' noWrap={true}>
                   {displayName}
                 </Typography>
                 <Typography className={classes.pos} color='textSecondary'>

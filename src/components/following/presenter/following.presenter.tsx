@@ -12,13 +12,24 @@ import {
 } from '@material-ui/core';
 import * as moment from 'moment';
 import { CreditCardOutlined, DateRangeOutlined } from '@material-ui/icons';
+import { includes } from 'ramda';
 interface Props extends WithStyles<typeof styles> {
-  data: any
+  data: any,
+  handleUnfollowClick: (userPublicKey: string) => void
+  unfollows: string[]
 }
 const FollowingPresenter = withStyles(styles)(
   class extends React.Component<Props> {
+    static defaultProps = {
+      unfollows: []
+    }
+    handleCancelButtonClick = (event: React.MouseEvent<HTMLElement>) => {
+      const { data, handleUnfollowClick } = this.props;
+      const { publicKey } = data;
+      handleUnfollowClick(publicKey)
+    }
     render() {
-      const { classes, data } = this.props;
+      const { classes, data, unfollows } = this.props;
       const { balance, createdAt, displayName, image, publicKey } = data;
       return (
         <Card className={classes.card}>
@@ -27,7 +38,7 @@ const FollowingPresenter = withStyles(styles)(
               <Grid item={true} xs={4}>
                 <Avatar
                   className={classes.avatar}
-                  src={image ? `data:image/jpeg;base64,${Buffer.from(image).toString('base64')}` : ''}
+                  src={image ? `data:image/jpeg;base64,${Buffer.from(image).toString('base64')}` : `https:
                 />
               </Grid>
               <Grid item={true} xs={6}>
@@ -49,9 +60,12 @@ const FollowingPresenter = withStyles(styles)(
                   variant='contained'
                   className={classes.cancelBtn}
                   size='small'
-                  color='secondary'
+                  color={includes(publicKey, unfollows) ? 'default' : 'secondary'}
+                  onClick={this.handleCancelButtonClick}
                 >
-                  Xoá
+                  {
+                    includes(publicKey, unfollows) ? 'Huỷ' : 'Xoá'
+                  }
                 </Button>
               </Grid>
             </Grid>

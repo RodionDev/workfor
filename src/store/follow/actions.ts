@@ -39,6 +39,12 @@ const doFollowerFetched = (data: any[]): FollowAction => ({
     data
   }
 })
+const doUnfollow = (userPublicKey: string):  FollowAction => ({
+  type: FollowActionTypes.UNFOLLOW,
+  payload: {
+    userPublicKey
+  }
+})
 export {
   doFollowingFetching,
   doFollowingFetched,
@@ -46,4 +52,5 @@ export {
   doFollowerFetch,
   doFollowerFetched,
   doFollowerFetching,
+  doUnfollow
 }

@@ -8,13 +8,19 @@ import {
   Grid,
   Button} from '@material-ui/core';
 import { Follower, Following } from '../..';
+import { isEmpty } from 'ramda';
 interface Props extends WithStyles<typeof styles> {
-  followings: any[]
+  followings: any[],
+  unfollows: string[]
 }
 const FollowingListPresenter = withStyles(styles)(
   class extends React.Component<Props> {
+    static defaultProps = {
+      followings: [],
+      unfollows: []
+    }
     render() {
-      const { classes, followings } = this.props;
+      const { classes, followings, unfollows } = this.props;
       return (
         <Paper elevation={0} square={true}>
           <Grid container={true}>
@@ -28,13 +34,15 @@ const FollowingListPresenter = withStyles(styles)(
               </Typography>
             </Grid>
             <Grid item={true} xs={4}>
-              <Button
-                variant='contained'
-                color="primary"
-                className={classes.confirmBtn}
-              >
-                Xác nhận
+              {
+                !isEmpty(unfollows) && <Button
+                  variant='contained'
+                  color="primary"
+                  className={classes.confirmBtn}
+                >
+                  Xác nhận
               </Button>
+              }
             </Grid>
           </Grid>
           {}

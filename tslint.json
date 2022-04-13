@@ -15,7 +15,8 @@
       "config/**/*.js",
       "node_modules/**/*.ts",
       "coverage/lcov-report/*.js",
-      "public/coverage/lcov-report/*.js"
+      "public/coverage/lcov-report/*.js",
+      "src/**/*.test.tsx"
     ]
   }
 }

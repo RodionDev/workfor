@@ -9,18 +9,20 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 })
 const mapStateToProps = ({user, follow}: ApplicationState) => ({
   publicKeys: user.followings ? user.followings : [],
-  followings: follow.followings
+  followings: follow.followings,
+  unfollows: follow.unfollows
 })
 interface Props {
   onDisplay: (publicKeys: string[]) => FollowAction;
   publicKeys: string[],
-  followings: any[]
+  followings: any[],
+  unfollows: string[]
 }
 class FollowingList extends React.Component<Props> {
   render() {
-    const { followings } = this.props;
+    const { followings, unfollows } = this.props;
     return(
-      <FollowingListPresenter followings={followings}/>
+      <FollowingListPresenter followings={followings} unfollows={unfollows}/>
     );
   }
   componentDidMount() {

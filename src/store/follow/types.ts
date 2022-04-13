@@ -5,6 +5,8 @@ export const enum FollowActionTypes {
   FOLLOWER_FETCHING = '@@follow/FOLLOWER_FETCHING',
   FOLLOWER_FETCHED = '@@follow/FOLLOWER_FETCHED',
   FOLLOWER_FETCH = '@@follow/FOLLOWER_FETCH',
+  UNFOLLOW = '@@follow/UNFOLLOW',
+  UNFOLLOW_CONFIRM = '@@follow/UNFOLLOW_CONFIRM',
 }
 export interface FollowState {
   readonly loading: boolean,
@@ -22,4 +24,5 @@ export interface FollowState {
     displayName: string,
     image: any
   }>,
+  readonly unfollows: string[]
 }

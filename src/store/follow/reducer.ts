@@ -1,10 +1,12 @@
 import { Reducer } from 'redux';
 import { FollowActionTypes, FollowState } from './types';
 import { FollowAction } from './actions';
+import { includes, equals } from 'ramda';
 const initialState: FollowState = {
   loading: false,
   followers: [],
-  followings: []
+  followings: [],
+  unfollows: [],
 }
 const applyFollowingFetching = (state: FollowState, action: FollowAction): FollowState => ({
   ...state,
@@ -24,6 +26,12 @@ const applyFollowerFetched = (state: FollowState, action: FollowAction): FollowS
   loading: false,
   followers: action.payload.data
 })
+const applyUnfollow = (state: FollowState, action: FollowAction): FollowState => ({
+  ...state,
+  unfollows: includes(action.payload.userPublicKey, state.unfollows) 
+  ? state.unfollows.filter(unfollow => !equals(unfollow, action.payload.userPublicKey)) 
+  : [...state.unfollows, action.payload.userPublicKey]
+})
 const reducer: Reducer<FollowState, FollowAction> = (state = initialState, action) => {
   switch(action.type) {
     case FollowActionTypes.FOLLOWING_FETCHING: {
@@ -37,6 +45,9 @@ const reducer: Reducer<FollowState, FollowAction> = (state = initialState, actio
     }
     case FollowActionTypes.FOLLOWER_FETCHED: {
       return applyFollowerFetched(state, action);
+    }
+    case FollowActionTypes.UNFOLLOW: {
+      return applyUnfollow(state, action);
     }
     default: return state;
   }
