@@ -4,7 +4,8 @@ export const enum UserActionTypes {
   PRIVATE_KEY_VERIFY_FAILED = '@@user/PRIVATE_KEY_VERIFY_FAILED',
   PRIVATE_KEY_VERIFY_SUCCESS = '@@user/PRIVATE_KEY_VERIFY_SUCCESS',
   UPDATE_USERNAME = '@@user/UPDATE_USERNAME',
-  UPDATE_USERNAME_DONE = '@@user/UPDATE_USERNAME_DONE'
+  UPDATE_USERNAME_DONE = '@@user/UPDATE_USERNAME_DONE',
+  UPDATE_FOLLOWING = '@@user/UPDATE_FOLLOWING'
 };
 export interface UserState {
   readonly privateKey?: string;

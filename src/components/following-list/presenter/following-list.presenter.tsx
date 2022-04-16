@@ -10,14 +10,20 @@ import {
 import { Follower, Following } from '../..';
 import { isEmpty } from 'ramda';
 interface Props extends WithStyles<typeof styles> {
-  followings: any[],
+  followings: any[]
   unfollows: string[]
+  handleUnfollowConfirm: () => void
 }
 const FollowingListPresenter = withStyles(styles)(
   class extends React.Component<Props> {
     static defaultProps = {
       followings: [],
-      unfollows: []
+      unfollows: [],
+      handleUnfollowConfirm: () => { console.log('handleUnfollowConfirm')}
+    }
+    handleConfirmBtnClick = (event: React.MouseEvent<HTMLElement>) => {
+      const { handleUnfollowConfirm } = this.props;
+      handleUnfollowConfirm();
     }
     render() {
       const { classes, followings, unfollows } = this.props;
@@ -39,13 +45,13 @@ const FollowingListPresenter = withStyles(styles)(
                   variant='contained'
                   color="primary"
                   className={classes.confirmBtn}
+                  onClick={this.handleConfirmBtnClick}
                 >
                   Xác nhận
               </Button>
               }
             </Grid>
           </Grid>
-          {}
           <Divider variant='fullWidth' />
           <Grid
             container={true}

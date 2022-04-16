@@ -1,5 +1,6 @@
 import { Reducer, AnyAction } from 'redux';
 import { UserState, UserActionTypes } from './types';
+import { includes } from 'ramda';
 const initialState: UserState = {
   loading: false,
   privateKey: '',
@@ -28,6 +29,14 @@ const applyUpdateUsernameDone = (state: UserState, action: AnyAction): UserState
     displayName: action.payload.username
   }
 }
+const applyUpdateFollowing = (state: UserState, action: AnyAction): UserState => {
+  return {
+    ...state,
+    followings: state.followings 
+    ? state.followings.filter(following => !includes(following, action.payload.unfollowKeys))
+    : []
+  }
+}
 const reducer: Reducer<UserState> = (state = initialState, action) => {
   switch(action.type) {
     case UserActionTypes.PRIVATE_KEY_VERIFYING: {
@@ -41,6 +50,9 @@ const reducer: Reducer<UserState> = (state = initialState, action) => {
     }
     case UserActionTypes.UPDATE_USERNAME_DONE: {
       return applyUpdateUsernameDone(state, action);
+    }
+    case UserActionTypes.UPDATE_FOLLOWING: {
+      return applyUpdateFollowing(state, action);
     }
     default: return state;
   }

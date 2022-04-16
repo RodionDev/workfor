@@ -45,11 +45,18 @@ const doUpdateUsernameDone = (username: string): UserAction => ({
     username
   }
 })
+const doUpdateFollowing = (unfollowKeys: string): UserAction => ({
+  type: UserActionTypes.UPDATE_FOLLOWING,
+  payload: {
+    unfollowKeys
+  }
+})
 export {
   doPrivateKeyVerifying,
   doPrivateKeySubmit,
   doPrivateKeyVerifyFailed,
   doPrivateKeyVerifySuccess,
   doUpdateUsername,
-  doUpdateUsernameDone
+  doUpdateUsernameDone,
+  doUpdateFollowing
 }

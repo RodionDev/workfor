@@ -1,9 +1,12 @@
 import { put, call } from 'redux-saga/effects';
-import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess, doPrivateKeySubmit, doUpdateUsernameDone } from '../store/user';
-import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername } from '../api'
+import { delay } from 'redux-saga';
+import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess, doPrivateKeySubmit, doUpdateUsernameDone, doUpdateFollowing } from '../store/user';
+import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing } from '../api'
 import { generateKey } from './helper';
 import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched } from '../store/follow';
 import { PostAction } from '../store/post';
+import { compose, map, filter } from 'ramda';
+import includes from 'ramda/es/includes';
 function *handlePrivateKeySubmit(action: UserAction) {
   yield put(doPrivateKeyVerifying());
   const { privateKey } = action.payload;
@@ -49,8 +52,28 @@ function *handleUpdateUsername(action: UserAction) {
     const publicKey = generateKey(privateKey);
     yield call(updateUsername, publicKey, username, privateKey);
     yield put(doUpdateUsernameDone(username))
+    yield delay(5000);
+    const accountSummary = yield call(getAccountSummary, publicKey);
+    yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
   } catch (err) {
     console.log(err);
+  }
+}
+function *handleUnfollowConfirm (action: FollowAction) {
+  const { unfollows, followings, privateKey } = action.payload;
+  const publicKey = generateKey(privateKey);
+  try {
+    yield put(doUpdateFollowing(unfollows));
+    const accounts = compose(
+      map((following: any) => following.publicKey),
+      filter((following: any) => !includes(following.publicKey, unfollows)),
+    )(followings)
+    yield call(updateFollowing, publicKey, accounts, privateKey);
+    yield delay(5000);
+    const accountSummary = yield call(getAccountSummary, publicKey);
+    yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
+  } catch (err) {
+    console.log(err)
   }
 }
 export {
@@ -58,5 +81,6 @@ export {
   handleFollowingFetch,
   handleFollowerFetch,
   handlePostSubmit,
-  handleUpdateUsername
+  handleUpdateUsername,
+  handleUnfollowConfirm
 }

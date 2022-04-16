@@ -2,7 +2,7 @@ import { endpoint, call, applyValue } from './utils';
 import { DATABASE, ACCOUNT_SUMMARY, API_URL, USER_INFO, FOLLOWER, COMMIT, CREATE, RPC_COMMIT } from './constants';
 import { pipe } from 'ramda';
 import axios from 'axios';
-import { contentEncode } from './encoder';
+import { contentEncode, followingEncode } from './encoder';
 import { sign, encode } from './tx';
 const test = async () => {
   const { data } = await pipe(
@@ -97,11 +97,37 @@ const updateUsername = async (publicKey: string, username: string, privateKey: s
     }
   )
 }
+const updateFollowing = async (publicKey: string, accounts: string[], privateKey: string) => {
+  const { data } = await pipe(
+    endpoint(COMMIT),
+    call(CREATE),
+    applyValue(publicKey),
+    applyValue('update_account'),
+    axios.get
+  )(API_URL);
+  const tx = {
+    ...data.transaction,
+    memo: Buffer.alloc(0),
+    params: {
+      key: 'followings',
+      value: followingEncode(accounts)
+    },
+    signature: Buffer.alloc(64, 0)
+  }
+  sign(tx, privateKey);
+  await axios.post(
+    pipe(endpoint(COMMIT),call(RPC_COMMIT))(API_URL),
+    {
+      transaction: encode(tx).toString('base64')
+    }
+  )
+}
 export { 
   test,
   getAccountSummary,
   getUserInfos,
   getFollower,
   postContent,
-  updateUsername
+  updateUsername,
+  updateFollowing
 }

@@ -32,6 +32,11 @@ const applyUnfollow = (state: FollowState, action: FollowAction): FollowState =>
   ? state.unfollows.filter(unfollow => !equals(unfollow, action.payload.userPublicKey)) 
   : [...state.unfollows, action.payload.userPublicKey]
 })
+const applyUnfollowConfirm = (state: FollowState, action: FollowAction): FollowState => ({
+  ...state,
+  unfollows: [],
+  followings: state.followings.filter(following => !includes(following.publicKey, action.payload.unfollows))
+})
 const reducer: Reducer<FollowState, FollowAction> = (state = initialState, action) => {
   switch(action.type) {
     case FollowActionTypes.FOLLOWING_FETCHING: {
@@ -48,6 +53,9 @@ const reducer: Reducer<FollowState, FollowAction> = (state = initialState, actio
     }
     case FollowActionTypes.UNFOLLOW: {
       return applyUnfollow(state, action);
+    }
+    case FollowActionTypes.UNFOLLOW_CONFIRM: {
+      return applyUnfollowConfirm(state, action);
     }
     default: return state;
   }
