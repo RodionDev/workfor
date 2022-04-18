@@ -6,6 +6,7 @@ const USER_INFO = '/get_user_info';
 const FOLLOWER = '/get_follower';
 const CREATE = '/create';
 const RPC_COMMIT = '/rpc_commit';
+const GET_POSTS = '/get_posts';
 export {
   API_URL,
   DATABASE,
@@ -14,5 +15,6 @@ export {
   FOLLOWER,
   CREATE,
   COMMIT,
-  RPC_COMMIT
+  RPC_COMMIT,
+  GET_POSTS
 }

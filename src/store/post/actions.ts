@@ -11,6 +11,20 @@ const doPostSubmit = (publicKey: string, content: string, privateKey: string): P
     privateKey
   }
 });
+const doPostFetch = (publicKey: string): PostAction => ({
+  type: PostActionTypes.POST_FETCH,
+  payload: {
+    publicKey
+  }
+})
+const doPostFetched = (posts: any[]): PostAction => ({
+  type: PostActionTypes.POST_FETCHED,
+  payload: {
+    posts
+  }
+})
 export {
-  doPostSubmit
+  doPostSubmit,
+  doPostFetch,
+  doPostFetched
 }

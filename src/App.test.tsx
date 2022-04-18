@@ -20,7 +20,8 @@ const initialState: ApplicationState = {
     unfollows: []
   },
   post: {
-    posts: []
+    posts: [],
+    loading: false
   }
 }
 const store = createStore(

@@ -95,7 +95,7 @@ const InfoPanelPresenter = withStyles(styles)(
             variant='body2'
             className={classes.subText}
           >
-            <DateRangeOutlined className={classes.subIcon}/> {moment(createdAt).toString()}
+            <DateRangeOutlined className={classes.subIcon}/> {moment(createdAt).format('LLL').toString()}
           </Typography>
         </div>
       )

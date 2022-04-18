@@ -1,6 +1,7 @@
 import { Theme, createStyles } from '@material-ui/core/styles';
 const styles = (theme: Theme) => createStyles({
   root: {
+    marginBottom: 12
   },
   lrMargin: {
     margin: '0 18px 0 18px',
@@ -8,8 +9,8 @@ const styles = (theme: Theme) => createStyles({
     fontSize: 24
   },
   postContainer: {
-    marginTop: 6,
-    padding: '6px 18px 6px 18px',
+    marginTop: 8,
+    padding: '6px 18px 24px 18px',
   },
   posterName: {
     fontSize: 15,
@@ -24,8 +25,9 @@ const styles = (theme: Theme) => createStyles({
     display: 'inline'
   },
   postContent: {
-    fontSize: 13,
-    fontWeight: 400
+    fontSize: 15,
+    fontWeight: 400,
+    whiteSpace: 'pre-wrap'
   },
   like: {
     padding: 0,
@@ -84,6 +86,12 @@ const styles = (theme: Theme) => createStyles({
       backgroundColor: 'transparent',
       color: theme.palette.secondary.light
     }
+  },
+  avatar: {
+    margin: '0 auto'
+  },
+  reactionGroup: {
+    marginTop: 16
   }
 });
 export default styles;

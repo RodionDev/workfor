@@ -6,4 +6,5 @@ export const enum PostActionTypes {
 }
 export interface PostState {
   readonly posts: any[],
+  loading: boolean
 }

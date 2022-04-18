@@ -9,7 +9,7 @@ class App extends React.Component {
         <>
           <Header className='header-layout' />
           <Main className='main-layout' />
-          <Footer className='footer-layout'/>
+          {}
         </>
       </Router>
     );

@@ -1,10 +1,10 @@
 import { put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess, doPrivateKeySubmit, doUpdateUsernameDone, doUpdateFollowing } from '../store/user';
-import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing } from '../api'
+import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts } from '../api'
 import { generateKey } from './helper';
 import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched } from '../store/follow';
-import { PostAction } from '../store/post';
+import { PostAction, doPostFetch, doPostFetched } from '../store/post';
 import { compose, map, filter } from 'ramda';
 import includes from 'ramda/es/includes';
 function *handlePrivateKeySubmit(action: UserAction) {
@@ -13,6 +13,7 @@ function *handlePrivateKeySubmit(action: UserAction) {
   try {
     const publicKey = generateKey(privateKey);
     const accountSummary = yield call(getAccountSummary, publicKey);
+    yield put(doPostFetch(publicKey));
     yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
   } catch (err) {
     yield put(doPrivateKeyVerifyFailed(privateKey));
@@ -42,6 +43,8 @@ function *handlePostSubmit(action: PostAction) {
   const { publicKey, content, privateKey } = action.payload;
   try {
     yield call(postContent, publicKey, content, privateKey);
+    yield delay(3000);
+    yield put(doPostFetch(publicKey))
   } catch (err) {
     console.log(err);
   }
@@ -76,11 +79,21 @@ function *handleUnfollowConfirm (action: FollowAction) {
     console.log(err)
   }
 }
+function *handlePostFetch(action: PostAction) {
+  const { publicKey } = action.payload;
+  try {
+    const posts = yield call(getPosts, publicKey);
+    yield put(doPostFetched(posts))
+  } catch (err) {
+    console.log(err);
+  }
+}
 export {
   handlePrivateKeySubmit,
   handleFollowingFetch,
   handleFollowerFetch,
   handlePostSubmit,
   handleUpdateUsername,
-  handleUnfollowConfirm
+  handleUnfollowConfirm,
+  handlePostFetch
 }
