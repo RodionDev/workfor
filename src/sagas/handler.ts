@@ -3,7 +3,7 @@ import { delay } from 'redux-saga';
 import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess, doPrivateKeySubmit, doUpdateUsernameDone, doUpdateFollowing } from '../store/user';
 import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts } from '../api'
 import { generateKey } from './helper';
-import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched } from '../store/follow';
+import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched, doFollowerFetch, doFollowingFetch } from '../store/follow';
 import { PostAction, doPostFetch, doPostFetched } from '../store/post';
 import { compose, map, filter } from 'ramda';
 import includes from 'ramda/es/includes';
@@ -14,6 +14,8 @@ function *handlePrivateKeySubmit(action: UserAction) {
     const publicKey = generateKey(privateKey);
     const accountSummary = yield call(getAccountSummary, publicKey);
     yield put(doPostFetch(publicKey));
+    yield put(doFollowerFetch(publicKey));
+    yield put(doFollowingFetch(publicKey));
     yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
   } catch (err) {
     yield put(doPrivateKeyVerifyFailed(privateKey));

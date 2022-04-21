@@ -5,12 +5,16 @@ import { Tabs, Tab, Paper, Grid, Avatar, Button } from '@material-ui/core';
 import { UserState } from '../../../store/user';
 interface Props extends WithStyles<typeof styles>, UserState {
   handleTabChange: (tabId: number) => void
+  postCount: number
 }
 interface State {
   value: number;
 }
 const StatusBarPresenter = withStyles(styles)(
   class extends React.Component<Props, State> {
+    static defaultProps = {
+      postCount: 0
+    }
     state = {
       value: 0
     };
@@ -20,7 +24,7 @@ const StatusBarPresenter = withStyles(styles)(
       handleTabChange(value);
     };
     render(): JSX.Element {
-      const { classes, image, followings, followerCount } = this.props;
+      const { classes, image, followings, followerCount, postCount } = this.props;
       return (
         <Paper color='default' className={classes.root} elevation={2}>
           <Grid container={true} spacing={0} className={classes.fixedHeight}>
@@ -45,7 +49,7 @@ const StatusBarPresenter = withStyles(styles)(
                 centered={true}
               >
                 <Tab
-                  label='778'
+                  label={postCount}
                   icon={<span className={classes.tabTitle}>Bài viết</span>}
                   className={classes.tab}
                 />
