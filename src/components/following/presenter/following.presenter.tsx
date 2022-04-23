@@ -49,7 +49,7 @@ const FollowingPresenter = withStyles(styles)(
                   {publicKey}
                 </Typography>
                 <Typography className={classes.pos} color='textSecondary'>
-                  <DateRangeOutlined className={classes.subIcon} fontSize='small'/> {moment(createdAt).toString()}
+                  <DateRangeOutlined className={classes.subIcon} fontSize='small'/> {moment(createdAt).format('LLL').toString()}
                 </Typography>
                 <Typography className={classes.pos} color='textSecondary'>
                   <CreditCardOutlined className={classes.subIcon} fontSize='small'/> {balance/100000000 + ' TRE'}

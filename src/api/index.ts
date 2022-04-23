@@ -1,5 +1,5 @@
 import { endpoint, call, applyValue } from './utils';
-import { DATABASE, ACCOUNT_SUMMARY, API_URL, USER_INFO, FOLLOWER, COMMIT, CREATE, RPC_COMMIT, GET_POSTS } from './constants';
+import { DATABASE, ACCOUNT_SUMMARY, API_URL, USER_INFO, FOLLOWER, COMMIT, CREATE, RPC_COMMIT, POSTS, FOLLOWING } from './constants';
 import { pipe } from 'ramda';
 import axios from 'axios';
 import { contentEncode, followingEncode, contentDecode } from './encoder';
@@ -125,7 +125,7 @@ const updateFollowing = async (publicKey: string, accounts: string[], privateKey
 const getPosts = async (publicKey: string) => {
   const { data } = await pipe(
     endpoint(DATABASE),
-    call(GET_POSTS),
+    call(POSTS),
     applyValue(publicKey),
     axios.get
   )(API_URL);
@@ -138,6 +138,15 @@ const getPosts = async (publicKey: string) => {
   })
   return posts.filter(post => !!post.content);
 }
+const getFollowing = async (publicKey: string) => {
+  const { data } = await pipe(
+    endpoint(DATABASE),
+    call(FOLLOWING),
+    applyValue(publicKey),
+    axios.get
+  )(API_URL)
+  return data.result;
+}
 export { 
   test,
   getAccountSummary,
@@ -146,5 +155,6 @@ export {
   postContent,
   updateUsername,
   updateFollowing,
-  getPosts
+  getPosts,
+  getFollowing
 }

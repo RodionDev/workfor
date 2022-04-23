@@ -7,7 +7,6 @@ it('Navigation bar renders without crashing', () => {
   ReactDOM.render(
     <Router>
       <NavigationBarPresenter
-       followings={[]}
        privateKey=''
        brandName='Vortex' 
        searchBarPlaceHolder='search'

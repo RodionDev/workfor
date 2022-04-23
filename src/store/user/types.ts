@@ -8,14 +8,14 @@ export const enum UserActionTypes {
   UPDATE_FOLLOWING = '@@user/UPDATE_FOLLOWING'
 };
 export interface UserState {
-  readonly privateKey?: string;
-  readonly loading?: boolean;
-  readonly balance?: number;
-  readonly createdAt?: Date,
-  readonly displayName?: string;
-  readonly followings?: string[];
-  readonly publicKey?: string;
-  readonly energy?: number;
-  readonly image?: any,
+  readonly privateKey?: string
+  readonly loading?: boolean
+  readonly balance?: number
+  readonly createdAt?: Date
+  readonly displayName?: string
+  readonly publicKey?: string
+  readonly energy?: number
+  readonly image?: any
   readonly followerCount?: number
+  readonly followingCount?: number
 }

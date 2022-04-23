@@ -5,7 +5,7 @@ interface Props {
 }
 const Header: React.SFC<Props> = ({className}) => 
   <div className={className}>
-    <NavigationBar followings={[]} brandName='Vortex' redirectLinks={[{name: 'Khám phá', link: '/introduction'}]}/>
+    <NavigationBar brandName='Vortex' redirectLinks={[{name: 'Khám phá', link: '/introduction'}]}/>
     <CoverImage/>
     <StatusBar/>
   </div>

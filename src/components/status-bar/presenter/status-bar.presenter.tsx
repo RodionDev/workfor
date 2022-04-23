@@ -24,7 +24,7 @@ const StatusBarPresenter = withStyles(styles)(
       handleTabChange(value);
     };
     render(): JSX.Element {
-      const { classes, image, followings, followerCount, postCount } = this.props;
+      const { classes, image, followerCount, postCount, followingCount } = this.props;
       return (
         <Paper color='default' className={classes.root} elevation={2}>
           <Grid container={true} spacing={0} className={classes.fixedHeight}>
@@ -64,7 +64,7 @@ const StatusBarPresenter = withStyles(styles)(
                   className={classes.tab}
                 />
                 <Tab
-                  label={followings ? followings.length : 0}
+                  label={followingCount ? followingCount : 0}
                   icon={<span className={classes.tabTitle}>Following</span>}
                   className={classes.tab}
                 />

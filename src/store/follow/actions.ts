@@ -15,10 +15,10 @@ const doFollowingFetched = (data: any[]): FollowAction => ({
     data
   }
 })
-const doFollowingFetch = (publicKeys: string[]): FollowAction => ({
+const doFollowingFetch = (publicKey: string): FollowAction => ({
   type: FollowActionTypes.FOLLOWING_FETCH,
   payload: {
-    publicKeys
+    publicKey
   }
 })
 const doFollowerFetching = (): FollowAction => ({

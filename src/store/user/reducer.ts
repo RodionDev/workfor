@@ -4,7 +4,6 @@ import { includes } from 'ramda';
 const initialState: UserState = {
   loading: false,
   privateKey: '',
-  followings: [],
 }
 const applyPrivateKeyVerifying = (state: UserState, action: AnyAction): UserState => {
   return {
@@ -32,9 +31,6 @@ const applyUpdateUsernameDone = (state: UserState, action: AnyAction): UserState
 const applyUpdateFollowing = (state: UserState, action: AnyAction): UserState => {
   return {
     ...state,
-    followings: state.followings 
-    ? state.followings.filter(following => !includes(following, action.payload.unfollowKeys))
-    : []
   }
 }
 const reducer: Reducer<UserState> = (state = initialState, action) => {

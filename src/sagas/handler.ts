@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess, doPrivateKeySubmit, doUpdateUsernameDone, doUpdateFollowing } from '../store/user';
-import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts } from '../api'
+import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing } from '../api'
 import { generateKey } from './helper';
 import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched, doFollowerFetch, doFollowingFetch } from '../store/follow';
 import { PostAction, doPostFetch, doPostFetched } from '../store/post';
@@ -23,9 +23,9 @@ function *handlePrivateKeySubmit(action: UserAction) {
 }
 function *handleFollowingFetch(action: FollowAction) {
   yield put(doFollowingFetching());
-  const { publicKeys } = action.payload;
+  const { publicKey } = action.payload;
   try {
-    const data = yield call(getUserInfos, publicKeys);
+    const data = yield call(getFollowing, publicKey);
     yield put(doFollowingFetched(data));
   } catch(err) {
     yield put(doFollowingFetched([]));
@@ -74,7 +74,7 @@ function *handleUnfollowConfirm (action: FollowAction) {
       filter((following: any) => !includes(following.publicKey, unfollows)),
     )(followings)
     yield call(updateFollowing, publicKey, accounts, privateKey);
-    yield delay(5000);
+    yield delay(4000);
     const accountSummary = yield call(getAccountSummary, publicKey);
     yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
   } catch (err) {

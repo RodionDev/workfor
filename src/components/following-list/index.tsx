@@ -5,22 +5,22 @@ import { doFollowingFetch, FollowAction, doUnfollowConfirm } from '../../store/f
 import { ApplicationState } from '../../store';
 import { connect } from 'react-redux';
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onDisplay: (publicKeys: string[]) => dispatch(doFollowingFetch(publicKeys)),
+  onDisplay: (publicKey: string) => dispatch(doFollowingFetch(publicKey)),
   onUnfollowConfirm: (unfollows: string[], followings: any[], privateKey: string) => dispatch(doUnfollowConfirm(unfollows, followings, privateKey))
 })
 const mapStateToProps = ({user, follow}: ApplicationState) => ({
-  publicKeys: user.followings ? user.followings : [],
+  publicKey:  user.publicKey,
   privateKey: user.privateKey ? user.privateKey : '',
   followings: follow.followings,
   unfollows: follow.unfollows
 })
 interface Props {
-  onDisplay: (publicKeys: string[]) => FollowAction;
+  onDisplay: (publicKey: string) => FollowAction;
   onUnfollowConfirm: (unfollows: string[], followings: any[], privateKey) => FollowAction
-  publicKeys: string[],
-  followings: any[],
+  followings: any[]
   unfollows: string[]
   privateKey: string
+  publicKey: string
 }
 class FollowingList extends React.Component<Props> {
   handleUnfollowConfirm = () => {
@@ -34,8 +34,8 @@ class FollowingList extends React.Component<Props> {
     );
   }
   componentDidMount() {
-    const { onDisplay, publicKeys } = this.props;
-    onDisplay(publicKeys);
+    const { onDisplay, publicKey } = this.props;
+    onDisplay(publicKey);
   }
 }
 export default connect(

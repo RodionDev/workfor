@@ -5,10 +5,8 @@ import { connect } from 'react-redux';
 import { ApplicationState } from 'src/store';
 const mapStateToProps = ({primaryPanel, user}: ApplicationState) => ({
   tabId: primaryPanel.tabId,
-  followings: user.followings
 });
 interface Props extends PrimaryPanelState {
-  followings?: string[]
 }
 class PrimaryPanelContainer extends React.Component<Props> {
   render(): JSX.Element {

@@ -8,10 +8,10 @@ import { UserState } from '../../store/user';
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   tabChange: (tabId: number) => dispatch(doPrimaryPanelChange(tabId))
 });
-const mapStateToProps = ({user, follow, post}: ApplicationState) => ({
+const mapStateToProps = ({user, post}: ApplicationState) => ({
   image: user.image,
-  followings: user.followings,
-  followerCount: follow.followers.length,
+  followingCount: user.followingCount,
+  followerCount: user.followerCount,
   postCount: post.posts.length
 })
 interface Props extends UserState {
@@ -24,12 +24,13 @@ class StatusBarContainer extends React.Component<Props, {}> {
     tabChange(tabId);
   }
   render(): JSX.Element {
-    const { image, followings, followerCount, postCount } = this.props;
+    const { image, followerCount, postCount, followingCount } = this.props;
     return(
       <StatusBarPresenter 
       handleTabChange={this.handleTabChange} 
-      image={image} followings={followings} 
+      image={image} 
       followerCount={followerCount}
+      followingCount={followingCount}
       postCount={postCount}
       />
     );
