@@ -147,6 +147,28 @@ const getFollowing = async (publicKey: string) => {
   )(API_URL)
   return data.result;
 }
+const updateImage = async (buffer: Uint8Array, publicKey: string, privateKey: string) => {
+  const { data } = await pipe(
+    endpoint(COMMIT),
+    call(CREATE),
+    applyValue(publicKey),
+    applyValue('update_account'),
+    axios.get
+  )(API_URL);
+  const tx = {
+    ...data.transaction,
+    memo: Buffer.alloc(0),
+    params: {
+      key: 'picture',
+      value: buffer
+    },
+    signature: Buffer.alloc(64, 0)
+  };
+  sign(tx, privateKey);
+  await axios.post('http:
+    transaction: encode(tx).toString('base64')
+  });
+}
 export { 
   test,
   getAccountSummary,
@@ -156,5 +178,6 @@ export {
   updateUsername,
   updateFollowing,
   getPosts,
-  getFollowing
+  getFollowing,
+  updateImage
 }

@@ -25,7 +25,8 @@ const styles  = (theme: Theme) => createStyles({
     top: '-120px',
     transition: 'transform .2s',
     '&:hover': {
-      transform: 'scale(1.1)'
+      transform: 'scale(1.1)',
+      cursor: 'pointer'
     }
   },
   fixedHeight: {

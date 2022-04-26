@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess, doPrivateKeySubmit, doUpdateUsernameDone, doUpdateFollowing } from '../store/user';
-import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing } from '../api'
+import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing, updateImage } from '../api'
 import { generateKey } from './helper';
 import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched, doFollowerFetch, doFollowingFetch } from '../store/follow';
 import { PostAction, doPostFetch, doPostFetched } from '../store/post';
@@ -90,6 +90,18 @@ function *handlePostFetch(action: PostAction) {
     console.log(err);
   }
 }
+function *handleUpdateImage(action: UserAction) {
+  const { buffer, privateKey } = action.payload;
+  try {
+    const publicKey = generateKey(privateKey);
+    yield call(updateImage, buffer, publicKey, privateKey);
+    yield delay(4000);
+    const accountSummary = yield call(getAccountSummary, publicKey);
+    yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
+  } catch(err) {
+    console.log(err);
+  }
+}
 export {
   handlePrivateKeySubmit,
   handleFollowingFetch,
@@ -97,5 +109,6 @@ export {
   handlePostSubmit,
   handleUpdateUsername,
   handleUnfollowConfirm,
-  handlePostFetch
+  handlePostFetch,
+  handleUpdateImage
 }

@@ -5,6 +5,7 @@ import { Tabs, Tab, Paper, Grid, Avatar, Button } from '@material-ui/core';
 import { UserState } from '../../../store/user';
 interface Props extends WithStyles<typeof styles>, UserState {
   handleTabChange: (tabId: number) => void
+  handleUpload: (buffer: Uint8Array) => void
   postCount: number
 }
 interface State {
@@ -13,7 +14,8 @@ interface State {
 const StatusBarPresenter = withStyles(styles)(
   class extends React.Component<Props, State> {
     static defaultProps = {
-      postCount: 0
+      postCount: 0,
+      handleUpload: (buffer: Uint8Array) => console.log('handle upload')
     }
     state = {
       value: 0
@@ -23,6 +25,19 @@ const StatusBarPresenter = withStyles(styles)(
       this.setState({ value });
       handleTabChange(value);
     };
+    handleFileInput = (event: any) => {
+      const { handleUpload } = this.props;
+      const file: File = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const { result } = reader;
+        if (result) {
+          const buffer = Buffer.from(result as ArrayBuffer);
+          handleUpload(buffer);
+        }
+      }
+      reader.readAsArrayBuffer(file);
+    }
     render(): JSX.Element {
       const { classes, image, followerCount, postCount, followingCount } = this.props;
       return (
@@ -34,10 +49,19 @@ const StatusBarPresenter = withStyles(styles)(
                 justify='flex-end'
                 className={classes.fixedHeight}
               >
-                <Avatar
-                  className={classes.avatar}
-                  src={image ? `data:image/jpeg;base64,${Buffer.from(image).toString('base64')}` : 'https:
+                <input
+                  accept='image/jpeg'
+                  id='image-input'
+                  type='file'
+                  hidden={true}
+                  onChange={this.handleFileInput}
                 />
+                <label htmlFor='image-input'>
+                  <Avatar
+                    className={classes.avatar}
+                    src={image ? `data:image/jpeg;base64,${Buffer.from(image).toString('base64')}` : 'https:
+                  />
+                </label>
               </Grid>
             </Grid>
             <Grid item={true} md={6}>

@@ -51,6 +51,13 @@ const doUpdateFollowing = (unfollowKeys: string): UserAction => ({
     unfollowKeys
   }
 })
+const doUpdateImage = (buffer: Uint8Array, privateKey: string): UserAction => ({
+  type: UserActionTypes.UPDATE_IMAGE,
+  payload: {
+    buffer,
+    privateKey
+  }
+})
 export {
   doPrivateKeyVerifying,
   doPrivateKeySubmit,
@@ -58,5 +65,6 @@ export {
   doPrivateKeyVerifySuccess,
   doUpdateUsername,
   doUpdateUsernameDone,
-  doUpdateFollowing
+  doUpdateFollowing,
+  doUpdateImage
 }
