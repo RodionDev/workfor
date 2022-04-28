@@ -5,7 +5,7 @@ const styles = (theme: Theme) => createStyles({
   },
   paper: {
   },
-  logan: {
+  panelName: {
     fontSize: 24,
     padding: '8px 0 8px 0',
     margin: '0 18px 0 18px'

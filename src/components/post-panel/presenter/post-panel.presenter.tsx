@@ -34,7 +34,7 @@ const PostPanelPresenter = withStyles(styles)(
                 <Typography 
                   variant='body2' 
                   color='secondary' 
-                  className={classes.logan}
+                  className={classes.panelName}
                   >
                   Đăng bài
                 </Typography>
