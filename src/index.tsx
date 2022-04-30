@@ -22,7 +22,8 @@ const initialState: ApplicationState = {
     followers: [],
     followings: [], 
     loading: false,
-    unfollows: []
+    unfollows: [],
+    follows: []
   },
   post: {
     posts: [],

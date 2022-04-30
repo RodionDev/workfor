@@ -1,12 +1,13 @@
 import { Reducer } from 'redux';
 import { FollowActionTypes, FollowState } from './types';
 import { FollowAction } from './actions';
-import { includes, equals } from 'ramda';
+import { includes, equals, uniq } from 'ramda';
 const initialState: FollowState = {
   loading: false,
   followers: [],
   followings: [],
   unfollows: [],
+  follows: []
 }
 const applyFollowingFetching = (state: FollowState, action: FollowAction): FollowState => ({
   ...state,
@@ -15,6 +16,7 @@ const applyFollowingFetching = (state: FollowState, action: FollowAction): Follo
 const applyFollowingFetched = (state: FollowState, action: FollowAction): FollowState => ({
   ...state,
   followings: action.payload.data,
+  follows: uniq([...action.payload.data.map(user => user.publicKey), ...state.follows]),
   loading: false
 })
 const applyFollowerFetching = (state: FollowState, action: FollowAction): FollowState => ({
@@ -37,6 +39,12 @@ const applyUnfollowConfirm = (state: FollowState, action: FollowAction): FollowS
   unfollows: [],
   followings: state.followings.filter(following => !includes(following.publicKey, action.payload.unfollows))
 })
+const applyFollow = (state: FollowState, action: FollowAction): FollowState => ({
+  ...state,
+  follows: includes(action.payload.userPublicKey, state.follows)
+  ? state.follows.filter(follow => !equals(follow, action.payload.userPublicKey))
+  : [...state.follows, action.payload.userPublicKey]
+})
 const reducer: Reducer<FollowState, FollowAction> = (state = initialState, action) => {
   switch(action.type) {
     case FollowActionTypes.FOLLOWING_FETCHING: {
@@ -56,6 +64,9 @@ const reducer: Reducer<FollowState, FollowAction> = (state = initialState, actio
     }
     case FollowActionTypes.UNFOLLOW_CONFIRM: {
       return applyUnfollowConfirm(state, action);
+    }
+    case FollowActionTypes.FOLLOW: {
+      return applyFollow(state, action);
     }
     default: return state;
   }

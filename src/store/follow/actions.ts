@@ -53,6 +53,12 @@ const doUnfollowConfirm = (unfollows: string[], followings: any[], privateKey: s
     privateKey
   }
 })
+const doFollow = (userPublicKey: string): FollowAction => ({
+  type: FollowActionTypes.FOLLOW,
+  payload: {
+    userPublicKey
+  }
+})
 export {
   doFollowingFetching,
   doFollowingFetched,
@@ -61,5 +67,6 @@ export {
   doFollowerFetched,
   doFollowerFetching,
   doUnfollow,
-  doUnfollowConfirm
+  doUnfollowConfirm,
+  doFollow
 }

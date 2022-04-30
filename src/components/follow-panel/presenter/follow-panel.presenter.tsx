@@ -7,17 +7,26 @@ import {
   Typography,
   Button,
   Divider,
-  Avatar
 } from '@material-ui/core';
 import {} from 'ramda';
-interface Props extends WithStyles<typeof styles> {}
+interface Props extends WithStyles<typeof styles> {
+  handleFollow: (userPublicKey: string) => void
+  follows: string[]
+}
 const FollowPanelPresenter = withStyles(styles)(
   class extends React.Component<Props> {
+    static defaultProps = {
+      follows: []
+    }
     handleSubmit = (_: React.MouseEvent<HTMLElement>) => {
       console.log('Submit');
     };
+    handleBtnClick = (_: React.MouseEvent<HTMLElement>) => {
+      const { handleFollow } = this.props;
+      handleFollow('Test Public Key');
+    }
     render() {
-      const { classes } = this.props;
+      const { classes, follows } = this.props;
       return (
         <div className={classes.root}>
           <Paper elevation={0} square={true}>
@@ -59,7 +68,12 @@ const FollowPanelPresenter = withStyles(styles)(
                       </Typography>
                     </Grid>
                     <Grid item={true} xs={3}>
-                      <Button variant='outlined' color='secondary' size='small'>
+                      <Button 
+                      variant='outlined' 
+                      color='secondary' 
+                      size='small'
+                      onClick={this.handleBtnClick}
+                      >
                         Follow
                       </Button>
                     </Grid>
@@ -78,8 +92,11 @@ const FollowPanelPresenter = withStyles(styles)(
                       </Typography>
                     </Grid>
                     <Grid item={true} xs={3}>
-                      <Button variant='outlined' color='secondary' size='small'>
-                        Follow
+                      <Button 
+                      variant='outlined' 
+                      color='default' 
+                      size='small'>
+                        Huỷ
                       </Button>
                     </Grid>
                   </Grid>
