@@ -42,7 +42,7 @@ const FollowingPresenter = withStyles(styles)(
                 />
               </Grid>
               <Grid item={true} xs={6}>
-                <Typography variant='h5' component='h2'>
+                <Typography variant='h5' component='h2' noWrap={true}>
                   {displayName}
                 </Typography>
                 <Typography className={classes.pos} color='textSecondary'>

@@ -7,26 +7,53 @@ import {
   Typography,
   Button,
   Divider,
+  TextField
 } from '@material-ui/core';
-import {} from 'ramda';
+import { take, without, compose, filter, reject, isEmpty } from 'ramda';
+import includes from 'ramda/es/includes';
+import { handleFollowConfirm } from 'src/sagas/handler';
 interface Props extends WithStyles<typeof styles> {
-  handleFollow: (userPublicKey: string) => void
-  follows: string[]
+  handleFollow: (userPublicKey: string) => void;
+  userCanFollow: any;
+  publicKey: string;
+  handleFollowConfirm: () => void;
+}
+interface State {
+  selectedPublicKeys: string[];
+  filterTemp: string;
 }
 const FollowPanelPresenter = withStyles(styles)(
-  class extends React.Component<Props> {
+  class extends React.Component<Props, State> {
     static defaultProps = {
-      follows: []
-    }
-    handleSubmit = (_: React.MouseEvent<HTMLElement>) => {
-      console.log('Submit');
+      userCanFollow: [],
+      publicKey: ''
     };
-    handleBtnClick = (_: React.MouseEvent<HTMLElement>) => {
+    state: Readonly<State> = {
+      selectedPublicKeys: [],
+      filterTemp: ''
+    };
+    handleSubmit = (_: React.MouseEvent<HTMLElement>) => {
+      const { handleFollowConfirm } = this.props;
+      handleFollowConfirm();
+    };
+    handleBtnClick = (userPublicKey: string) => (
+      _: React.MouseEvent<HTMLElement>
+    ) => {
       const { handleFollow } = this.props;
-      handleFollow('Test Public Key');
-    }
+      const { selectedPublicKeys } = this.state;
+      this.setState({
+        selectedPublicKeys: includes(userPublicKey, selectedPublicKeys)
+          ? without([userPublicKey], selectedPublicKeys)
+          : [...selectedPublicKeys, userPublicKey]
+      });
+      handleFollow(userPublicKey);
+    };
+    handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      this.setState({ filterTemp: event.target.value });
+    };
     render() {
-      const { classes, follows } = this.props;
+      const { classes, userCanFollow, publicKey } = this.props;
+      const { selectedPublicKeys, filterTemp } = this.state;
       return (
         <div className={classes.root}>
           <Paper elevation={0} square={true}>
@@ -41,66 +68,87 @@ const FollowPanelPresenter = withStyles(styles)(
                 </Typography>
               </Grid>
               <Grid item={true} xs={4}>
-                <Button
-                  variant='contained'
-                  color='primary'
-                  className={classes.submitBtn}
-                  onClick={this.handleSubmit}
-                >
-                  Xong
-                </Button>
+                {!isEmpty(selectedPublicKeys) && (
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    className={classes.submitBtn}
+                    onClick={this.handleSubmit}
+                  >
+                    Xong
+                  </Button>
+                )}
               </Grid>
             </Grid>
             <Divider variant='fullWidth' />
             <div className={classes.input}>
+              <Grid container={true}>
+                <Grid item={true} xs={12}>
+                  <TextField
+                    label='Tìm kiếm'
+                    rowsMax={1}
+                    variant='outlined'
+                    value={filterTemp}
+                    onChange={this.handleInputChange}
+                    fullWidth={true}
+                  />
+                </Grid>
+              </Grid>
+            </div>
+            <div className={classes.input}>
               <Grid container={true} className={classes.list} spacing={16}>
                 {}
-                <Grid item={true} xs={12}>
-                  <Grid container={true}>
-                    <Grid item={true} xs={9}>
-                      <Typography
-                        variant='body2'
-                        noWrap={true}
-                        color='textPrimary'
-                        className={classes.displayName}
-                      >
-                        Display name or public key
-                      </Typography>
-                    </Grid>
-                    <Grid item={true} xs={3}>
-                      <Button 
-                      variant='outlined' 
-                      color='secondary' 
-                      size='small'
-                      onClick={this.handleBtnClick}
-                      >
-                        Follow
-                      </Button>
+                {compose(
+                  take<any>(20),
+                  filter<any>(user => {
+                    return (
+                      user.publicKey
+                        .toLowerCase()
+                        .includes(filterTemp.toLowerCase()) ||
+                      user.displayName
+                        .toLowerCase()
+                        .includes(filterTemp.toLowerCase())
+                    );
+                  }),
+                  reject<any>(user => user.publicKey === publicKey)
+                )(userCanFollow).map((user, index) => (
+                  <Grid item={true} xs={12} key={index}>
+                    <Grid container={true}>
+                      <Grid item={true} xs={9}>
+                        <Typography
+                          variant='body2'
+                          noWrap={true}
+                          color='textPrimary'
+                          align='center'
+                          className={classes.displayName}
+                        >
+                          {user.displayName}
+                        </Typography>
+                      </Grid>
+                      <Grid item={true} xs={3}>
+                        {includes(user.publicKey, selectedPublicKeys) ? (
+                          <Button
+                            variant='outlined'
+                            color='default'
+                            size='small'
+                            onClick={this.handleBtnClick(user.publicKey)}
+                          >
+                            Huỷ
+                          </Button>
+                        ) : (
+                          <Button
+                            variant='outlined'
+                            color='secondary'
+                            size='small'
+                            onClick={this.handleBtnClick(user.publicKey)}
+                          >
+                            Follow
+                          </Button>
+                        )}
+                      </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
-                <Grid item={true} xs={12}>
-                  <Grid container={true}>
-                    <Grid item={true} xs={9}>
-                      <Typography
-                        variant='body2'
-                        noWrap={true}
-                        color='textPrimary'
-                        className={classes.displayName}
-                      >
-                        Display name or public key
-                      </Typography>
-                    </Grid>
-                    <Grid item={true} xs={3}>
-                      <Button 
-                      variant='outlined' 
-                      color='default' 
-                      size='small'>
-                        Huỷ
-                      </Button>
-                    </Grid>
-                  </Grid>
-                </Grid>
+                ))}
               </Grid>
             </div>
           </Paper>

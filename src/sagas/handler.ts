@@ -1,9 +1,9 @@
 import { put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess, doPrivateKeySubmit, doUpdateUsernameDone, doUpdateFollowing } from '../store/user';
-import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing, updateImage } from '../api'
+import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing, updateImage, getAllUsers } from '../api'
 import { generateKey } from './helper';
-import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched, doFollowerFetch, doFollowingFetch } from '../store/follow';
+import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched, doFollowerFetch, doFollowingFetch, doFollowAddUser } from '../store/follow';
 import { PostAction, doPostFetch, doPostFetched } from '../store/post';
 import { compose, map, filter } from 'ramda';
 import includes from 'ramda/es/includes';
@@ -26,7 +26,9 @@ function *handleFollowingFetch(action: FollowAction) {
   const { publicKey } = action.payload;
   try {
     const data = yield call(getFollowing, publicKey);
+    const allUsers = yield call(getAllUsers);
     yield put(doFollowingFetched(data));
+    yield put(doFollowAddUser(allUsers));
   } catch(err) {
     yield put(doFollowingFetched([]));
   }
@@ -102,6 +104,20 @@ function *handleUpdateImage(action: UserAction) {
     console.log(err);
   }
 }
+function *handleFollowConfirm(action: FollowAction) {
+  const { userPublicKeys, privateKey } = action.payload;
+  try {
+    const publicKey = generateKey(privateKey);
+    yield call(updateFollowing, publicKey, userPublicKeys, privateKey);
+    yield delay(4000);
+    const accountSummary = yield call(getAccountSummary, publicKey);
+    yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
+    const data = yield call(getFollowing, publicKey);
+    yield put(doFollowingFetched(data));
+  } catch(err) {
+    console.log(err);
+  }
+}
 export {
   handlePrivateKeySubmit,
   handleFollowingFetch,
@@ -110,5 +126,6 @@ export {
   handleUpdateUsername,
   handleUnfollowConfirm,
   handlePostFetch,
-  handleUpdateImage
+  handleUpdateImage,
+  handleFollowConfirm
 }

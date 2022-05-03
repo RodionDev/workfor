@@ -8,6 +8,7 @@ const CREATE = '/create';
 const RPC_COMMIT = '/rpc_commit';
 const POSTS = '/get_posts';
 const FOLLOWING = '/get_following';
+const ALL_USERS = '/get_all_users';
 export {
   API_URL,
   DATABASE,
@@ -18,5 +19,6 @@ export {
   COMMIT,
   RPC_COMMIT,
   POSTS,
-  FOLLOWING
+  FOLLOWING,
+  ALL_USERS
 }

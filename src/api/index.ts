@@ -1,5 +1,5 @@
 import { endpoint, call, applyValue } from './utils';
-import { DATABASE, ACCOUNT_SUMMARY, API_URL, USER_INFO, FOLLOWER, COMMIT, CREATE, RPC_COMMIT, POSTS, FOLLOWING } from './constants';
+import { DATABASE, ACCOUNT_SUMMARY, API_URL, USER_INFO, FOLLOWER, COMMIT, CREATE, RPC_COMMIT, POSTS, FOLLOWING, ALL_USERS } from './constants';
 import { pipe } from 'ramda';
 import axios from 'axios';
 import { contentEncode, followingEncode, contentDecode } from './encoder';
@@ -169,6 +169,14 @@ const updateImage = async (buffer: Uint8Array, publicKey: string, privateKey: st
     transaction: encode(tx).toString('base64')
   });
 }
+const getAllUsers = async () => {
+  const { data } = await pipe(
+    endpoint(DATABASE),
+    call(ALL_USERS),
+    axios.get
+  )(API_URL);
+  return data.result;
+}
 export { 
   test,
   getAccountSummary,
@@ -179,5 +187,6 @@ export {
   updateFollowing,
   getPosts,
   getFollowing,
-  updateImage
+  updateImage,
+  getAllUsers
 }

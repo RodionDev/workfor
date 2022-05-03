@@ -59,6 +59,25 @@ const doFollow = (userPublicKey: string): FollowAction => ({
     userPublicKey
   }
 })
+const doFollowAddUser = (users: any[]): FollowAction => ({
+  type: FollowActionTypes.FOLLOW_ADD_USER,
+  payload: {
+    users
+  }
+})
+const doFollowConfirm = (userPublicKeys: string[], privateKey: string) => ({
+  type: FollowActionTypes.FOLLOW_CONFIRM,
+  payload: {
+    userPublicKeys,
+    privateKey
+  }
+})
+const doFollowCanFollowUpdate = (userPublicKeys: string[]) => ({
+  type: FollowActionTypes.FOLLOW_CAN_FOLLOW_UPDATE,
+  payload: {
+    userPublicKeys
+  }
+})
 export {
   doFollowingFetching,
   doFollowingFetched,
@@ -68,5 +87,8 @@ export {
   doFollowerFetching,
   doUnfollow,
   doUnfollowConfirm,
-  doFollow
+  doFollow,
+  doFollowAddUser,
+  doFollowConfirm,
+  doFollowCanFollowUpdate
 }

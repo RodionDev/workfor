@@ -8,11 +8,11 @@ import {
   handleUpdateUsername, 
   handleUnfollowConfirm, 
   handlePostFetch, 
-  handleUpdateImage 
+  handleUpdateImage, 
+  handleFollowConfirm
 } from './handler';
 import { FollowActionTypes } from 'src/store/follow';
 import { PostActionTypes } from 'src/store/post';
-import takeLast from 'ramda/es/takeLast';
 function *rootSaga() {
   yield all([
     takeEvery(UserActionTypes.PRIVATE_KEY_SUBMIT, handlePrivateKeySubmit),
@@ -22,7 +22,8 @@ function *rootSaga() {
     takeEvery(UserActionTypes.UPDATE_USERNAME, handleUpdateUsername),
     takeEvery(FollowActionTypes.UNFOLLOW_CONFIRM, handleUnfollowConfirm),
     takeEvery(PostActionTypes.POST_FETCH, handlePostFetch),
-    takeEvery(UserActionTypes.UPDATE_IMAGE, handleUpdateImage)
+    takeEvery(UserActionTypes.UPDATE_IMAGE, handleUpdateImage),
+    takeLatest(FollowActionTypes.FOLLOW_CONFIRM, handleFollowConfirm)
   ]);
 }
 export default rootSaga;

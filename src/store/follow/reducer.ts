@@ -1,13 +1,14 @@
 import { Reducer } from 'redux';
 import { FollowActionTypes, FollowState } from './types';
 import { FollowAction } from './actions';
-import { includes, equals, uniq } from 'ramda';
+import { includes, equals, uniq, reject } from 'ramda';
 const initialState: FollowState = {
   loading: false,
   followers: [],
   followings: [],
   unfollows: [],
-  follows: []
+  follows: [],
+  userCanFollow: []
 }
 const applyFollowingFetching = (state: FollowState, action: FollowAction): FollowState => ({
   ...state,
@@ -45,6 +46,18 @@ const applyFollow = (state: FollowState, action: FollowAction): FollowState => (
   ? state.follows.filter(follow => !equals(follow, action.payload.userPublicKey))
   : [...state.follows, action.payload.userPublicKey]
 })
+const applyFollowAddUser = (state: FollowState, action: FollowAction): FollowState => ({
+  ...state,
+  userCanFollow: action.payload.users.filter(user => !includes(user.publicKey, state.follows))
+})
+const applyFollowConfirm = (state: FollowState, action: FollowAction): FollowState => ({
+  ...state,
+  follows: uniq([...state.follows, ...action.payload.userPublicKeys])
+})
+const applyFollowCanFollowUpdate = (state: FollowState, action: FollowAction): FollowState => ({
+  ...state,
+  userCanFollow: reject<any>(user => includes(user.publicKey, action.payload.userPublicKeys), state.userCanFollow)
+})
 const reducer: Reducer<FollowState, FollowAction> = (state = initialState, action) => {
   switch(action.type) {
     case FollowActionTypes.FOLLOWING_FETCHING: {
@@ -67,6 +80,15 @@ const reducer: Reducer<FollowState, FollowAction> = (state = initialState, actio
     }
     case FollowActionTypes.FOLLOW: {
       return applyFollow(state, action);
+    }
+    case FollowActionTypes.FOLLOW_ADD_USER: {
+      return applyFollowAddUser(state, action);
+    }
+    case FollowActionTypes.FOLLOW_CONFIRM: {
+      return applyFollowConfirm(state, action);
+    }
+    case FollowActionTypes.FOLLOW_CAN_FOLLOW_UPDATE: {
+      return applyFollowCanFollowUpdate(state, action);
     }
     default: return state;
   }

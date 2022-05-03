@@ -8,6 +8,9 @@ export const enum FollowActionTypes {
   UNFOLLOW = '@@follow/UNFOLLOW',
   UNFOLLOW_CONFIRM = '@@follow/UNFOLLOW_CONFIRM',
   FOLLOW = '@@follow/FOLLOW',
+  FOLLOW_ADD_USER = '@@follow/FOLLOW_ADD_USER',
+  FOLLOW_CONFIRM = '@@follow/FOLLOW_CONFIRM',
+  FOLLOW_CAN_FOLLOW_UPDATE = '@@follow/FOLLOW_CAN_FOLLOW_UPDATE'
 }
 export interface FollowState {
   readonly loading: boolean
@@ -27,4 +30,5 @@ export interface FollowState {
   }>,
   readonly unfollows: string[]
   readonly follows: string[]
+  readonly userCanFollow: any[]
 }
