@@ -3,7 +3,7 @@ import { pink } from '@material-ui/core/colors';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 const styles = (theme: Theme) => createStyles({
   root: {
-    paddingLeft: 12
+    paddingLeft: 12,
   },
   panelName: {
     fontSize: 24,
@@ -14,6 +14,9 @@ const styles = (theme: Theme) => createStyles({
     margin: '10px 0 0 16px'
   },
   list: {
+  },
+  paper: {
+    height: 438
   },
   input: {
     margin: '8px 12px 6px 12px',

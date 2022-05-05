@@ -58,8 +58,8 @@ const PostPanelPresenter = withStyles(styles)(
               <TextField
                 label='Nội dung'
                 multiline={true}
-                rowsMax={10}
-                rows={6}
+                rowsMax={9}
+                rows={9}
                 variant='outlined'
                 value={content}
                 onChange={this.handleInputChange}

@@ -34,6 +34,7 @@ const FollowPanelPresenter = withStyles(styles)(
     };
     handleSubmit = (_: React.MouseEvent<HTMLElement>) => {
       const { handleFollowConfirm } = this.props;
+      this.setState({selectedPublicKeys: []})
       handleFollowConfirm();
     };
     handleBtnClick = (userPublicKey: string) => (
@@ -56,7 +57,7 @@ const FollowPanelPresenter = withStyles(styles)(
       const { selectedPublicKeys, filterTemp } = this.state;
       return (
         <div className={classes.root}>
-          <Paper elevation={0} square={true}>
+          <Paper elevation={0} square={true} className={classes.paper}>
             <Grid container={true}>
               <Grid item={true} xs={8}>
                 <Typography
@@ -99,7 +100,7 @@ const FollowPanelPresenter = withStyles(styles)(
               <Grid container={true} className={classes.list} spacing={16}>
                 {}
                 {compose(
-                  take<any>(20),
+                  take<any>(6),
                   filter<any>(user => {
                     return (
                       user.publicKey

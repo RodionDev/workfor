@@ -1,12 +1,19 @@
 import { Theme, createStyles } from '@material-ui/core/styles';
 const styles = (theme: Theme) => createStyles({
   root: {
-    marginBottom: 12
+    marginBottom: 12,
   },
   lrMargin: {
     margin: '0 18px 0 18px',
     padding: '8px 0 8px 0',
     fontSize: 24
+  },
+  hiddenScroll: {
+    maxHeight: 700,
+    overflowY: 'scroll',
+    '&::-webkit-scrollbar': {
+      display: 'none'
+    }
   },
   postContainer: {
     marginTop: 8,
