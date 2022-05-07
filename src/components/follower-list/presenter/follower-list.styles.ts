@@ -9,6 +9,13 @@ const styles = (theme: Theme) => createStyles({
     marginTop: 6,
     padding: '6px 18px 6px 18px',
   },
+  hiddenScroll: {
+    maxHeight: 700,
+    overflowY: 'scroll',
+    '&::-webkit-scrollbar': {
+      display: 'none'
+    }
+  },
   card: {
     minWidth: 275,
   },

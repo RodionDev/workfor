@@ -1,30 +1,27 @@
 import * as React from 'react';
 import styles from './following-list.styles';
 import { WithStyles, withStyles } from '@material-ui/core/styles';
-import {
-  Paper,
-  Typography,
-  Divider,
-  Grid,
-  Button} from '@material-ui/core';
+import { Paper, Typography, Divider, Grid, Button } from '@material-ui/core';
 import { Follower, Following } from '../..';
 import { isEmpty } from 'ramda';
 interface Props extends WithStyles<typeof styles> {
-  followings: any[]
-  unfollows: string[]
-  handleUnfollowConfirm: () => void
+  followings: any[];
+  unfollows: string[];
+  handleUnfollowConfirm: () => void;
 }
 const FollowingListPresenter = withStyles(styles)(
   class extends React.Component<Props> {
     static defaultProps = {
       followings: [],
       unfollows: [],
-      handleUnfollowConfirm: () => { console.log('handleUnfollowConfirm')}
-    }
+      handleUnfollowConfirm: () => {
+        console.log('handleUnfollowConfirm');
+      }
+    };
     handleConfirmBtnClick = (event: React.MouseEvent<HTMLElement>) => {
       const { handleUnfollowConfirm } = this.props;
       handleUnfollowConfirm();
-    }
+    };
     render() {
       const { classes, followings, unfollows } = this.props;
       return (
@@ -40,34 +37,33 @@ const FollowingListPresenter = withStyles(styles)(
               </Typography>
             </Grid>
             <Grid item={true} xs={4}>
-              {
-                !isEmpty(unfollows) && <Button
+              {!isEmpty(unfollows) && (
+                <Button
                   variant='contained'
-                  color="primary"
+                  color='primary'
                   className={classes.confirmBtn}
                   onClick={this.handleConfirmBtnClick}
                 >
                   Xác nhận
-              </Button>
-              }
+                </Button>
+              )}
             </Grid>
           </Grid>
           <Divider variant='fullWidth' />
-          <Grid
-            container={true}
-            className={classes.followerContainer}
-            justify='flex-start'
-            spacing={16}
-          >
-          {
-            followings.map(
-              (following, index) => 
-              <Grid key={index} item={true} xl={12} xs={12}>
-                <Following data={following}/>
+          <div className={classes.hiddenScroll}>
+            <Grid
+              container={true}
+              className={classes.followerContainer}
+              justify='flex-start'
+              spacing={16}
+            >
+              {followings.map((following, index) => (
+                <Grid key={index} item={true} xl={12} xs={12}>
+                  <Following data={following} />
+                </Grid>
+              ))}
             </Grid>
-            )
-          }
-          </Grid>
+          </div>
         </Paper>
       );
     }

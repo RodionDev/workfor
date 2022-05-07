@@ -34,7 +34,9 @@ const FollowPanelPresenter = withStyles(styles)(
     };
     handleSubmit = (_: React.MouseEvent<HTMLElement>) => {
       const { handleFollowConfirm } = this.props;
-      this.setState({selectedPublicKeys: []})
+      this.setState({
+        selectedPublicKeys: [],
+      });
       handleFollowConfirm();
     };
     handleBtnClick = (userPublicKey: string) => (
