@@ -9,9 +9,7 @@ import {
   Divider,
   TextField
 } from '@material-ui/core';
-import { take, without, compose, filter, reject, isEmpty } from 'ramda';
-import includes from 'ramda/es/includes';
-import { handleFollowConfirm } from 'src/sagas/handler';
+import { take, without, compose, filter, reject, isEmpty, includes } from 'ramda';
 interface Props extends WithStyles<typeof styles> {
   handleFollow: (userPublicKey: string) => void;
   userCanFollow: any;
