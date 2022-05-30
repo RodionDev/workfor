@@ -10,7 +10,7 @@ import {
   Button
 } from '@material-ui/core';
 import Icon from '@mdi/react';
-import { mdiCommentOutline, mdiHeartOutline, mdiShareOutline } from '@mdi/js';
+import { mdiCommentOutline, mdiHeartOutline, mdiThumbUpOutline, mdiEmoticonExcitedOutline, mdiStarFace, mdiEmoticonAngryOutline, mdiEmoticonSadOutline } from '@mdi/js';
 import * as moment from 'moment';
 interface Props extends WithStyles<typeof styles> {
   posts: any[];
@@ -111,7 +111,7 @@ const PostPresenter = withStyles(styles)(
                             }}
                           >
                             <Icon path={mdiCommentOutline} size='1.25em' />{' '}
-                            &nbsp; 672
+                            &nbsp; { post.reacts.filter(p => p.type === 1).length }
                           </Button>
                           <Button
                             disableRipple={true}
@@ -124,20 +124,72 @@ const PostPresenter = withStyles(styles)(
                             }}
                           >
                             <Icon path={mdiHeartOutline} size='1.25em' /> &nbsp;
-                            672
+                            { post.reacts.filter(p => p.type === 2 && p.reaction === 2).length }
                           </Button>
                           <Button
                             disableRipple={true}
-                            className={classes.share}
+                            className={classes.like}
                             variant='text'
                             color='default'
                             size='small'
                             classes={{
-                              text: classes.shareHover
+                              text: classes.likeHover
                             }}
                           >
-                            <Icon path={mdiShareOutline} size='1.25em' /> &nbsp;
-                            672
+                            <Icon path={mdiThumbUpOutline} size='1.25em' /> &nbsp;
+                            { post.reacts.filter(p => p.type === 2 && p.reaction === 1).length }
+                          </Button>
+                          <Button
+                            disableRipple={true}
+                            className={classes.like}
+                            variant='text'
+                            color='default'
+                            size='small'
+                            classes={{
+                              text: classes.likeHover
+                            }}
+                          >
+                            <Icon path={mdiEmoticonExcitedOutline} size='1.25em' /> &nbsp;
+                            { post.reacts.filter(p => p.type === 2 && p.reaction === 3).length }
+                          </Button>
+                          <Button
+                            disableRipple={true}
+                            className={classes.like}
+                            variant='text'
+                            color='default'
+                            size='small'
+                            classes={{
+                              text: classes.likeHover
+                            }}
+                          >
+                            <Icon path={mdiStarFace} size='1.25em' /> &nbsp;
+                            { post.reacts.filter(p => p.type === 2 && p.reaction === 4).length }
+                          </Button>
+                          <Button
+                            disableRipple={true}
+                            className={classes.like}
+                            variant='text'
+                            color='default'
+                            size='small'
+                            classes={{
+                              text: classes.likeHover
+                            }}
+                          >
+                            <Icon path={mdiEmoticonSadOutline} size='1.25em' /> &nbsp;
+                            { post.reacts.filter(p => p.type === 2 && p.reaction === 5).length }
+                          </Button>
+                          <Button
+                            disableRipple={true}
+                            className={classes.like}
+                            variant='text'
+                            color='default'
+                            size='small'
+                            classes={{
+                              text: classes.likeHover
+                            }}
+                          >
+                            <Icon path={mdiEmoticonAngryOutline} size='1.25em' /> &nbsp;
+                            { post.reacts.filter(p => p.type === 2 && p.reaction === 6).length }
                           </Button>
                         </Grid>
                       </Grid>

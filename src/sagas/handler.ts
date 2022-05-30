@@ -25,10 +25,10 @@ function *handleFollowingFetch(action: FollowAction) {
   yield put(doFollowingFetching());
   const { publicKey } = action.payload;
   try {
-    const allUsers = yield call(getAllUsers);
-    yield put(doFollowAddUser(allUsers));
     const data = yield call(getFollowing, publicKey);
     yield put(doFollowingFetched(data));
+    const allUsers = yield call(getAllUsers);
+    yield put(doFollowAddUser(allUsers));
   } catch(err) {
     yield put(doFollowingFetched([]));
   }
