@@ -13,9 +13,10 @@ import Icon from '@mdi/react';
 import { mdiCommentOutline, mdiHeartOutline, mdiThumbUpOutline, mdiEmoticonExcitedOutline, mdiStarFace, mdiEmoticonAngryOutline, mdiEmoticonSadOutline } from '@mdi/js';
 import * as moment from 'moment';
 interface Props extends WithStyles<typeof styles> {
-  posts: any[];
-  image: any;
-  displayName: string;
+  posts: any[]
+  image: any
+  displayName: string
+  handleReact: (post: any, reactContent: any) => void
 }
 interface State {
   commentOpen: boolean;
@@ -30,6 +31,10 @@ const PostPresenter = withStyles(styles)(
     state: Readonly<State> = {
       commentOpen: false
     };
+    handleReactionClick = (post: any, reactContent: any) => (_: React.MouseEvent<HTMLElement>) => {
+      const { handleReact } = this.props;
+      handleReact(post, reactContent);
+    }
     render(): JSX.Element {
       const { classes, posts, image, displayName } = this.props;
       return (
@@ -122,6 +127,7 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
+                            onClick={this.handleReactionClick(post, {type: 2, reaction: 2})}
                           >
                             <Icon path={mdiHeartOutline} size='1.25em' /> &nbsp;
                             { post.reacts.filter(p => p.type === 2 && p.reaction === 2).length }
@@ -135,6 +141,7 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
+                            onClick={this.handleReactionClick(post, {type: 2, reaction: 1})}
                           >
                             <Icon path={mdiThumbUpOutline} size='1.25em' /> &nbsp;
                             { post.reacts.filter(p => p.type === 2 && p.reaction === 1).length }
@@ -148,6 +155,7 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
+                            onClick={this.handleReactionClick(post, {type: 2, reaction: 3})}
                           >
                             <Icon path={mdiEmoticonExcitedOutline} size='1.25em' /> &nbsp;
                             { post.reacts.filter(p => p.type === 2 && p.reaction === 3).length }
@@ -161,6 +169,7 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
+                            onClick={this.handleReactionClick(post, {type: 2, reaction: 4})}
                           >
                             <Icon path={mdiStarFace} size='1.25em' /> &nbsp;
                             { post.reacts.filter(p => p.type === 2 && p.reaction === 4).length }
@@ -174,6 +183,7 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
+                            onClick={this.handleReactionClick(post, {type: 2, reaction: 5})}
                           >
                             <Icon path={mdiEmoticonSadOutline} size='1.25em' /> &nbsp;
                             { post.reacts.filter(p => p.type === 2 && p.reaction === 5).length }
@@ -187,6 +197,7 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
+                            onClick={this.handleReactionClick(post, {type: 2, reaction: 6})}
                           >
                             <Icon path={mdiEmoticonAngryOutline} size='1.25em' /> &nbsp;
                             { post.reacts.filter(p => p.type === 2 && p.reaction === 6).length }

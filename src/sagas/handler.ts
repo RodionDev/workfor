@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess, doPrivateKeySubmit, doUpdateUsernameDone, doUpdateFollowing } from '../store/user';
-import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing, updateImage, getAllUsers } from '../api'
+import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing, updateImage, getAllUsers, updateReact } from '../api'
 import { generateKey } from './helper';
 import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched, doFollowerFetch, doFollowingFetch, doFollowAddUser } from '../store/follow';
 import { PostAction, doPostFetch, doPostFetched } from '../store/post';
@@ -17,6 +17,7 @@ function *handlePrivateKeySubmit(action: UserAction) {
     yield put(doFollowerFetch(publicKey));
     yield put(doFollowingFetch(publicKey));
     yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
+    window.sessionStorage.setItem('privateKey', privateKey);
   } catch (err) {
     yield put(doPrivateKeyVerifyFailed(privateKey));
   }
@@ -118,6 +119,23 @@ function *handleFollowConfirm(action: FollowAction) {
     console.log(err);
   }
 }
+function *handlePostReact(action: PostAction) {
+  const { post, reactContent } = action.payload;
+  const react = {
+    object: post.dataHash,
+    content: reactContent
+  }
+  const privateKey = window.sessionStorage.getItem('privateKey');
+  if (privateKey) {
+    try {
+      const publicKey = generateKey(privateKey);
+      yield call(updateReact, react, publicKey, privateKey);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  console.log({post, reactContent});
+}
 export {
   handlePrivateKeySubmit,
   handleFollowingFetch,
@@ -127,5 +145,6 @@ export {
   handleUnfollowConfirm,
   handlePostFetch,
   handleUpdateImage,
-  handleFollowConfirm
+  handleFollowConfirm,
+  handlePostReact
 }
