@@ -7,19 +7,33 @@ import {
   Divider,
   Grid,
   Avatar,
-  Button
+  Button,
+  Modal,
+  TextField
 } from '@material-ui/core';
 import Icon from '@mdi/react';
-import { mdiCommentOutline, mdiHeartOutline, mdiThumbUpOutline, mdiEmoticonExcitedOutline, mdiStarFace, mdiEmoticonAngryOutline, mdiEmoticonSadOutline } from '@mdi/js';
+import {
+  mdiCommentOutline,
+  mdiHeartOutline,
+  mdiThumbUpOutline,
+  mdiEmoticonExcitedOutline,
+  mdiStarFace,
+  mdiEmoticonAngryOutline,
+  mdiEmoticonSadOutline
+} from '@mdi/js';
 import * as moment from 'moment';
+import axios from 'axios';
+import { isEmpty } from 'ramda';
+import Comment from './comment';
 interface Props extends WithStyles<typeof styles> {
-  posts: any[]
-  image: any
-  displayName: string
-  handleReact: (post: any, reactContent: any) => void
+  posts: any[];
+  image: any;
+  displayName: string;
+  handleReact: (post: any, reactContent: any) => void;
 }
 interface State {
-  commentOpen: boolean;
+  commentOpen: boolean
+  selectedPost: any
 }
 const PostPresenter = withStyles(styles)(
   class extends React.Component<Props, State> {
@@ -29,14 +43,29 @@ const PostPresenter = withStyles(styles)(
       displayName: ''
     };
     state: Readonly<State> = {
-      commentOpen: false
+      commentOpen: false,
+      selectedPost: null,
     };
-    handleReactionClick = (post: any, reactContent: any) => (_: React.MouseEvent<HTMLElement>) => {
+    handleReactionClick = (post: any, reactContent: any) => (
+      _: React.MouseEvent<HTMLElement>
+    ) => {
       const { handleReact } = this.props;
       handleReact(post, reactContent);
+    };
+    handleCommentClick = (post: any) => (_: React.MouseEvent<HTMLElement>) => {
+      this.setState({ selectedPost: post });
+      this.setState({ commentOpen: true });
+    };
+    onModalClose = () => {
+      this.setState({ selectedPost: null });
+      this.setState({ commentOpen: false });
+    };
+    handleCommentSubmit = (commentContent) => {
+      console.log(commentContent);
     }
     render(): JSX.Element {
       const { classes, posts, image, displayName } = this.props;
+      const { selectedPost } = this.state;
       return (
         <Paper elevation={0} square={true} className={classes.root}>
           <Typography
@@ -114,9 +143,11 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.commentHover
                             }}
+                            onClick={this.handleCommentClick(post)}
                           >
                             <Icon path={mdiCommentOutline} size='1.25em' />{' '}
-                            &nbsp; { post.reacts.filter(p => p.type === 1).length }
+                            &nbsp;{' '}
+                            {post.reacts.filter(p => p.type === 1).length}
                           </Button>
                           <Button
                             disableRipple={true}
@@ -127,10 +158,17 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
-                            onClick={this.handleReactionClick(post, {type: 2, reaction: 2})}
+                            onClick={this.handleReactionClick(post, {
+                              type: 2,
+                              reaction: 2
+                            })}
                           >
                             <Icon path={mdiHeartOutline} size='1.25em' /> &nbsp;
-                            { post.reacts.filter(p => p.type === 2 && p.reaction === 2).length }
+                            {
+                              post.reacts.filter(
+                                p => p.type === 2 && p.reaction === 2
+                              ).length
+                            }
                           </Button>
                           <Button
                             disableRipple={true}
@@ -141,10 +179,18 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
-                            onClick={this.handleReactionClick(post, {type: 2, reaction: 1})}
+                            onClick={this.handleReactionClick(post, {
+                              type: 2,
+                              reaction: 1
+                            })}
                           >
-                            <Icon path={mdiThumbUpOutline} size='1.25em' /> &nbsp;
-                            { post.reacts.filter(p => p.type === 2 && p.reaction === 1).length }
+                            <Icon path={mdiThumbUpOutline} size='1.25em' />{' '}
+                            &nbsp;
+                            {
+                              post.reacts.filter(
+                                p => p.type === 2 && p.reaction === 1
+                              ).length
+                            }
                           </Button>
                           <Button
                             disableRipple={true}
@@ -155,10 +201,21 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
-                            onClick={this.handleReactionClick(post, {type: 2, reaction: 3})}
+                            onClick={this.handleReactionClick(post, {
+                              type: 2,
+                              reaction: 3
+                            })}
                           >
-                            <Icon path={mdiEmoticonExcitedOutline} size='1.25em' /> &nbsp;
-                            { post.reacts.filter(p => p.type === 2 && p.reaction === 3).length }
+                            <Icon
+                              path={mdiEmoticonExcitedOutline}
+                              size='1.25em'
+                            />{' '}
+                            &nbsp;
+                            {
+                              post.reacts.filter(
+                                p => p.type === 2 && p.reaction === 3
+                              ).length
+                            }
                           </Button>
                           <Button
                             disableRipple={true}
@@ -169,10 +226,17 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
-                            onClick={this.handleReactionClick(post, {type: 2, reaction: 4})}
+                            onClick={this.handleReactionClick(post, {
+                              type: 2,
+                              reaction: 4
+                            })}
                           >
                             <Icon path={mdiStarFace} size='1.25em' /> &nbsp;
-                            { post.reacts.filter(p => p.type === 2 && p.reaction === 4).length }
+                            {
+                              post.reacts.filter(
+                                p => p.type === 2 && p.reaction === 4
+                              ).length
+                            }
                           </Button>
                           <Button
                             disableRipple={true}
@@ -183,10 +247,18 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
-                            onClick={this.handleReactionClick(post, {type: 2, reaction: 5})}
+                            onClick={this.handleReactionClick(post, {
+                              type: 2,
+                              reaction: 5
+                            })}
                           >
-                            <Icon path={mdiEmoticonSadOutline} size='1.25em' /> &nbsp;
-                            { post.reacts.filter(p => p.type === 2 && p.reaction === 5).length }
+                            <Icon path={mdiEmoticonSadOutline} size='1.25em' />{' '}
+                            &nbsp;
+                            {
+                              post.reacts.filter(
+                                p => p.type === 2 && p.reaction === 5
+                              ).length
+                            }
                           </Button>
                           <Button
                             disableRipple={true}
@@ -197,10 +269,21 @@ const PostPresenter = withStyles(styles)(
                             classes={{
                               text: classes.likeHover
                             }}
-                            onClick={this.handleReactionClick(post, {type: 2, reaction: 6})}
+                            onClick={this.handleReactionClick(post, {
+                              type: 2,
+                              reaction: 6
+                            })}
                           >
-                            <Icon path={mdiEmoticonAngryOutline} size='1.25em' /> &nbsp;
-                            { post.reacts.filter(p => p.type === 2 && p.reaction === 6).length }
+                            <Icon
+                              path={mdiEmoticonAngryOutline}
+                              size='1.25em'
+                            />{' '}
+                            &nbsp;
+                            {
+                              post.reacts.filter(
+                                p => p.type === 2 && p.reaction === 6
+                              ).length
+                            }
                           </Button>
                         </Grid>
                       </Grid>
@@ -214,6 +297,9 @@ const PostPresenter = withStyles(styles)(
               </Grid>
             ))}
           </div>
+          <Modal open={this.state.commentOpen} onClose={this.onModalClose}>
+            <Comment post={selectedPost} handleCommentSubmit={this.handleCommentSubmit}/>
+          </Modal>
         </Paper>
       );
     }
