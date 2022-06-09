@@ -1,4 +1,4 @@
-import { IContent, PlainTextContent, Content, Followings, address, ReactContent } from './struct';
+import { IContent, PlainTextContent, Content, Followings, address } from './struct';
 import base32 from 'base32.js';
 const contentEncode = (content: IContent) => {
   const { type } = content;
@@ -6,24 +6,14 @@ const contentEncode = (content: IContent) => {
     case 1: {
       return PlainTextContent.encode(content);
     }
-    case 2: {
-      return ReactContent.encode(content);
-    }
   }
 }
 const contentDecode = (content: Buffer) => {
-  try {
-    const { type } = typeDecode(content);
-    switch(type) {
-      case 1: {
-        return PlainTextContent.decode(content);
-      }
-      case 2: {
-        return ReactContent.decode(content);
-      }
+  const { type } = typeDecode(content);
+  switch(type) {
+    case 1: {
+      return PlainTextContent.decode(content);
     }
-  } catch (err) {
-    console.log(err);
   }
 }
 const followingEncode = (followings: string[]) => {

@@ -23,16 +23,8 @@ const doPostFetched = (posts: any[]): PostAction => ({
     posts
   }
 })
-const doPostReaction = (post: any, reactContent: any): PostAction => ({
-  type: PostActionTypes.POST_REACTION,
-  payload: {
-    post,
-    reactContent
-  }
-})
 export {
   doPostSubmit,
   doPostFetch,
-  doPostFetched,
-  doPostReaction
+  doPostFetched
 }
