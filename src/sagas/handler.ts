@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
 import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess, doPrivateKeySubmit, doUpdateUsernameDone, doUpdateFollowing } from '../store/user';
-import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing, updateImage, getAllUsers } from '../api'
+import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing, updateImage, getAllUsers, updateReact } from '../api'
 import { generateKey } from './helper';
 import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched, doFollowerFetch, doFollowingFetch, doFollowAddUser } from '../store/follow';
 import { PostAction, doPostFetch, doPostFetched } from '../store/post';
@@ -17,6 +17,9 @@ function *handlePrivateKeySubmit(action: UserAction) {
     yield put(doFollowerFetch(publicKey));
     yield put(doFollowingFetch(publicKey));
     yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
+    window.sessionStorage.setItem('privateKey', privateKey);
+    window.sessionStorage.setItem('publicKey', publicKey);
+    window.sessionStorage.setItem('displayName', accountSummary.result.displayName);
   } catch (err) {
     yield put(doPrivateKeyVerifyFailed(privateKey));
   }
@@ -25,10 +28,10 @@ function *handleFollowingFetch(action: FollowAction) {
   yield put(doFollowingFetching());
   const { publicKey } = action.payload;
   try {
-    const allUsers = yield call(getAllUsers);
-    yield put(doFollowAddUser(allUsers));
     const data = yield call(getFollowing, publicKey);
     yield put(doFollowingFetched(data));
+    const allUsers = yield call(getAllUsers);
+    yield put(doFollowAddUser(allUsers));
   } catch(err) {
     yield put(doFollowingFetched([]));
   }
@@ -118,6 +121,43 @@ function *handleFollowConfirm(action: FollowAction) {
     console.log(err);
   }
 }
+function *handlePostReact(action: PostAction) {
+  const { post, reactContent } = action.payload;
+  const react = {
+    object: post.dataHash,
+    content: reactContent
+  }
+  const privateKey = window.sessionStorage.getItem('privateKey');
+  if (privateKey) {
+    try {
+      const publicKey = generateKey(privateKey);
+      yield call(updateReact, react, publicKey, privateKey);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+function *handleComment(action: PostAction) {
+  const { post, commentContent } = action.payload;
+  const react = {
+    object: post.dataHash,
+    content: {
+      type: 1,
+      text: commentContent
+    }
+  }
+  const privateKey = window.sessionStorage.getItem('privateKey');
+  if (privateKey) {
+    try {
+      const publicKey = generateKey(privateKey);
+      yield call(updateReact, react, publicKey, privateKey);
+      yield delay(3000);
+      yield put(doPostFetch(publicKey));
+    } catch (err) {
+      console.log(err);
+    } 
+  }
+}
 export {
   handlePrivateKeySubmit,
   handleFollowingFetch,
@@ -127,5 +167,7 @@ export {
   handleUnfollowConfirm,
   handlePostFetch,
   handleUpdateImage,
-  handleFollowConfirm
+  handleFollowConfirm,
+  handlePostReact,
+  handleComment
 }

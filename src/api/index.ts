@@ -177,6 +177,28 @@ const getAllUsers = async () => {
   )(API_URL);
   return data.result;
 }
+const updateReact = async (react: any, publicKey: string, privateKey: string) => {
+  const { data } = await pipe(
+    endpoint(COMMIT),
+    call(CREATE),
+    applyValue(publicKey),
+    applyValue('interact'),
+    axios.get
+  )(API_URL);
+  const tx = {
+    ...data.transaction,
+    memo: Buffer.alloc(0),
+    params: {
+      object: react.object,
+      content: contentEncode(react.content)
+    },
+    signature: Buffer.alloc(64, 0)
+  }
+  sign(tx, privateKey);
+  await axios.post('http:
+    transaction: encode(tx).toString('base64')
+  });
+}
 export { 
   test,
   getAccountSummary,
@@ -188,5 +210,6 @@ export {
   getPosts,
   getFollowing,
   updateImage,
-  getAllUsers
+  getAllUsers,
+  updateReact
 }
