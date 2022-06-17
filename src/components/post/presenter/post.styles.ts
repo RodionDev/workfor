@@ -99,27 +99,6 @@ const styles = (theme: Theme) => createStyles({
   },
   reactionGroup: {
     marginTop: 16
-  },
-  modal: {
-    width: 600,
-    height: 410,
-    boxShadow: theme.shadows[5],
-    margin: '0 auto',
-    marginTop: 100
-  },
-  commentHiddenScroll: {
-    maxHeight: 270,
-    overflowY: 'scroll',
-    '&::-webkit-scrollbar': {
-      display: 'none'
-    }
-  },
-  commentInput: {
-    margin: '8px 12px 6px 12px'
-  },
-  submitBtn: {
-    margin: '10px 12px 0px 16px',
-    float: 'right'
   }
 });
 export default styles;

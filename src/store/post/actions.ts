@@ -23,31 +23,8 @@ const doPostFetched = (posts: any[]): PostAction => ({
     posts
   }
 })
-const doPostReaction = (post: any, reactContent: any): PostAction => ({
-  type: PostActionTypes.POST_REACTION,
-  payload: {
-    post,
-    reactContent
-  }
-})
-const doPostComment = (post: any, commentContent: any): PostAction => ({
-  type: PostActionTypes.POST_COMMENT,
-  payload: {
-    post,
-    commentContent
-  }
-})
-const doPostViewComment = (selectedPost: any): PostAction => ({
-  type: PostActionTypes.POST_VIEWCOMMENT,
-  payload: {
-    selectedPost
-  }
-})
 export {
   doPostSubmit,
   doPostFetch,
-  doPostFetched,
-  doPostReaction,
-  doPostComment,
-  doPostViewComment
+  doPostFetched
 }
