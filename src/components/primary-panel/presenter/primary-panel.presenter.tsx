@@ -12,6 +12,7 @@ const PrimaryPanelPresenter = withStyles(styles)(
       return (
         <div>
           {tabId === 0 && <Post />}
+          {tabId === 1 && <div>Newfeeds</div>}
           {tabId === 2 && <FollowerList />}
           {tabId === 3 && <FollowingList />}
         </div>

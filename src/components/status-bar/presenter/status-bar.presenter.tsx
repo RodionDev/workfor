@@ -79,7 +79,7 @@ const StatusBarPresenter = withStyles(styles)(
                 />
                 <Tab
                   label='17.2N'
-                  icon={<span className={classes.tabTitle}>Thích</span>}
+                  icon={<span className={classes.tabTitle}>Newfeeds</span>}
                   className={classes.tab}
                 />
                 <Tab

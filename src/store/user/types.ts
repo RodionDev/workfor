@@ -6,7 +6,7 @@ export const enum UserActionTypes {
   UPDATE_USERNAME = '@@user/UPDATE_USERNAME',
   UPDATE_USERNAME_DONE = '@@user/UPDATE_USERNAME_DONE',
   UPDATE_FOLLOWING = '@@user/UPDATE_FOLLOWING',
-  UPDATE_IMAGE = '@@user/UPDATE_IMAGE'
+  UPDATE_IMAGE = '@@user/UPDATE_IMAGE',
 };
 export interface UserState {
   readonly privateKey?: string

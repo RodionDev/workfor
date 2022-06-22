@@ -22,7 +22,9 @@ const initialState: ApplicationState = {
   },
   post: {
     posts: [],
-    loading: false
+    loading: false,
+    selectedPost: null,
+    feeds: []
   }
 }
 const store = createStore(

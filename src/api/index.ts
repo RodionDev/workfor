@@ -1,5 +1,5 @@
 import { endpoint, call, applyValue } from './utils';
-import { DATABASE, ACCOUNT_SUMMARY, API_URL, USER_INFO, FOLLOWER, COMMIT, CREATE, RPC_COMMIT, POSTS, FOLLOWING, ALL_USERS } from './constants';
+import { DATABASE, ACCOUNT_SUMMARY, API_URL, USER_INFO, FOLLOWER, COMMIT, CREATE, RPC_COMMIT, POSTS, FOLLOWING, ALL_USERS, NEW_FEEDS } from './constants';
 import { pipe } from 'ramda';
 import axios from 'axios';
 import { contentEncode, followingEncode, contentDecode } from './encoder';
@@ -177,6 +177,37 @@ const getAllUsers = async () => {
   )(API_URL);
   return data.result;
 }
+const updateReact = async (react: any, publicKey: string, privateKey: string) => {
+  const { data } = await pipe(
+    endpoint(COMMIT),
+    call(CREATE),
+    applyValue(publicKey),
+    applyValue('interact'),
+    axios.get
+  )(API_URL);
+  const tx = {
+    ...data.transaction,
+    memo: Buffer.alloc(0),
+    params: {
+      object: react.object,
+      content: contentEncode(react.content)
+    },
+    signature: Buffer.alloc(64, 0)
+  }
+  sign(tx, privateKey);
+  await axios.post('http:
+    transaction: encode(tx).toString('base64')
+  });
+}
+const getNewFeeds = async (publicKey: string) => {
+  const { data } = await pipe(
+    endpoint(DATABASE),
+    call(NEW_FEEDS),
+    applyValue(publicKey),
+    axios.get
+  )(API_URL);
+  return data.result;
+}
 export { 
   test,
   getAccountSummary,
@@ -188,5 +219,7 @@ export {
   getPosts,
   getFollowing,
   updateImage,
-  getAllUsers
+  getAllUsers,
+  updateReact,
+  getNewFeeds
 }

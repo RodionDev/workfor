@@ -10,3 +10,4 @@ export { default as Following }from './following';
 export { default as FollowingList } from './following-list'
 export { default as PostPanel } from './post-panel';
 export { default as FollowPanel } from './follow-panel';
+export { default as Newfeeds } from './newfeeds';
