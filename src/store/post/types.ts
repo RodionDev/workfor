@@ -7,7 +7,9 @@ export const enum PostActionTypes {
   POST_COMMENT = '@@post/POST_COMMENT',
   POST_VIEWCOMMENT = '@@post/POST_VIEWCOMMENT',
   FETCH_NEWFEEDS = '@@post/FETCH_NEWFEEDS',
-  ADD_NEWFEEDS = '@@post/ADD_NEWFEEDS'
+  ADD_NEWFEEDS = '@@post/ADD_NEWFEEDS',
+  NEWFEED_REACT = '@@post/NEWFEED_REACT',
+  NEWFEED_COMMENT = '@post/NEWFEED_COMMENT'
 }
 export interface PostState {
   readonly posts: any[]

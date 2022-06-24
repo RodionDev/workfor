@@ -58,6 +58,11 @@ const doUpdateImage = (buffer: Uint8Array, privateKey: string): UserAction => ({
     privateKey
   }
 })
+const doUserLogout = (): UserAction =>  ({
+  type: UserActionTypes.USER_LOGOUT,
+  payload: {
+  }
+})
 export {
   doPrivateKeyVerifying,
   doPrivateKeySubmit,
@@ -66,5 +71,6 @@ export {
   doUpdateUsername,
   doUpdateUsernameDone,
   doUpdateFollowing,
-  doUpdateImage
+  doUpdateImage,
+  doUserLogout,
 }

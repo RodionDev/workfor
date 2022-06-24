@@ -13,7 +13,8 @@ interface Props extends WithStyles<typeof styles>, UserState {
   searchBarPlaceHolder?: string;
   redirectLinks?: Redirect[];
   handleBrandClick: () => void;
-  handleKeySubmit: (privateKey: string) => void;
+  handleKeySubmit: (privateKey: string) => void
+  handleLogout: () => void
 }
 interface State {
   anchorEl?: HTMLElement | null;
@@ -41,6 +42,9 @@ const NavigationBarPresenter = withStyles(styles)(
       const { handleKeySubmit } = this.props;
       const { privateKey } = this.state;
       handleKeySubmit(privateKey);
+    }
+    onLogoutClick = (_: React.MouseEvent<HTMLElement>) => {
+      this.props.handleLogout()
     }
     render(): JSX.Element {
       const { 
@@ -160,60 +164,53 @@ const NavigationBarPresenter = withStyles(styles)(
                   open={open}
                   onClose={this.handleClose}
                 >
+                {!window.sessionStorage.getItem('privateKey') ? 
                   <MenuItem 
                     className={classes.key}
                     classes={{
                       root: classes.noHoverMenu
                     }}
                   >
-                  <TextField
-                    id='standard-textarea'
-                    label='Private Key'
-                    color='secondary'
-                    className={classes.textField}
-                    margin='normal'
-                    onChange={this.handleKeyChange}
-                  />
-                  </MenuItem>
-                  <MenuItem 
-                    onClick={this.handleClose}
-                    classes={{
-                      root: classes.noHoverMenu
-                    }}
-                    disableRipple={true}
-                  >
-                    <Button
-                      variant='contained'
-                      fullWidth={true}
+                    <TextField
+                      id='standard-textarea'
+                      label='Private Key'
                       color='secondary'
-                      className={classes.noCap}
-                      onClick={this.onSigninClick}
-                    >
-                      Đăng nhập
-                    </Button>
-                  </MenuItem>
-                  <Divider variant='fullWidth' className={classes.divider}/>
-                  <Typography
-                    variant='body2'
-                    className={classes.newCommer}
-                  >
-                    Mới gia nhập?
-                  </Typography>
+                      className={classes.textField}
+                      margin='normal'
+                      onChange={this.handleKeyChange}
+                    />
+                  </MenuItem> 
+                  : null
+                }
                   <MenuItem 
                     onClick={this.handleClose}
                     classes={{
                       root: classes.noHoverMenu
                     }}
                     disableRipple={true}
-                  >
-                    <Button
-                      variant='contained'
-                      fullWidth={true}
-                      color='primary'
-                      className={classes.noCap}
-                    >
-                      Đăng ký
-                    </Button>
+                  > 
+                    {
+                      window.sessionStorage.getItem('privateKey') ? 
+                      <Button
+                        variant='contained'
+                        fullWidth={true}
+                        color='primary'
+                        className={classes.noCap}
+                        onClick={this.onLogoutClick}
+                      >
+                        Đăng xuất
+                      </Button>
+                      :
+                      <Button
+                        variant='contained'
+                        fullWidth={true}
+                        color='secondary'
+                        className={classes.noCap}
+                        onClick={this.onSigninClick}
+                      >
+                        Đăng nhập
+                      </Button>
+                    }
                   </MenuItem>
                 </Menu>
               </div>

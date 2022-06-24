@@ -7,6 +7,7 @@ interface Props extends WithStyles<typeof styles>, UserState {
   handleTabChange: (tabId: number) => void
   handleUpload: (buffer: Uint8Array) => void
   postCount: number
+  feedCount: number
 }
 interface State {
   value: number;
@@ -15,7 +16,8 @@ const StatusBarPresenter = withStyles(styles)(
   class extends React.Component<Props, State> {
     static defaultProps = {
       postCount: 0,
-      handleUpload: (buffer: Uint8Array) => console.log('handle upload')
+      handleUpload: (buffer: Uint8Array) => console.log('handle upload'),
+      feedCount: 0
     }
     state = {
       value: 0
@@ -39,7 +41,7 @@ const StatusBarPresenter = withStyles(styles)(
       reader.readAsArrayBuffer(file);
     }
     render(): JSX.Element {
-      const { classes, image, followerCount, postCount, followingCount } = this.props;
+      const { classes, image, followerCount, postCount, followingCount, feedCount } = this.props;
       return (
         <Paper color='default' className={classes.root} elevation={2}>
           <Grid container={true} spacing={0} className={classes.fixedHeight}>
@@ -78,7 +80,7 @@ const StatusBarPresenter = withStyles(styles)(
                   className={classes.tab}
                 />
                 <Tab
-                  label='17.2N'
+                  label={feedCount || 0}
                   icon={<span className={classes.tabTitle}>Newfeeds</span>}
                   className={classes.tab}
                 />

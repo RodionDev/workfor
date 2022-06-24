@@ -4,7 +4,7 @@ import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateK
 import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing, updateImage, getAllUsers, updateReact, getNewFeeds } from '../api'
 import { generateKey } from './helper';
 import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched, doFollowerFetch, doFollowingFetch, doFollowAddUser } from '../store/follow';
-import { PostAction, doPostFetch, doPostFetched, doAddNewfeeds } from '../store/post';
+import { PostAction, doPostFetch, doPostFetched, doAddNewfeeds, doFetchNewfeeds } from '../store/post';
 import { compose, map, filter } from 'ramda';
 import includes from 'ramda/es/includes';
 function *handlePrivateKeySubmit(action: UserAction) {
@@ -13,13 +13,14 @@ function *handlePrivateKeySubmit(action: UserAction) {
   try {
     const publicKey = generateKey(privateKey);
     const accountSummary = yield call(getAccountSummary, publicKey);
-    yield put(doPostFetch(publicKey));
-    yield put(doFollowerFetch(publicKey));
-    yield put(doFollowingFetch(publicKey));
-    yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
     window.sessionStorage.setItem('privateKey', privateKey);
     window.sessionStorage.setItem('publicKey', publicKey);
     window.sessionStorage.setItem('displayName', accountSummary.result.displayName);
+    yield put(doPostFetch(publicKey));
+    yield put(doFetchNewfeeds());
+    yield put(doFollowerFetch(publicKey));
+    yield put(doFollowingFetch(publicKey));
+    yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
   } catch (err) {
     yield put(doPrivateKeyVerifyFailed(privateKey));
   }
@@ -169,6 +170,43 @@ function *handleFetchNewfeeds(action: PostAction) {
     }
   }
 }
+function *handleFeedReact(action: PostAction) {
+  const { feed, reactContent } = action.payload;
+  const react = {
+    object: feed.dataHash,
+    content: reactContent
+  }
+  const privateKey = window.sessionStorage.getItem('privateKey');
+  if (privateKey) {
+    try {
+      const publicKey = generateKey(privateKey);
+      yield call(updateReact, react, publicKey, privateKey);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
+function *handleFeedComment(action: PostAction) {
+  const { feed, commentContent } = action.payload;
+  const react = {
+    object: feed.dataHash,
+    content: {
+      type: 1,
+      text: commentContent
+    }
+  }
+  const privateKey = window.sessionStorage.getItem('privateKey');
+  if (privateKey) {
+    try {
+      const publicKey = generateKey(privateKey);
+      yield call(updateReact, react, publicKey, privateKey);
+      yield delay(3000);
+      yield put(doFetchNewfeeds());
+    } catch (err) {
+      console.log(err);
+    } 
+  }
+}
 export {
   handlePrivateKeySubmit,
   handleFollowingFetch,
@@ -181,5 +219,7 @@ export {
   handleFollowConfirm,
   handlePostReact,
   handleComment,
-  handleFetchNewfeeds
+  handleFetchNewfeeds,
+  handleFeedReact,
+  handleFeedComment
 }

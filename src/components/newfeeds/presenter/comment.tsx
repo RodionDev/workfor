@@ -9,7 +9,7 @@ import {
   Divider,
   TextField
 } from '@material-ui/core';
-import styles from './post.styles';
+import styles from './newfeeds.styles';
 import { isEmpty, take } from 'ramda';
 import * as moment from 'moment';
 interface Props extends WithStyles<typeof styles> {
@@ -86,7 +86,6 @@ const Comment = withStyles(styles)(
                             variant='body2'
                             className={classes.posterName}
                             component='span'
-                            noWrap={true}
                           >
                             {react.displayName || take(12, react.account) + '...'}
                           </Typography>

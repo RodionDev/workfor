@@ -13,6 +13,7 @@ const mapStateToProps = ({user, post}: ApplicationState) => ({
   image: user.image,
   followingCount: user.followingCount,
   followerCount: user.followerCount,
+  feedCount: post.feeds.length,
   postCount: post.posts.length,
   privateKey: user.privateKey
 })
@@ -20,6 +21,7 @@ interface Props extends UserState {
   tabChange: (tabId: number) => PrimaryPanelAction
   postCount: number
   onUpload: (buffer: Uint8Array, privateKey: string) => UserAction
+  feedCount: number
 }
 class StatusBarContainer extends React.Component<Props, {}> {
   handleTabChange = (tabId: number): void => {
@@ -33,13 +35,14 @@ class StatusBarContainer extends React.Component<Props, {}> {
     }
   }
   render(): JSX.Element {
-    const { image, followerCount, postCount, followingCount } = this.props;
+    const { image, followerCount, postCount, followingCount, feedCount } = this.props;
     return(
       <StatusBarPresenter 
         handleTabChange={this.handleTabChange} 
         image={image} 
         followerCount={followerCount}
         followingCount={followingCount}
+        feedCount={feedCount}
         postCount={postCount}
         handleUpload={this.handleUpload}
       />

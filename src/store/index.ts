@@ -9,9 +9,38 @@ export interface ApplicationState {
   follow: FollowState,
   post: PostState
 };
-export const rootReducer = combineReducers<ApplicationState>({
+const initialState: ApplicationState = {
+  primaryPanel: {
+    tabId: 0
+  },
+  user: {
+    privateKey: '',
+    loading: false,
+  },
+  follow: {
+    followers: [],
+    followings: [], 
+    loading: false,
+    unfollows: [],
+    follows: [],
+    userCanFollow: []
+  },
+  post: {
+    posts: [],
+    loading: false,
+    selectedPost: null,
+    feeds: []
+  }
+}
+const appReducer = combineReducers<ApplicationState>({
   primaryPanel: primaryPanelReducer,
   user: userReducer,
   follow: followReducer,
   post: postReducer
 });
+export const rootReducer = (state, action) => {
+  if (action.type === '@@user/USER_LOGOUT') {
+    state = initialState
+  }
+  return appReducer(state, action);
+}

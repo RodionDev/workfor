@@ -2,7 +2,7 @@ import * as React from 'react';
 import PostPresenter from './presenter/post.presenter';
 import { ApplicationState } from '../../store';
 import { connect } from 'react-redux';
-import { doPostReaction, PostAction, doPostComment, doPostViewComment } from '../../store/post';
+import { doPostReaction, PostAction, doPostComment, doPostViewComment, doPostFetch } from '../../store/post';
 import { Dispatch } from 'redux';
 const mapStateToProps = ({post, user}: ApplicationState) => ({
   posts: post.posts,
@@ -14,6 +14,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   onReact: (post: any, reactContent: any) => dispatch(doPostReaction(post, reactContent)),
   onComment: (post: any, commentContent: any) => dispatch(doPostComment(post, commentContent)),
   onViewComment: (post: any) => dispatch(doPostViewComment(post)),
+  onFetch: (publicKey: string) => dispatch(doPostFetch(publicKey))
 })
 interface Props {
   posts: any[]
@@ -22,6 +23,7 @@ interface Props {
   onReact: (post: any, reactContent: any) => PostAction
   onComment: (post: any,commentContent: any) => PostAction
   onViewComment: (post: any) => PostAction
+  onFetch: (publicKey: string) => PostAction
   selectedPost: any
 }
 class Post extends React.Component<Props> {
@@ -50,6 +52,13 @@ class Post extends React.Component<Props> {
       selectedPost={selectedPost}
       />
     )
+  }
+  componentDidMount() {
+    const { onFetch } = this.props;
+    const publicKey = window.sessionStorage.getItem('publicKey');
+    if (publicKey) {
+      onFetch(publicKey);
+    }
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Post);

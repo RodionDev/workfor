@@ -12,7 +12,9 @@ import {
   handleFollowConfirm,
   handlePostReact,
   handleComment,
-  handleFetchNewfeeds
+  handleFetchNewfeeds,
+  handleFeedReact,
+  handleFeedComment
 } from './handler';
 import { FollowActionTypes } from 'src/store/follow';
 import { PostActionTypes } from 'src/store/post';
@@ -29,7 +31,9 @@ function *rootSaga() {
     takeLatest(FollowActionTypes.FOLLOW_CONFIRM, handleFollowConfirm),
     takeEvery(PostActionTypes.POST_REACTION, handlePostReact),
     takeEvery(PostActionTypes.POST_COMMENT, handleComment),
-    takeLatest(PostActionTypes.FETCH_NEWFEEDS, handleFetchNewfeeds)
+    takeLatest(PostActionTypes.FETCH_NEWFEEDS, handleFetchNewfeeds),
+    takeEvery(PostActionTypes.NEWFEED_REACT, handleFeedReact),
+    takeEvery(PostActionTypes.NEWFEED_COMMENT, handleFeedComment)
   ]);
 }
 export default rootSaga;

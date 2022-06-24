@@ -33,6 +33,21 @@ const applyUpdateFollowing = (state: UserState, action: AnyAction): UserState =>
     ...state,
   }
 }
+const applyUserLogout = (state: UserState, action: AnyAction): UserState => {
+  window.sessionStorage.clear();
+  return {
+    balance: undefined,
+    createdAt: undefined,
+    displayName: undefined,
+    energy: 0,
+    followerCount: 0,
+    followingCount: 0,
+    image: null,
+    loading: false,
+    privateKey: undefined,
+    publicKey: undefined
+  }
+}
 const reducer: Reducer<UserState> = (state = initialState, action) => {
   switch(action.type) {
     case UserActionTypes.PRIVATE_KEY_VERIFYING: {
@@ -49,6 +64,9 @@ const reducer: Reducer<UserState> = (state = initialState, action) => {
     }
     case UserActionTypes.UPDATE_FOLLOWING: {
       return applyUpdateFollowing(state, action);
+    }
+    case UserActionTypes.USER_LOGOUT: {
+      return applyUserLogout(state, action);
     }
     default: return state;
   }

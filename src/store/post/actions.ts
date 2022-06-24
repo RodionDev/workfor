@@ -54,6 +54,20 @@ const doAddNewfeeds = (feeds: any[]) => ({
     feeds
   }
 })
+const doNewfeedReaction = (feed: any, reactContent: any) => ({
+  type: PostActionTypes.NEWFEED_REACT,
+  payload: {
+    feed,
+    reactContent
+  }
+})
+const doNewfeedComment = (feed: any, commentContent: any) => ({
+  type: PostActionTypes.NEWFEED_COMMENT,
+  payload: {
+    feed,
+    commentContent
+  }
+})
 export {
   doPostSubmit,
   doPostFetch,
@@ -62,5 +76,7 @@ export {
   doPostComment,
   doPostViewComment,
   doFetchNewfeeds,
-  doAddNewfeeds
+  doAddNewfeeds,
+  doNewfeedComment,
+  doNewfeedReaction
 }

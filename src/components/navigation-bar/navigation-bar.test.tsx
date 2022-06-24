@@ -7,12 +7,13 @@ it('Navigation bar renders without crashing', () => {
   ReactDOM.render(
     <Router>
       <NavigationBarPresenter
-       privateKey=''
-       brandName='Vortex' 
-       searchBarPlaceHolder='search'
-       handleBrandClick={() => {console.log('test')}}
-       handleKeySubmit={() => {console.log('test')}}
-       loading={false}
+        privateKey=''
+        brandName='Vortex' 
+        searchBarPlaceHolder='search'
+        handleLogout={() => console.log('test')}
+        handleBrandClick={() => {console.log('test')}}
+        handleKeySubmit={() => {console.log('test')}}
+        loading={false}
       />
     </Router>
     , div

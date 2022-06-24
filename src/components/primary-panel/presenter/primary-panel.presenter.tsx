@@ -1,9 +1,9 @@
 import * as React from 'react';
 import styles from './primary-panel.styles';
 import { WithStyles, withStyles } from '@material-ui/core/styles';
-import { Post, FollowerList, FollowingList } from '../..';
-import { PrimaryPanelState } from 'src/store/primary-panel';
-interface Props extends WithStyles<typeof styles>, PrimaryPanelState {
+import { Post, FollowerList, FollowingList, Newfeeds } from '../..';
+interface Props extends WithStyles<typeof styles> {
+  tabId: number
 }
 const PrimaryPanelPresenter = withStyles(styles)(
   class extends React.Component<Props> {
@@ -12,7 +12,7 @@ const PrimaryPanelPresenter = withStyles(styles)(
       return (
         <div>
           {tabId === 0 && <Post />}
-          {tabId === 1 && <div>Newfeeds</div>}
+          {tabId === 1 && <Newfeeds/>}
           {tabId === 2 && <FollowerList />}
           {tabId === 3 && <FollowingList />}
         </div>

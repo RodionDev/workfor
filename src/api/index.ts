@@ -206,7 +206,14 @@ const getNewFeeds = async (publicKey: string) => {
     applyValue(publicKey),
     axios.get
   )(API_URL);
-  return data.result;
+  const { result } = data;
+  const feeds = result.map(feed => {
+    return {
+      ...feed,
+      content: contentDecode(Buffer.from(feed.content))
+    }
+  })
+  return feeds.filter(feed => !!feed.content);
 }
 export { 
   test,
