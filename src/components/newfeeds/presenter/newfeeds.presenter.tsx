@@ -67,7 +67,7 @@ const NewfeedsPresenter = withStyles(styles)(
                       className={classes.avatar}
                       src={feed.image 
                         ? `data:image/jpeg;base64,${Buffer.from(feed.image).toString('base64')}`
-                        : 'https:
+                        : `https:
                       }
                     />
                   </Grid>

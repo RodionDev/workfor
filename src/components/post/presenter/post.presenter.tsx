@@ -99,7 +99,7 @@ const PostPresenter = withStyles(styles)(
                           ? `data:image/jpeg;base64,${Buffer.from(
                               image
                             ).toString('base64')}`
-                          : 'https:
+                          : `https:
                       }
                     />
                   </Grid>

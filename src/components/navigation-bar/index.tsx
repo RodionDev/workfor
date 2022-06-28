@@ -44,6 +44,12 @@ class NavigationBar extends React.Component<Props> {
             handleLogout={this.handleLogout}
           />
   }
+  componentDidMount() {
+    const privateKey = window.sessionStorage.getItem('privateKey');
+    if (privateKey) {
+      this.props.privateKeySubmit(privateKey);
+    }
+  }
 }
 export default withRouter(
   connect(mapStateToProps, mapDispatchToProps)(NavigationBar)

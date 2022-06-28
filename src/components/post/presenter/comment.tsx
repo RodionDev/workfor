@@ -88,7 +88,7 @@ const Comment = withStyles(styles)(
                             component='span'
                             noWrap={true}
                           >
-                            {react.displayName || take(12, react.account) + '...'}
+                            {react.displayName && react.displayName.length > 25 ? take(25, react.displayName) + '...' : react.displayName  || take(12, react.account) + '...'}
                           </Typography>
                           <Typography
                             variant='overline'
