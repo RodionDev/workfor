@@ -1,7 +1,7 @@
 import { put, call } from 'redux-saga/effects';
 import { delay } from 'redux-saga';
-import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess, doPrivateKeySubmit, doUpdateUsernameDone, doUpdateFollowing } from '../store/user';
-import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing, updateImage, getAllUsers, updateReact, getNewFeeds } from '../api'
+import { UserAction, doPrivateKeyVerifying, doPrivateKeyVerifyFailed, doPrivateKeyVerifySuccess, doPrivateKeySubmit, doUpdateUsernameDone, doUpdateFollowing, doPaymentAdd, doPaymentFetch } from '../store/user';
+import { getAccountSummary, getUserInfos, getFollower, postContent, updateUsername, updateFollowing, getPosts, getFollowing, updateImage, getAllUsers, updateReact, getNewFeeds, getPayments, createAccount, paymentSubmit } from '../api'
 import { generateKey } from './helper';
 import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetching, doFollowerFetched, doFollowerFetch, doFollowingFetch, doFollowAddUser } from '../store/follow';
 import { PostAction, doPostFetch, doPostFetched, doAddNewfeeds, doFetchNewfeeds } from '../store/post';
@@ -17,6 +17,7 @@ function *handlePrivateKeySubmit(action: UserAction) {
     window.sessionStorage.setItem('publicKey', publicKey);
     window.sessionStorage.setItem('displayName', accountSummary.result.displayName);
     yield put(doPostFetch(publicKey));
+    yield put(doPaymentFetch());
     yield put(doFetchNewfeeds());
     yield put(doFollowerFetch(publicKey));
     yield put(doFollowingFetch(publicKey));
@@ -186,6 +187,17 @@ function *handleFeedReact(action: PostAction) {
     }
   }
 }
+function *handlePaymenFetch(action: UserAction) {
+  const publicKey = window.sessionStorage.getItem('publicKey');
+  if (publicKey) {
+    try {
+      const payments = yield call(getPayments, publicKey);
+      yield put(doPaymentAdd(payments));
+    } catch (err) {
+      console.log(err);
+    }
+  }
+}
 function *handleFeedComment(action: PostAction) {
   const { feed, commentContent } = action.payload;
   const react = {
@@ -207,6 +219,30 @@ function *handleFeedComment(action: PostAction) {
     } 
   }
 }
+function *handleAccountSubmit(action: UserAction) {
+  const { account } = action.payload;
+  const privateKey = window.sessionStorage.getItem('privateKey');
+  if (privateKey) {
+    try {
+      const publicKey = window.sessionStorage.getItem('publicKey');
+      yield call(createAccount, account,  publicKey, privateKey);
+    } catch(err) {  
+      console.log(err);
+    }
+  }
+}
+function *handlePaymentSubmit(action: UserAction) {
+  const { account, amount } = action.payload;
+  const privateKey = window.sessionStorage.getItem('privateKey');
+  if (privateKey) {
+    try {
+      const publicKey = window.sessionStorage.getItem('publicKey');
+      yield call(paymentSubmit, account, amount, publicKey, privateKey);
+    } catch(err) {  
+      console.log(err);
+    }
+  }
+}
 export {
   handlePrivateKeySubmit,
   handleFollowingFetch,
@@ -221,5 +257,8 @@ export {
   handleComment,
   handleFetchNewfeeds,
   handleFeedReact,
-  handleFeedComment
+  handleFeedComment,
+  handlePaymenFetch,
+  handleAccountSubmit,
+  handlePaymentSubmit
 }

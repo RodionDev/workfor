@@ -97,7 +97,7 @@ const FollowPanelPresenter = withStyles(styles)(
               </Grid>
             </div>
             <div className={classes.input}>
-              <Grid container={true} className={classes.list} spacing={16}>
+              <Grid container={true} spacing={16}>
                 {}
                 {compose(
                   take<any>(6),

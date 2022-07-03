@@ -10,6 +10,7 @@ const POSTS = '/get_posts';
 const FOLLOWING = '/get_following';
 const ALL_USERS = '/get_all_users';
 const NEW_FEEDS = '/new_feeds';
+const PAYMENTS = '/get_payments';
 export {
   API_URL,
   DATABASE,
@@ -22,5 +23,6 @@ export {
   POSTS,
   FOLLOWING,
   ALL_USERS,
-  NEW_FEEDS
+  NEW_FEEDS,
+  PAYMENTS
 }

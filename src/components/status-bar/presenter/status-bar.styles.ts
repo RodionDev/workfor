@@ -38,7 +38,34 @@ const styles  = (theme: Theme) => createStyles({
   actionButton: {
     borderRadius: '18px',
     textTransform: 'none',
-    fontSize: 17
-  }
+    fontSize: 17,
+    marginRight: 5
+  },
+  createModal: {
+    width: 600,
+    height: 150,
+    boxShadow: theme.shadows[5],
+    margin: '0 auto',
+    marginTop: 100
+  },
+  paymentModal: {
+    width: 600,
+    height: 215,
+    boxShadow: theme.shadows[5],
+    margin: '0 auto',
+    marginTop: 100
+  },
+  lrMargin: {
+    margin: '0 18px 0 18px',
+    padding: '8px 0 8px 0',
+    fontSize: 24
+  },
+  submitBtn: {
+    margin: '10px 12px 0px 16px',
+    float: 'right'
+  },
+  commentInput: {
+    margin: '8px 12px 6px 12px'
+  },
 });
 export default styles;

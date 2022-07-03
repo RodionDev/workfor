@@ -4,10 +4,11 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { doPrimaryPanelChange, PrimaryPanelAction } from '../../store/primary-panel';
 import { ApplicationState } from '../../store';
-import { UserState, doUpdateImage, UserAction } from '../../store/user';
+import { UserState, doUpdateImage, UserAction, doAccountSubmit } from '../../store/user';
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   tabChange: (tabId: number) => dispatch(doPrimaryPanelChange(tabId)),
-  onUpload: (buffer: Uint8Array, privateKey: string) => dispatch(doUpdateImage(buffer, privateKey))
+  onUpload: (buffer: Uint8Array, privateKey: string) => dispatch(doUpdateImage(buffer, privateKey)),
+  onAccountSubmit: (account: string) => dispatch(doAccountSubmit(account))
 });
 const mapStateToProps = ({user, post}: ApplicationState) => ({
   image: user.image,
@@ -21,6 +22,7 @@ interface Props extends UserState {
   tabChange: (tabId: number) => PrimaryPanelAction
   postCount: number
   onUpload: (buffer: Uint8Array, privateKey: string) => UserAction
+  onAccountSubmit: (account: string) => UserAction
   feedCount: number
 }
 class StatusBarContainer extends React.Component<Props, {}> {
@@ -34,6 +36,10 @@ class StatusBarContainer extends React.Component<Props, {}> {
       onUpload(buffer, privateKey);
     }
   }
+  handleAccountSubmit = (account: string) => {
+    const { onAccountSubmit } = this.props;
+    onAccountSubmit(account);
+  }
   render(): JSX.Element {
     const { image, followerCount, postCount, followingCount, feedCount } = this.props;
     return(
@@ -45,6 +51,7 @@ class StatusBarContainer extends React.Component<Props, {}> {
         feedCount={feedCount}
         postCount={postCount}
         handleUpload={this.handleUpload}
+        handleAccountSubmit={this.handleAccountSubmit}
       />
     );
   }

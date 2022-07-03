@@ -7,7 +7,11 @@ export const enum UserActionTypes {
   UPDATE_USERNAME_DONE = '@@user/UPDATE_USERNAME_DONE',
   UPDATE_FOLLOWING = '@@user/UPDATE_FOLLOWING',
   UPDATE_IMAGE = '@@user/UPDATE_IMAGE',
-  USER_LOGOUT = '@@user/USER_LOGOUT'
+  USER_LOGOUT = '@@user/USER_LOGOUT',
+  PAYMENT_FETCH = '@@user/PAYMENT_FETCH',
+  PAYMENT_ADD = '@@user/PAYMENT_ADD',
+  PAYMENT_SUBMIT = '@@user/PAYMENT_SUBMIT',
+  ACCOUNT_SUBMIT = '@@user/ACCOUNT_SUBMIT'
 };
 export interface UserState {
   readonly privateKey?: string
@@ -20,4 +24,5 @@ export interface UserState {
   readonly image?: any
   readonly followerCount?: number
   readonly followingCount?: number
+  readonly payments?: any[]
 }

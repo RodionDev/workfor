@@ -1,5 +1,5 @@
 import { endpoint, call, applyValue } from './utils';
-import { DATABASE, ACCOUNT_SUMMARY, API_URL, USER_INFO, FOLLOWER, COMMIT, CREATE, RPC_COMMIT, POSTS, FOLLOWING, ALL_USERS, NEW_FEEDS } from './constants';
+import { DATABASE, ACCOUNT_SUMMARY, API_URL, USER_INFO, FOLLOWER, COMMIT, CREATE, RPC_COMMIT, POSTS, FOLLOWING, ALL_USERS, NEW_FEEDS, PAYMENTS } from './constants';
 import { pipe } from 'ramda';
 import axios from 'axios';
 import { contentEncode, followingEncode, contentDecode } from './encoder';
@@ -115,6 +115,49 @@ const updateFollowing = async (publicKey: string, accounts: string[], privateKey
     signature: Buffer.alloc(64, 0)
   }
   sign(tx, privateKey);
+}
+const createAccount = async (account: string, publicKey: string, privateKey: string) => {
+  const { data } = await pipe(
+    endpoint(COMMIT),
+    call(CREATE),
+    applyValue(publicKey),
+    applyValue('create_account'),
+    axios.get
+  )(API_URL);
+  const tx = {
+    ...data.transaction,
+    memo: Buffer.alloc(0),
+    params: {
+      address: account
+    },
+    signature: Buffer.alloc(64, 0)
+  };
+  sign(tx, privateKey);
+  await axios.post(
+    pipe(endpoint(COMMIT),call(RPC_COMMIT))(API_URL),
+    {
+      transaction: encode(tx).toString('base64')
+    }
+  )
+}
+const paymentSubmit = async (account: string, amount: number, publicKey: string, privateKey: string) => {
+  const { data } = await pipe(
+    endpoint(COMMIT),
+    call(CREATE),
+    applyValue(publicKey),
+    applyValue('payment'),
+    axios.get
+  )(API_URL);
+  const tx = {
+    ...data.transaction,
+    memo: Buffer.alloc(0),
+    params: {
+      address: account,
+      amount
+    },
+    signature: Buffer.alloc(64, 0)
+  };
+  sign(tx, privateKey);
   await axios.post(
     pipe(endpoint(COMMIT),call(RPC_COMMIT))(API_URL),
     {
@@ -215,6 +258,16 @@ const getNewFeeds = async (publicKey: string) => {
   })
   return feeds.filter(feed => !!feed.content);
 }
+const getPayments = async (publicKey: string) => {
+  const { data } = await pipe(
+    endpoint(DATABASE),
+    call(PAYMENTS),
+    applyValue(publicKey),
+    axios.get
+  )(API_URL);
+  const { result } = data;
+  return result;
+}
 export { 
   test,
   getAccountSummary,
@@ -228,5 +281,8 @@ export {
   updateImage,
   getAllUsers,
   updateReact,
-  getNewFeeds
+  getNewFeeds,
+  getPayments,
+  createAccount,
+  paymentSubmit
 }

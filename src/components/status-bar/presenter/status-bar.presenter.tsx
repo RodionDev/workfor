@@ -1,26 +1,38 @@
 import * as React from 'react';
 import { WithStyles, withStyles } from '@material-ui/core/styles';
 import styles from './status-bar.styles';
-import { Tabs, Tab, Paper, Grid, Avatar, Button } from '@material-ui/core';
-import { UserState } from '../../../store/user';
-interface Props extends WithStyles<typeof styles>, UserState {
+import { Tabs, Tab, Paper, Grid, Avatar, Button, Modal } from '@material-ui/core';
+import CreateAccount from './createAccountModal';
+import Payment from './PaymentModal';
+interface Props extends WithStyles<typeof styles> {
   handleTabChange: (tabId: number) => void
   handleUpload: (buffer: Uint8Array) => void
+  handleAccountSubmit: (account: string) => void
   postCount: number
   feedCount: number
+  image: any
+  followingCount: number,
+  followerCount: number
 }
 interface State {
-  value: number;
+  value: number
+  createOpen: boolean
+  paymentOpen: boolean
 }
 const StatusBarPresenter = withStyles(styles)(
   class extends React.Component<Props, State> {
     static defaultProps = {
       postCount: 0,
       handleUpload: (buffer: Uint8Array) => console.log('handle upload'),
-      feedCount: 0
+      feedCount: 0,
+      followingCount: 0,
+      followerCount: 0,
+      image: null
     }
-    state = {
-      value: 0
+    state: Readonly<State> = {
+      value: 0,
+      createOpen: false,
+      paymentOpen: false
     };
     handleChange = (_: any, value: any) => {
       const { handleTabChange } = this.props;
@@ -39,6 +51,23 @@ const StatusBarPresenter = withStyles(styles)(
         }
       }
       reader.readAsArrayBuffer(file);
+    }
+    onCreateClose = () => {
+      this.setState({ createOpen: false });
+    }
+    createClick = (_: React.MouseEvent<HTMLElement>) => {
+      this.setState({ createOpen: true });
+    }
+    onPaymentClose = () => {
+      this.setState({ paymentOpen: false });
+    }
+    paymentClick = (_: React.MouseEvent<HTMLElement>) => {
+      this.setState({ paymentOpen: true });
+    }
+    handleCreateAccountSubmit = (account: string) => {
+      const { handleAccountSubmit } = this.props;
+      handleAccountSubmit(account);
+      this.onCreateClose();
     }
     render(): JSX.Element {
       const { classes, image, followerCount, postCount, followingCount, feedCount } = this.props;
@@ -105,13 +134,30 @@ const StatusBarPresenter = withStyles(styles)(
                     classes={{
                       root: classes.actionButton
                     }}
+                    onClick={this.paymentClick}
                     >
-                    Theo dõi
+                    Chuyển tiền
+                  </Button>
+                  <Button 
+                    variant='outlined' 
+                    color='secondary'
+                    classes={{
+                      root: classes.actionButton
+                    }}
+                    onClick={this.createClick}
+                    >
+                    Tạo tài khoản
                   </Button>
                 </div>
               </Grid>
             </Grid>
           </Grid>
+          <Modal open={this.state.createOpen} onClose={this.onCreateClose}>
+            <CreateAccount onSubmit={this.handleCreateAccountSubmit}/>
+          </Modal>
+          <Modal open={this.state.paymentOpen} onClose={this.onPaymentClose}>
+            <Payment/>
+          </Modal>
         </Paper>
       );
     }

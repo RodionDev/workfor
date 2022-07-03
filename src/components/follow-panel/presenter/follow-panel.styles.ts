@@ -13,8 +13,6 @@ const styles = (theme: Theme) => createStyles({
   submitBtn: {
     margin: '10px 0 0 16px'
   },
-  list: {
-  },
   paper: {
     height: 438
   },

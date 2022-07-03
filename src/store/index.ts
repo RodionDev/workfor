@@ -16,6 +16,7 @@ const initialState: ApplicationState = {
   user: {
     privateKey: '',
     loading: false,
+    payments: []
   },
   follow: {
     followers: [],

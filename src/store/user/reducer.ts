@@ -4,6 +4,7 @@ import { includes } from 'ramda';
 const initialState: UserState = {
   loading: false,
   privateKey: '',
+  payments: []
 }
 const applyPrivateKeyVerifying = (state: UserState, action: AnyAction): UserState => {
   return {
@@ -45,7 +46,14 @@ const applyUserLogout = (state: UserState, action: AnyAction): UserState => {
     image: null,
     loading: false,
     privateKey: undefined,
-    publicKey: undefined
+    publicKey: undefined,
+    payments: []
+  }
+}
+const applyPaymentAdd = (state: UserState, action: AnyAction): UserState => {
+  return {
+    ...state,
+    payments: state.payments ? [...state.payments, ...action.payload.payments] : action.payload.payments
   }
 }
 const reducer: Reducer<UserState> = (state = initialState, action) => {
@@ -67,6 +75,9 @@ const reducer: Reducer<UserState> = (state = initialState, action) => {
     }
     case UserActionTypes.USER_LOGOUT: {
       return applyUserLogout(state, action);
+    }
+    case UserActionTypes.PAYMENT_ADD: {
+      return applyPaymentAdd(state, action);
     }
     default: return state;
   }

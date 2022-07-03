@@ -38,6 +38,10 @@ const styles = (theme: Theme) => createStyles({
   },
   saveBtn: {
     height: '100%'
+  },
+  paymenHistory: {
+    marginTop: 25,
+    paddingRight: '15px'
   }
 });
 export default styles;

@@ -63,6 +63,30 @@ const doUserLogout = (): UserAction =>  ({
   payload: {
   }
 })
+const doPaymentFetch = (): UserAction => ({
+  type: UserActionTypes.PAYMENT_FETCH,
+  payload: {
+  }
+})
+const doPaymentAdd = (payments: any[]) => ({
+  type: UserActionTypes.PAYMENT_ADD,
+  payload: {
+    payments
+  }
+})
+const doPaymentSubmit = (account: string, amount: number) => ({
+  type: UserActionTypes.PAYMENT_SUBMIT,
+  payload: {
+    account,
+    amount
+  }
+})
+const doAccountSubmit = (account: string) => ({
+  type: UserActionTypes.ACCOUNT_SUBMIT,
+  payload: {
+    account
+  }
+})
 export {
   doPrivateKeyVerifying,
   doPrivateKeySubmit,
@@ -73,4 +97,8 @@ export {
   doUpdateFollowing,
   doUpdateImage,
   doUserLogout,
+  doPaymentFetch,
+  doPaymentAdd,
+  doAccountSubmit,
+  doPaymentSubmit
 }
