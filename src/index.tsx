@@ -9,6 +9,7 @@ import { rootReducer, ApplicationState } from './store';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from 'src/sagas';
+import 'react-toastify/dist/ReactToastify.css';
 const saga = createSagaMiddleware();
 const initialState: ApplicationState = {
   primaryPanel: {

@@ -11,17 +11,28 @@ import {
 } from '@material-ui/core';
 import styles from './status-bar.styles';
 import { isEmpty } from 'ramda';
-interface Props extends WithStyles<typeof styles> {}
+interface Props extends WithStyles<typeof styles> {
+  onSubmit: (account: string, amount: number) => void
+}
 interface State {
-  publicKey: string;
+  publicKey: string
+  amount: string
 }
 const Payment = withStyles(styles)(
   class extends React.Component<Props, State> {
     state: Readonly<State> = {
-      publicKey: ''
+      publicKey: '',
+      amount: ''
     };
     handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       this.setState({ publicKey: event.target.value });
+    }
+    handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      this.setState({ amount: event.target.value });
+    }
+    handleSubmit = (event: React.MouseEvent<HTMLElement>) => {
+      const { publicKey, amount} = this.state;
+      this.props.onSubmit(publicKey,+amount);
     }
     render() {
       const { classes } = this.props;
@@ -43,8 +54,9 @@ const Payment = withStyles(styles)(
                   variant='contained'
                   color='primary'
                   className={classes.submitBtn}
+                  onClick={this.handleSubmit}
                 >
-                  Tạo
+                  Chuyển
                 </Button>
               )}
             </Grid>
@@ -71,8 +83,8 @@ const Payment = withStyles(styles)(
               rows={1}
               rowsMax={1}
               type='number'
-              value={this.state.publicKey}
-              onChange={this.handleInputChange}
+              value={this.state.amount}
+              onChange={this.handleAmountChange}
             />
           </div>
         </Paper>

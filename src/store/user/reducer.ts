@@ -20,6 +20,7 @@ const applyPrivateKeyVerifyFailed = (state: UserState, action: AnyAction): UserS
 }
 const applyPrivateKeyVerifySuccess = (state: UserState, action: AnyAction): UserState => {
   return {
+    ...state,
     ...action.payload
   }
 }

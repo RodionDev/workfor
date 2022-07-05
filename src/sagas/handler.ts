@@ -7,23 +7,30 @@ import { doFollowingFetching, FollowAction, doFollowingFetched, doFollowerFetchi
 import { PostAction, doPostFetch, doPostFetched, doAddNewfeeds, doFetchNewfeeds } from '../store/post';
 import { compose, map, filter } from 'ramda';
 import includes from 'ramda/es/includes';
+import { toast } from 'react-toastify'
 function *handlePrivateKeySubmit(action: UserAction) {
   yield put(doPrivateKeyVerifying());
   const { privateKey } = action.payload;
   try {
     const publicKey = generateKey(privateKey);
+    console.log(publicKey);
     const accountSummary = yield call(getAccountSummary, publicKey);
+    yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
     window.sessionStorage.setItem('privateKey', privateKey);
     window.sessionStorage.setItem('publicKey', publicKey);
     window.sessionStorage.setItem('displayName', accountSummary.result.displayName);
     yield put(doPostFetch(publicKey));
     yield put(doPaymentFetch());
     yield put(doFetchNewfeeds());
+    const allUsers = yield call(getAllUsers);
+    yield put(doFollowAddUser(allUsers));
     yield put(doFollowerFetch(publicKey));
     yield put(doFollowingFetch(publicKey));
-    yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
   } catch (err) {
     yield put(doPrivateKeyVerifyFailed(privateKey));
+    toast.error('Invalid Private Key', {
+      position: toast.POSITION.BOTTOM_LEFT
+    });
   }
 }
 function *handleFollowingFetch(action: FollowAction) {
@@ -52,9 +59,12 @@ function *handlePostSubmit(action: PostAction) {
   const { publicKey, content, privateKey } = action.payload;
   try {
     yield call(postContent, publicKey, content, privateKey);
-    yield delay(3000);
+    yield delay(5000);
     yield put(doPostFetch(publicKey))
   } catch (err) {
+    toast.error('Something Wrong Happened', {
+      position: toast.POSITION.BOTTOM_LEFT
+    });
     console.log(err);
   }
 }
@@ -68,6 +78,9 @@ function *handleUpdateUsername(action: UserAction) {
     const accountSummary = yield call(getAccountSummary, publicKey);
     yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
   } catch (err) {
+    toast.error('Something Wrong Happened', {
+      position: toast.POSITION.BOTTOM_LEFT
+    });
     console.log(err);
   }
 }
@@ -85,6 +98,9 @@ function *handleUnfollowConfirm (action: FollowAction) {
     const accountSummary = yield call(getAccountSummary, publicKey);
     yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
   } catch (err) {
+    toast.error('Something Wrong Happened', {
+      position: toast.POSITION.BOTTOM_LEFT
+    });
     console.log(err)
   }
 }
@@ -94,6 +110,9 @@ function *handlePostFetch(action: PostAction) {
     const posts = yield call(getPosts, publicKey);
     yield put(doPostFetched(posts))
   } catch (err) {
+    toast.error('Something Wrong Happened', {
+      position: toast.POSITION.BOTTOM_LEFT
+    });
     console.log(err);
   }
 }
@@ -106,6 +125,9 @@ function *handleUpdateImage(action: UserAction) {
     const accountSummary = yield call(getAccountSummary, publicKey);
     yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
   } catch(err) {
+    toast.error('Something Wrong Happened', {
+      position: toast.POSITION.BOTTOM_LEFT
+    });
     console.log(err);
   }
 }
@@ -120,6 +142,9 @@ function *handleFollowConfirm(action: FollowAction) {
     const data = yield call(getFollowing, publicKey);
     yield put(doFollowingFetched(data));
   } catch(err) {
+    toast.error('Something Wrong Happened', {
+      position: toast.POSITION.BOTTOM_LEFT
+    });
     console.log(err);
   }
 }
@@ -134,7 +159,13 @@ function *handlePostReact(action: PostAction) {
     try {
       const publicKey = generateKey(privateKey);
       yield call(updateReact, react, publicKey, privateKey);
+      yield delay(4000);
+      const accountSummary = yield call(getAccountSummary, publicKey);
+      yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
     } catch (err) {
+      toast.error('Something Wrong Happened', {
+        position: toast.POSITION.BOTTOM_LEFT
+      });
       console.log(err);
     }
   }
@@ -153,9 +184,14 @@ function *handleComment(action: PostAction) {
     try {
       const publicKey = generateKey(privateKey);
       yield call(updateReact, react, publicKey, privateKey);
-      yield delay(3000);
+      yield delay(4000);
       yield put(doPostFetch(publicKey));
+      const accountSummary = yield call(getAccountSummary, publicKey);
+      yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
     } catch (err) {
+      toast.error('Something Wrong Happened', {
+        position: toast.POSITION.BOTTOM_LEFT
+      });
       console.log(err);
     } 
   }
@@ -167,6 +203,9 @@ function *handleFetchNewfeeds(action: PostAction) {
       const data = yield call(getNewFeeds, publicKey);
       yield put(doAddNewfeeds(data));
     } catch (err) {
+      toast.error('Something Wrong Happened', {
+        position: toast.POSITION.BOTTOM_LEFT
+      });
       console.log(err);
     }
   }
@@ -183,6 +222,9 @@ function *handleFeedReact(action: PostAction) {
       const publicKey = generateKey(privateKey);
       yield call(updateReact, react, publicKey, privateKey);
     } catch (err) {
+      toast.error('Something Wrong Happened', {
+        position: toast.POSITION.BOTTOM_LEFT
+      });
       console.log(err);
     }
   }
@@ -194,6 +236,9 @@ function *handlePaymenFetch(action: UserAction) {
       const payments = yield call(getPayments, publicKey);
       yield put(doPaymentAdd(payments));
     } catch (err) {
+      toast.error('Something Wrong Happened', {
+        position: toast.POSITION.BOTTOM_LEFT
+      });
       console.log(err);
     }
   }
@@ -212,7 +257,7 @@ function *handleFeedComment(action: PostAction) {
     try {
       const publicKey = generateKey(privateKey);
       yield call(updateReact, react, publicKey, privateKey);
-      yield delay(3000);
+      yield delay(4000);
       yield put(doFetchNewfeeds());
     } catch (err) {
       console.log(err);
@@ -238,6 +283,9 @@ function *handlePaymentSubmit(action: UserAction) {
     try {
       const publicKey = window.sessionStorage.getItem('publicKey');
       yield call(paymentSubmit, account, amount, publicKey, privateKey);
+      yield delay(4000);
+      const accountSummary = yield call(getAccountSummary, publicKey);
+      yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
     } catch(err) {  
       console.log(err);
     }

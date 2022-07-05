@@ -8,10 +8,12 @@
     "@mdi/font": "^3.2.89",
     "@mdi/js": "^3.2.89",
     "@mdi/react": "^1.1.0",
+    "@types/jimp": "^0.2.28",
     "@types/react-router-dom": "^4.3.1",
     "axios": "^0.18.0",
     "base32": "^0.0.6",
     "crypto": "^1.0.1",
+    "jimp": "^0.6.0",
     "moment": "^2.23.0",
     "ramda": "^0.26.1",
     "react": "^16.6.3",
@@ -19,8 +21,10 @@
     "react-redux": "^5.1.1",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "3.1.0",
+    "react-toastify": "^4.5.1",
     "redux": "^4.0.1",
     "redux-saga": "^0.16.2",
+    "sharp": "^0.21.1",
     "stellar-base": "^0.10.0",
     "typeface-roboto": "^0.0.54",
     "varstruct": "^6.1.2"
@@ -40,7 +44,9 @@
     "@types/react": "^16.7.10",
     "@types/react-dom": "^16.0.11",
     "@types/react-redux": "^6.0.10",
+    "@types/react-toastify": "^4.0.1",
     "@types/redux-logger": "^3.0.6",
+    "@types/sharp": "^0.21.0",
     "redux-logger": "^3.0.6",
     "typescript": "^3.2.1"
   }

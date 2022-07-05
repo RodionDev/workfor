@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { doPrimaryPanelChange, PrimaryPanelAction } from '../../store/primary-panel';
 import { ApplicationState } from '../../store';
-import { UserState, doUpdateImage, UserAction, doAccountSubmit } from '../../store/user';
+import { UserState, doUpdateImage, UserAction, doAccountSubmit, doPaymentSubmit } from '../../store/user';
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   tabChange: (tabId: number) => dispatch(doPrimaryPanelChange(tabId)),
   onUpload: (buffer: Uint8Array, privateKey: string) => dispatch(doUpdateImage(buffer, privateKey)),
-  onAccountSubmit: (account: string) => dispatch(doAccountSubmit(account))
+  onAccountSubmit: (account: string) => dispatch(doAccountSubmit(account)),
+  onPayment: (account: string, amount: number) => dispatch(doPaymentSubmit(account, amount))
 });
 const mapStateToProps = ({user, post}: ApplicationState) => ({
   image: user.image,
@@ -23,6 +24,7 @@ interface Props extends UserState {
   postCount: number
   onUpload: (buffer: Uint8Array, privateKey: string) => UserAction
   onAccountSubmit: (account: string) => UserAction
+  onPayment: (acount: string, amount: number) => UserAction
   feedCount: number
 }
 class StatusBarContainer extends React.Component<Props, {}> {
@@ -40,6 +42,10 @@ class StatusBarContainer extends React.Component<Props, {}> {
     const { onAccountSubmit } = this.props;
     onAccountSubmit(account);
   }
+  handlePayment = (account: string, amount: number) => {
+    const { onPayment } = this.props;
+    onPayment(account, amount);
+  }
   render(): JSX.Element {
     const { image, followerCount, postCount, followingCount, feedCount } = this.props;
     return(
@@ -52,6 +58,7 @@ class StatusBarContainer extends React.Component<Props, {}> {
         postCount={postCount}
         handleUpload={this.handleUpload}
         handleAccountSubmit={this.handleAccountSubmit}
+        handlePayment={this.handlePayment}
       />
     );
   }

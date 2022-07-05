@@ -4,6 +4,7 @@ import { withStyles, WithStyles } from '@material-ui/core/styles';
 import styles from './navigationbar.styles';
 import { Link } from 'react-router-dom';
 import { UserState } from '../../../store/user';
+import { toast } from 'react-toastify';
 export interface Redirect {
   name: string,
   link: string
