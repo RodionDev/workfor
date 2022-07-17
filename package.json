@@ -32,7 +32,8 @@
     "start": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom --coverage",
-    "eject": "react-scripts-ts eject"
+    "eject": "react-scripts-ts eject",
+    "fix-memory-limit": "cross-env LIMIT=4096 increase-memory-limit"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
