@@ -284,6 +284,7 @@ function *handlePaymentSubmit(action: UserAction) {
       const publicKey = window.sessionStorage.getItem('publicKey');
       yield call(paymentSubmit, account, amount, publicKey, privateKey);
       yield delay(4000);
+      yield put(doPaymentFetch());
       const accountSummary = yield call(getAccountSummary, publicKey);
       yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
     } catch(err) {  
