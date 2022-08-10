@@ -105,6 +105,7 @@ const updateFollowing = async (publicKey: string, accounts: string[], privateKey
     applyValue('update_account'),
     axios.get
   )(API_URL);
+  console.log('aaa');
   const tx = {
     ...data.transaction,
     memo: Buffer.alloc(0),
@@ -115,6 +116,12 @@ const updateFollowing = async (publicKey: string, accounts: string[], privateKey
     signature: Buffer.alloc(64, 0)
   }
   sign(tx, privateKey);
+  await axios.post(
+    pipe(endpoint(COMMIT),call(RPC_COMMIT))(API_URL),
+    {
+      transaction: encode(tx).toString('base64')
+    }
+  )
 }
 const createAccount = async (account: string, publicKey: string, privateKey: string) => {
   const { data } = await pipe(

@@ -38,7 +38,8 @@ const applyUnfollow = (state: FollowState, action: FollowAction): FollowState =>
 const applyUnfollowConfirm = (state: FollowState, action: FollowAction): FollowState => ({
   ...state,
   unfollows: [],
-  followings: state.followings.filter(following => !includes(following.publicKey, action.payload.unfollows))
+  followings: state.followings.filter(following => !includes(following.publicKey, action.payload.unfollows)),
+  follows: state.follows.filter(follow => !includes(follow, action.payload.unfollows))
 })
 const applyFollow = (state: FollowState, action: FollowAction): FollowState => ({
   ...state,

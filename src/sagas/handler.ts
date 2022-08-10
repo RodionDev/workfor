@@ -135,12 +135,13 @@ function *handleFollowConfirm(action: FollowAction) {
   const { userPublicKeys, privateKey } = action.payload;
   try {
     const publicKey = generateKey(privateKey);
+    console.log(publicKey);
     yield call(updateFollowing, publicKey, userPublicKeys, privateKey);
     yield delay(4000);
-    const accountSummary = yield call(getAccountSummary, publicKey);
-    yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
     const data = yield call(getFollowing, publicKey);
     yield put(doFollowingFetched(data));
+    const accountSummary = yield call(getAccountSummary, publicKey);
+    yield put(doPrivateKeyVerifySuccess(privateKey, accountSummary));
   } catch(err) {
     toast.error('Something Wrong Happened', {
       position: toast.POSITION.BOTTOM_LEFT
